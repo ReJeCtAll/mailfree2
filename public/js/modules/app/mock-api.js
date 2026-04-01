@@ -300,7 +300,8 @@ export async function mockApi(path, options = {}) {
   // 演示模式禁止删除操作
   if ((url.pathname === '/api/emails' && options.method === 'DELETE') ||
       (url.pathname.startsWith('/api/email/') && options.method === 'DELETE') ||
-      (url.pathname === '/api/mailboxes' && options.method === 'DELETE')) {
+      (url.pathname === '/api/mailboxes' && options.method === 'DELETE') ||
+      (url.pathname === '/api/mailboxes/batch-delete' && options.method === 'POST')) {
     return new Response('演示模式不可操作', { status: 403 });
   }
 

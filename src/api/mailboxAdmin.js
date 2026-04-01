@@ -27,6 +27,90 @@ import {
 export async function handleMailboxAdminApi(request, db, url, path, options) {
   const isMock = !!options.mockOnly;
 
+  if (path === '/api/mailboxes/batch-delete' && request.method === 'POST') {
+    if (isMock) return errorResponse('演示模式不可删除', 403);
+
+    try {
+      const body = await request.json();
+      const rawAddresses = Array.isArray(body.addresses) ? body.addresses : [];
+
+      if (!rawAddresses.length) {
+        return errorResponse('缺少 addresses 参数或地址列表为空', 400);
+      }
+      if (rawAddresses.length > 100) {
+        return errorResponse('单次最多删除100个邮箱', 400);
+      }
+
+      const normalizedAddresses = [...new Set(
+        rawAddresses
+          .map((address) => String(address || '').trim().toLowerCase())
+          .filter(Boolean)
+      )];
+
+      if (!normalizedAddresses.length) {
+        return errorResponse('缺少有效邮箱地址', 400);
+      }
+
+      const strictAdmin = isStrictAdmin(request, options);
+      const payload = strictAdmin ? null : getJwtPayload(request, options);
+      if (!strictAdmin && (!payload || payload.role !== 'admin' || !payload.userId)) {
+        return errorResponse('Forbidden', 403);
+      }
+
+      const addressPlaceholders = normalizedAddresses.map(() => '?').join(',');
+      let allowedRows = [];
+
+      if (strictAdmin) {
+        const mailboxResult = await db.prepare(
+          `SELECT id, address FROM mailboxes WHERE address IN (${addressPlaceholders})`
+        ).bind(...normalizedAddresses).all();
+        allowedRows = mailboxResult.results || [];
+      } else {
+        const mailboxResult = await db.prepare(
+          `SELECT m.id, m.address
+           FROM mailboxes m
+           JOIN user_mailboxes um ON um.mailbox_id = m.id
+           WHERE um.user_id = ? AND m.address IN (${addressPlaceholders})`
+        ).bind(Number(payload.userId), ...normalizedAddresses).all();
+        allowedRows = mailboxResult.results || [];
+      }
+
+      const mailboxIds = allowedRows.map((row) => Number(row.id)).filter(Boolean);
+      const deletedAddresses = allowedRows.map((row) => row.address);
+
+      if (!mailboxIds.length) {
+        return Response.json({
+          success: true,
+          total: normalizedAddresses.length,
+          deleted_count: 0,
+          fail_count: normalizedAddresses.length,
+          deleted_addresses: []
+        });
+      }
+
+      const idPlaceholders = mailboxIds.map(() => '?').join(',');
+
+      try { await db.exec('BEGIN'); } catch (_) { }
+      await db.prepare(`DELETE FROM messages WHERE mailbox_id IN (${idPlaceholders})`).bind(...mailboxIds).run();
+      await db.prepare(`DELETE FROM mailboxes WHERE id IN (${idPlaceholders})`).bind(...mailboxIds).run();
+      try { await db.exec('COMMIT'); } catch (_) { }
+
+      deletedAddresses.forEach((address) => invalidateMailboxCache(address));
+      invalidateSystemStatCache('total_mailboxes');
+
+      return Response.json({
+        success: true,
+        total: normalizedAddresses.length,
+        deleted_count: deletedAddresses.length,
+        fail_count: normalizedAddresses.length - deletedAddresses.length,
+        deleted_addresses: deletedAddresses
+      });
+    } catch (e) {
+      try { await db.exec('ROLLBACK'); } catch (_) { }
+      return errorResponse('批量删除失败', 500);
+    }
+  }
+
   // 删除邮箱
   if (path === '/api/mailboxes' && request.method === 'DELETE') {
     if (isMock) return errorResponse('演示模式不可删除', 403);

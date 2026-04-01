@@ -28,6 +28,11 @@ export function escapeHtml(str) {
   return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+function isMailboxSelected(selectedAddresses, address) {
+  if (!selectedAddresses || typeof selectedAddresses.has !== 'function') return false;
+  return selectedAddresses.has(String(address || '').trim().toLowerCase());
+}
+
 /**
  * 生成骨架屏卡片
  * @returns {string}
@@ -61,13 +66,18 @@ export function generateSkeleton(view = 'grid', count = 8) {
  * @param {object} m - 邮箱数据
  * @returns {string}
  */
-export function renderCard(m) {
+export function renderCard(m, selectedAddresses = new Set()) {
   const addr = escapeHtml(m.address);
   const time = formatTime(m.created_at);
   const forward = m.forward_to ? escapeHtml(m.forward_to) : '';
+  const selected = isMailboxSelected(selectedAddresses, m.address);
   
   return `
-    <div class="mailbox-card" data-address="${addr}" data-id="${m.id}" data-action="jump">
+    <div class="mailbox-card ${selected ? 'selected' : ''}" data-address="${addr}" data-id="${m.id}" data-action="jump">
+      <label class="selection-control card-selection-control" title="选择邮箱">
+        <input class="mailbox-select" type="checkbox" data-action="select" ${selected ? 'checked' : ''} aria-label="Select ${addr}">
+        <span class="selection-control-ui"></span>
+      </label>
       ${m.is_pinned ? '<div class="pin-badge" title="置顶">📌</div>' : ''}
       ${m.is_favorite ? '<div class="favorite-badge" title="收藏">⭐</div>' : ''}
       ${forward ? `<div class="forward-badge" title="转发到: ${forward}">📤</div>` : ''}
@@ -89,13 +99,18 @@ export function renderCard(m) {
  * @param {object} m - 邮箱数据
  * @returns {string}
  */
-export function renderListItem(m) {
+export function renderListItem(m, selectedAddresses = new Set()) {
   const addr = escapeHtml(m.address);
   const time = formatTime(m.created_at);
   const forward = m.forward_to ? escapeHtml(m.forward_to) : '';
+  const selected = isMailboxSelected(selectedAddresses, m.address);
   
   return `
-    <div class="mailbox-list-item" data-address="${addr}" data-id="${m.id}">
+    <div class="mailbox-list-item ${selected ? 'selected' : ''}" data-address="${addr}" data-id="${m.id}">
+      <label class="selection-control list-selection-control" title="选择邮箱">
+        <input class="mailbox-select" type="checkbox" data-action="select" ${selected ? 'checked' : ''} aria-label="Select ${addr}">
+        <span class="selection-control-ui"></span>
+      </label>
       <div class="pin-indicator">
         ${m.is_pinned ? '<span class="pin-icon">📌</span>' : '<span class="pin-placeholder"></span>'}
       </div>
@@ -128,9 +143,9 @@ export function renderListItem(m) {
  * @param {Array} list - 邮箱列表
  * @returns {string}
  */
-export function renderGrid(list) {
+export function renderGrid(list, selectedAddresses = new Set()) {
   if (!list || !list.length) return '';
-  return list.map(m => renderCard(m)).join('');
+  return list.map(m => renderCard(m, selectedAddresses)).join('');
 }
 
 /**
@@ -138,9 +153,9 @@ export function renderGrid(list) {
  * @param {Array} list - 邮箱列表
  * @returns {string}
  */
-export function renderList(list) {
+export function renderList(list, selectedAddresses = new Set()) {
   if (!list || !list.length) return '';
-  return list.map(m => renderListItem(m)).join('');
+  return list.map(m => renderListItem(m, selectedAddresses)).join('');
 }
 
 export default {

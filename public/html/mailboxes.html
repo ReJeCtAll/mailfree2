@@ -105,6 +105,31 @@
                         <!-- 第二行：批量操作 + 视图切换 -->
                         <div class="toolbar-row-2">
                             <div class="toolbar-spacer"></div>
+                            <div class="selection-actions">
+                                <button
+                                    id="select-page"
+                                    class="btn btn-ghost btn-sm"
+                                    title="全选或取消选择当前页"
+                                >
+                                    <span class="btn-icon">☑️</span
+                                    ><span>全选本页</span>
+                                </button>
+                                <button
+                                    id="clear-selection"
+                                    class="btn btn-ghost btn-sm"
+                                    title="清空已选择邮箱"
+                                    disabled
+                                >
+                                    <span class="btn-icon">🧹</span
+                                    ><span>清空选择</span>
+                                </button>
+                                <span
+                                    id="selection-count"
+                                    class="selection-count"
+                                >
+                                    未选择
+                                </span>
+                            </div>
                             <div class="batch-actions">
                                 <button
                                     id="batch-allow"
@@ -153,6 +178,15 @@
                                 >
                                     <span class="btn-icon">🚫</span
                                     ><span>清除转发</span>
+                                </button>
+                                <button
+                                    id="batch-delete"
+                                    class="btn btn-danger btn-sm"
+                                    title="批量删除已选择邮箱"
+                                    disabled
+                                >
+                                    <span class="btn-icon">🗑️</span
+                                    ><span>批量删除</span>
                                 </button>
                             </div>
                             <div class="view-toggle">

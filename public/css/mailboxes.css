@@ -49,6 +49,11 @@
   -webkit-backdrop-filter: blur(20px);
 }
 
+.mailbox-card.selected {
+  border-color: rgba(239, 68, 68, 0.35);
+  box-shadow: 0 16px 40px rgba(239, 68, 68, 0.14), 0 0 0 1px rgba(239, 68, 68, 0.18);
+}
+
 .mailbox-card::before {
   content: '';
   position: absolute;
@@ -154,6 +159,67 @@
   z-index: 10;
   border: 2px solid rgba(255, 255, 255, 0.9);
   transition: all 0.2s ease;
+}
+
+.selection-control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.selection-control input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.selection-control-ui {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.selection-control input:checked + .selection-control-ui {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  border-color: #dc2626;
+  box-shadow: 0 6px 18px rgba(220, 38, 38, 0.22);
+}
+
+.selection-control input:checked + .selection-control-ui::after {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.selection-control:hover .selection-control-ui {
+  transform: scale(1.04);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.card-selection-control {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 12;
+}
+
+.mailbox-card:has(.card-selection-control .mailbox-select:checked)::before {
+  opacity: 1;
+  background: linear-gradient(90deg, #ef4444, #f97316, #f59e0b);
 }
 
 .mailbox-card .pin-badge:hover {
@@ -1008,6 +1074,25 @@
   flex-wrap: wrap;
 }
 
+.selection-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.selection-count {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(239, 68, 68, 0.08);
+  color: #b91c1c;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .batch-actions .btn {
   white-space: nowrap;
   transition: all 0.2s ease;
@@ -1056,6 +1141,17 @@
   cursor: pointer;
   transition: all 0.2s ease;
   min-height: 60px;
+}
+
+.mailbox-list-item.selected {
+  border-color: rgba(239, 68, 68, 0.28);
+  background: linear-gradient(135deg, rgba(254, 242, 242, 0.95) 0%, rgba(255, 255, 255, 0.92) 100%);
+  box-shadow: 0 10px 24px rgba(239, 68, 68, 0.1);
+}
+
+.list-selection-control {
+  position: relative;
+  flex-shrink: 0;
 }
 
 .mailbox-list-item:hover {
@@ -1826,4 +1922,3 @@
     gap: 16px;
   }
 }
-
