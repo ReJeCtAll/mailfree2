@@ -1,6 +1,6 @@
 <div class="topbar">
     <div class="brand">
-        <span class="brand-icon">📧</span>
+        <span class="brand-icon" aria-hidden="true"></span>
         <span class="brand-text">ReJeCt's临时邮箱</span>
     </div>
     <div id="role-badge" class="role-badge" title="欢迎用户："></div>
@@ -13,7 +13,7 @@
             rel="noopener noreferrer"
             title="GitHub 开源仓库"
         >
-            <span class="btn-icon">🔗</span>
+            <span class="btn-icon" aria-hidden="true"></span>
             <span class="btn-text">GitHub</span>
         </a>
         <a
@@ -23,7 +23,7 @@
             title="用户管理"
             style="display: none"
         >
-            <span class="btn-icon">🛠️</span>
+            <span class="btn-icon" aria-hidden="true"></span>
             <span class="btn-text">用户管理</span>
         </a>
         <a
@@ -33,11 +33,11 @@
             title="所有邮箱"
             style="display: none"
         >
-            <span class="btn-icon">📦</span>
+            <span class="btn-icon" aria-hidden="true"></span>
             <span class="btn-text">所有邮箱</span>
         </a>
         <button id="logout" class="btn btn-secondary" title="退出登录">
-            <span class="btn-icon">🚪</span>
+            <span class="btn-icon" aria-hidden="true"></span>
             <span class="btn-text">退出登录</span>
         </button>
     </div>
@@ -47,7 +47,7 @@
     <div class="sidebar">
         <div class="sidebar-header">
             <h3>
-                <span class="sidebar-icon">📨</span>
+                <span class="sidebar-icon" aria-hidden="true"></span>
                 <span class="sidebar-title">历史邮箱</span>
             </h3>
             <div class="sidebar-header-actions">
@@ -94,7 +94,7 @@
     <div class="main">
         <div class="card generate-card">
             <h2>
-                <span class="card-icon">✨</span>
+                <span class="card-icon" aria-hidden="true"></span>
                 生成临时邮箱
             </h2>
 
@@ -103,7 +103,7 @@
                 <div class="mailbox-display-section">
                     <div class="mailbox-display-content">
                         <div class="section-header">
-                            <span class="section-icon">📧</span>
+                            <span class="section-icon" aria-hidden="true"></span>
                             <span class="section-title">当前邮箱</span>
                         </div>
                         <div id="email" class="email-display">
@@ -142,15 +142,15 @@
                             class="btn btn-secondary"
                             style="width: 100%"
                         >
-                            <span class="btn-icon">📋</span>
-                            <span>复制邮箱 ✨</span>
+                            <span class="btn-icon" aria-hidden="true"></span>
+                            <span>复制邮箱</span>
                         </button>
                         <button
                             id="compose"
                             class="btn btn-primary"
                             style="width: 100%"
                         >
-                            <span class="btn-icon">✉️</span>
+                            <span class="btn-icon" aria-hidden="true"></span>
                             <span>发邮件</span>
                         </button>
                         <button
@@ -158,23 +158,23 @@
                             class="btn btn-danger"
                             style="width: 100%"
                         >
-                            <span class="btn-icon">🗑️</span>
-                            <span>清空邮件 💥</span>
+                            <span class="btn-icon" aria-hidden="true"></span>
+                            <span>清空邮件</span>
                         </button>
                         <button
                             id="refresh"
                             class="btn btn-ghost"
                             style="width: 100%"
                         >
-                            <span class="btn-icon">🔄</span>
-                            <span>刷新邮件 📬</span>
+                            <span class="btn-icon" aria-hidden="true"></span>
+                            <span>刷新邮件</span>
                         </button>
                         <button
                             id="forward-setting"
                             class="btn btn-ghost"
                             style="width: 100%"
                         >
-                            <span class="btn-icon">↪️</span>
+                            <span class="btn-icon" aria-hidden="true"></span>
                             <span>转发设置</span>
                         </button>
                         <button
@@ -191,7 +191,7 @@
                 <!-- 右侧：邮箱配置 -->
                 <div class="mailbox-config-section">
                     <div class="section-header">
-                        <span class="section-icon">⚙️</span>
+                            <span class="section-icon" aria-hidden="true"></span>
                         <span class="section-title">邮箱配置</span>
                         <button
                             id="config-toggle"
@@ -204,7 +204,7 @@
                     <div class="config-form">
                         <div class="config-item">
                             <label class="config-label">
-                                <span class="label-icon">🌐</span>
+                                <span class="label-icon" aria-hidden="true"></span>
                                 <span>邮箱后缀</span>
                             </label>
                             <select
@@ -214,7 +214,7 @@
                         </div>
                         <div class="config-item">
                             <label class="config-label">
-                                <span class="label-icon">📏</span>
+                                <span class="label-icon" aria-hidden="true"></span>
                                 <span>用户名长度</span>
                             </label>
                             <div class="range-container">
@@ -250,7 +250,7 @@
                                     class="btn btn-generate"
                                     style="flex: 1"
                                 >
-                                    <span class="btn-icon">🎲</span>
+                                    <span class="btn-icon" aria-hidden="true"></span>
                                     <span>随机生成</span>
                                 </button>
                                 <button
@@ -259,7 +259,7 @@
                                     style="flex: 1"
                                     title="使用随机人名生成邮箱"
                                 >
-                                    <span class="btn-icon">👤</span>
+                                    <span class="btn-icon" aria-hidden="true"></span>
                                     <span>随机人名</span>
                                 </button>
                             </div>
@@ -279,7 +279,7 @@
         <div class="card inbox-card" id="list-card" style="display: none">
             <div class="listcard-header">
                 <h2 class="listcard-title">
-                    <span class="card-icon" id="box-icon">📬</span>
+                    <span class="card-icon" id="box-icon" aria-hidden="true"></span>
                     <span id="box-title">收件箱</span>
                 </h2>
                 <div class="view-switch">
@@ -334,7 +334,7 @@
     <div class="modal-card">
         <div class="modal-header">
             <div id="modal-subject">
-                <span class="modal-icon">📧</span>
+                <span class="modal-icon" aria-hidden="true"></span>
                 <span>邮件详情</span>
             </div>
             <button id="modal-close" class="close">✕</button>
@@ -349,7 +349,7 @@
     <div class="modal-card confirm-card">
         <div class="modal-header confirm-header">
             <div>
-                <span class="modal-icon">⚠️</span>
+                <span class="modal-icon" aria-hidden="true"></span>
                 <span>确认操作</span>
             </div>
             <button id="confirm-close" class="close">✕</button>
@@ -370,7 +370,7 @@
     <div class="modal-card">
         <div class="modal-header">
             <div>
-                <span class="modal-icon">✉️</span>
+                <span class="modal-icon" aria-hidden="true"></span>
                 <span>新邮件</span>
             </div>
             <button id="compose-close" class="close">✕</button>

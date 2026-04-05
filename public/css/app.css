@@ -3627,3 +3627,426 @@ a:hover{
     margin: 0 auto !important;
   }
 }
+
+:root {
+  --workspace-shell-max: 1584px;
+  --workspace-sidebar-width: 320px;
+  --workspace-gap: 16px;
+}
+
+.topbar {
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  gap: 12px;
+  padding: 0 !important;
+}
+
+.brand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin: 0 !important;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 16px !important;
+}
+
+.btn-icon[aria-hidden="true"],
+.label-icon[aria-hidden="true"],
+.modal-icon[aria-hidden="true"] {
+  display: none !important;
+}
+
+.btn > span[aria-hidden="true"],
+a.btn > span[aria-hidden="true"] {
+  display: none !important;
+}
+
+.brand-icon[aria-hidden="true"],
+.card-icon[aria-hidden="true"],
+.section-icon[aria-hidden="true"],
+.sidebar-icon[aria-hidden="true"] {
+  position: relative;
+  overflow: hidden;
+  color: transparent !important;
+  font-size: 0 !important;
+}
+
+.brand-icon[aria-hidden="true"]::after,
+.card-icon[aria-hidden="true"]::after,
+.section-icon[aria-hidden="true"]::after,
+.sidebar-icon[aria-hidden="true"]::after {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: #0f62fe;
+}
+
+.brand-icon[aria-hidden="true"]::after {
+  width: 14px;
+  height: 14px;
+}
+
+.nav-actions {
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.role-badge {
+  background: #393939 !important;
+  color: #ffffff !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .container {
+  width: min(var(--workspace-shell-max), calc(100% - 64px)) !important;
+  margin: 0 auto !important;
+  padding: 32px 0 40px !important;
+  display: grid !important;
+  grid-template-columns: minmax(280px, var(--workspace-sidebar-width)) minmax(0, 1fr) !important;
+  gap: var(--workspace-gap) !important;
+  align-items: start;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .sidebar {
+  position: sticky;
+  top: 32px;
+  display: grid;
+  gap: 12px;
+  padding: 16px !important;
+  max-height: calc(100vh - 64px);
+  overflow: auto;
+  border-top: 3px solid var(--cds-button-primary);
+}
+
+.sidebar-header {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--cds-layer-02);
+}
+
+.sidebar h3,
+.sidebar-title,
+.section-title,
+.listcard-title {
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  line-height: 1.4 !important;
+}
+
+.quota-display {
+  background: var(--cds-layer-02) !important;
+  color: var(--cds-text-secondary) !important;
+  font-family: var(--font-mono);
+}
+
+body:not(.page-mailboxes):not(.admin-page) .main {
+  display: grid !important;
+  gap: 16px !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .generate-card,
+body:not(.page-mailboxes):not(.admin-page) .inbox-card,
+.modal-card {
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .generate-card,
+body:not(.page-mailboxes):not(.admin-page) .inbox-card {
+  border-top: 3px solid var(--cds-button-primary);
+  padding: 24px !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .mailbox-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.8fr) minmax(280px, 0.95fr) !important;
+  gap: 16px !important;
+  align-items: start;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .mailbox-display-section,
+body:not(.page-mailboxes):not(.admin-page) .mailbox-config-section {
+  min-width: 0;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .mailbox-display-content,
+body:not(.page-mailboxes):not(.admin-page) .config-form,
+body:not(.page-mailboxes):not(.admin-page) .list-viewport {
+  background: var(--cds-layer-01) !important;
+  padding: 16px !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .section-header {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--cds-layer-02);
+}
+
+body:not(.page-mailboxes):not(.admin-page) .email-display {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  padding: 20px !important;
+  background: #ffffff !important;
+  border-left: 4px solid var(--cds-button-primary) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 20px !important;
+  line-height: 1.4 !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .email-text,
+body:not(.page-mailboxes):not(.admin-page) #email-text {
+  font-family: var(--font-mono) !important;
+  word-break: break-all;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .placeholder-text {
+  color: var(--cds-text-secondary) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 14px !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .mailbox-actions {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px !important;
+  margin-top: 16px !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .mailbox-actions .btn {
+  width: 100% !important;
+  justify-content: flex-start !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .config-item {
+  margin-bottom: 16px !important;
+}
+
+.config-label,
+.field-label,
+.meta-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: var(--cds-text-secondary) !important;
+  font-size: 12px !important;
+  line-height: 16px !important;
+  letter-spacing: 0.32px !important;
+  text-transform: uppercase;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .generate-buttons {
+  margin-bottom: 8px !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .listcard-header {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 16px !important;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--cds-layer-02);
+}
+
+body:not(.page-mailboxes):not(.admin-page) .view-switch {
+  display: inline-flex;
+  background: var(--cds-layer-01);
+  border: 1px solid var(--cds-layer-02);
+}
+
+body:not(.page-mailboxes):not(.admin-page) .seg-btn {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 0;
+  background: transparent;
+  color: var(--cds-text-secondary);
+  font: inherit;
+  cursor: pointer;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .seg-btn[aria-pressed="true"] {
+  background: #ffffff;
+  color: var(--cds-text-primary);
+  box-shadow: inset 0 -2px 0 var(--cds-button-primary);
+}
+
+body:not(.page-mailboxes):not(.admin-page) .list {
+  display: grid !important;
+  gap: 8px !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .email-item {
+  padding: 16px !important;
+  background: #ffffff !important;
+  border-left: 3px solid transparent !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .email-item:hover {
+  background: var(--cds-layer-01) !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .email-item.clickable:active {
+  background: #edf5ff !important;
+  border-left-color: var(--cds-button-primary) !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .email-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  color: var(--cds-text-secondary);
+  font-size: 12px;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .email-line {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .label-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  padding: 4px 8px;
+  background: var(--cds-layer-01);
+  color: var(--cds-text-secondary);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .value-text.subject {
+  font-weight: 600;
+  color: var(--cds-text-primary);
+}
+
+body:not(.page-mailboxes):not(.admin-page) .email-preview,
+body:not(.page-mailboxes):not(.admin-page) .value-text {
+  color: var(--cds-text-secondary);
+}
+
+body:not(.page-mailboxes):not(.admin-page) .mailbox-item {
+  padding: 14px 16px !important;
+  background: #ffffff !important;
+  border-left: 3px solid transparent !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .mailbox-item:hover {
+  background: var(--cds-layer-01) !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .mailbox-item.selected {
+  background: #edf5ff !important;
+  border-left-color: var(--cds-button-primary) !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .mailbox-item .address {
+  font-family: var(--font-mono) !important;
+  font-size: 14px !important;
+  color: var(--cds-text-primary) !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .mailbox-item .time {
+  color: var(--cds-text-secondary) !important;
+}
+
+.pager {
+  justify-content: flex-end !important;
+  margin-top: 16px !important;
+  padding-top: 12px;
+  border-top: 1px solid var(--cds-layer-02);
+}
+
+.modal {
+  background: rgba(22, 22, 22, 0.45) !important;
+}
+
+.modal-card {
+  width: min(760px, calc(100% - 32px));
+  border-top: 3px solid var(--cds-button-primary);
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.modal-header {
+  min-height: 56px;
+  padding: 16px 20px !important;
+  border-bottom: 1px solid var(--cds-layer-02);
+  background: var(--cds-layer-01) !important;
+}
+
+.modal-body,
+.compose-form {
+  padding: 20px !important;
+  background: #ffffff !important;
+}
+
+.compose-actions,
+.confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.close {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  color: var(--cds-text-secondary);
+}
+
+.close:hover {
+  background: var(--cds-layer-01);
+  color: var(--cds-text-primary);
+}
+
+pre,
+code,
+.verification-code-box span[style*="monospace"] {
+  font-family: var(--font-mono);
+}
+
+@media (max-width: 1280px) {
+  body:not(.page-mailboxes):not(.admin-page) .mailbox-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 320px) !important;
+  }
+}
+
+@media (max-width: 1056px) {
+  body:not(.page-mailboxes):not(.admin-page) .container {
+    width: calc(100% - 32px) !important;
+    grid-template-columns: 1fr !important;
+    padding: 16px 0 24px !important;
+  }
+
+  body:not(.page-mailboxes):not(.admin-page) .sidebar {
+    position: static;
+    max-height: none;
+  }
+
+  body:not(.page-mailboxes):not(.admin-page) .mailbox-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  body:not(.page-mailboxes):not(.admin-page) .mailbox-actions {
+    grid-template-columns: 1fr !important;
+  }
+
+  body:not(.page-mailboxes):not(.admin-page) .listcard-header {
+    grid-template-columns: 1fr !important;
+  }
+}
