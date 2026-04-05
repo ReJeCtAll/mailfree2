@@ -43,8 +43,8 @@ export function createModal(options = {}) {
   const modal = document.createElement('div');
   modal.className = `modal-container ${className}`;
   modal.style.cssText = `
-    background: white;
-    border-radius: 12px;
+    background: #f4f4f4;
+    border-radius: 0;
     padding: 24px;
     min-width: 320px;
     max-width: 90vw;
@@ -52,16 +52,16 @@ export function createModal(options = {}) {
     overflow: auto;
     transform: scale(0.9);
     transition: transform 0.2s ease;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   `;
 
   // 构建内容
   modal.innerHTML = `
-    ${title ? `<div class="modal-title" style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">${title}</div>` : ''}
+    ${title ? `<div class="modal-title" style="font-size: 20px; font-weight: 600; line-height: 1.4; margin-bottom: 16px; color: #161616;">${title}</div>` : ''}
     <div class="modal-content" style="margin-bottom: 20px;">${content}</div>
     <div class="modal-actions" style="display: flex; gap: 12px; justify-content: flex-end;">
-      ${showCancel ? `<button class="modal-cancel" style="padding: 8px 16px; border: 1px solid #ddd; background: white; border-radius: 6px; cursor: pointer;">${cancelText}</button>` : ''}
-      <button class="modal-confirm" style="padding: 8px 16px; border: none; background: #3b82f6; color: white; border-radius: 6px; cursor: pointer;">${confirmText}</button>
+      ${showCancel ? `<button class="modal-cancel" style="height: 40px; padding: 0 16px; border: 1px solid transparent; background: transparent; color: #0f62fe; border-radius: 0; cursor: pointer;">${cancelText}</button>` : ''}
+      <button class="modal-confirm" style="height: 40px; padding: 0 16px; border: 1px solid transparent; background: #0f62fe; color: white; border-radius: 0; cursor: pointer;">${confirmText}</button>
     </div>
   `;
 
@@ -139,7 +139,7 @@ export function confirm(message, options = {}) {
   return new Promise((resolve) => {
     createModal({
       title: options.title || '确认',
-      content: `<p style="margin: 0; color: #666;">${message}</p>`,
+      content: `<p style="margin: 0; color: #525252;">${message}</p>`,
       confirmText: options.confirmText || '确定',
       cancelText: options.cancelText || '取消',
       showCancel: true,
@@ -165,7 +165,7 @@ export function alert(message, options = {}) {
   return new Promise((resolve) => {
     createModal({
       title: options.title || '提示',
-      content: `<p style="margin: 0; color: #666;">${message}</p>`,
+      content: `<p style="margin: 0; color: #525252;">${message}</p>`,
       confirmText: options.confirmText || '知道了',
       showCancel: false,
       onConfirm: () => {
@@ -187,11 +187,11 @@ export function prompt(message, options = {}) {
   return new Promise((resolve) => {
     const inputId = 'modal-input-' + Date.now();
     const content = `
-      <p style="margin: 0 0 12px; color: #666;">${message}</p>
+      <p style="margin: 0 0 12px; color: #525252;">${message}</p>
       <input id="${inputId}" type="${options.type || 'text'}" 
              placeholder="${options.placeholder || ''}"
              value="${options.defaultValue || ''}"
-             style="width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+             style="width: 100%; height: 40px; padding: 0 16px; border: 0; border-bottom: 2px solid #c6c6c6; border-radius: 0; background: #ffffff; box-sizing: border-box;">
     `;
     
     const modal = createModal({

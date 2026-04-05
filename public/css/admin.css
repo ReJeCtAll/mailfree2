@@ -1503,3 +1503,65 @@
 .admin-right .card {
   animation-delay: 0.3s;
 }
+
+/* IBM Carbon page override */
+.admin-page{
+  background: #ffffff !important;
+  color: #161616 !important;
+}
+
+.admin-page::before,
+.admin-page::after{
+  display: none !important;
+  content: none !important;
+}
+
+.admin-container{
+  max-width: 1584px !important;
+  width: calc(100% - 64px);
+  padding: 32px 0 !important;
+  min-height: auto;
+  animation: none !important;
+}
+
+.admin-page .card,
+.admin-left .card,
+.admin-right .card{
+  background: #f4f4f4 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.admin-page .btn:hover,
+.admin-page .card:hover,
+.table tbody tr:hover{
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.admin-page .table,
+.admin-page table{
+  background: #ffffff;
+}
+
+.admin-page .table thead th{
+  background: #e0e0e0;
+  color: #161616;
+  font-weight: 600;
+}
+
+.admin-page .table tbody tr{
+  background: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.admin-page .table tbody tr:nth-child(even){
+  background: #f4f4f4;
+}
+
+@media (max-width: 1056px) {
+  .admin-container{
+    width: calc(100% - 32px);
+  }
+}

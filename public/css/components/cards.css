@@ -191,3 +191,37 @@
   font-size: 14px;
   max-width: 320px;
 }
+
+/* IBM Carbon override layer */
+.card,
+.mailbox-card,
+.email-card {
+  background: var(--card-glass);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.card:hover,
+.mailbox-card:hover,
+.email-card:hover,
+.card-clickable:hover {
+  background: var(--card-hover);
+  box-shadow: none;
+  transform: none;
+}
+
+.card-header,
+.card-footer {
+  border-color: var(--border-light);
+}
+
+.card-highlight,
+.mailbox-card.pinned,
+.email-card.unread {
+  background: var(--primary-light);
+}
+
+.email-card.unread::before {
+  border-radius: 0;
+}

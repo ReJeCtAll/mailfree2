@@ -89,6 +89,81 @@
   transform: none !important;
 }
 
+/* IBM Carbon page override */
+.page-mailboxes{
+  background: #ffffff !important;
+  color: #161616 !important;
+}
+
+.page-mailboxes .container{
+  max-width: 1584px !important;
+  width: calc(100% - 64px);
+  padding: 32px 0 !important;
+}
+
+.page-mailboxes .card,
+.page-mailboxes .searchbar,
+.page-mailboxes .toolbar,
+.page-mailboxes .toolbar-row-1,
+.page-mailboxes .toolbar-row-2,
+.page-mailboxes .selection-actions{
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.page-mailboxes #grid.grid,
+.page-mailboxes .grid{
+  gap: 16px !important;
+  max-width: 1584px;
+}
+
+.mailbox-card{
+  width: 100%;
+  min-height: 144px;
+  height: auto;
+  padding: 16px !important;
+  background: #f4f4f4 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.mailbox-card::before{
+  display: none !important;
+  content: none !important;
+}
+
+.mailbox-card:hover{
+  background: #e8e8e8 !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.mailbox-card.selected{
+  background: #edf5ff !important;
+  border-left: 4px solid #0f62fe !important;
+}
+
+#change-password-form input,
+#new-password,
+#confirm-password{
+  width: 100% !important;
+  padding: 0 16px !important;
+  border: 0 !important;
+  border-bottom: 2px solid #c6c6c6 !important;
+  border-radius: 0 !important;
+  background: #f4f4f4 !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 1056px) {
+  .page-mailboxes .container{
+    width: calc(100% - 32px);
+  }
+}
+
 .mailbox-card .line{ 
   color:#475569; 
   font-size:12px; 

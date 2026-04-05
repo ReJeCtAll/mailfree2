@@ -204,3 +204,74 @@
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
 }
+
+/* IBM Carbon override layer */
+.btn {
+  min-height: 48px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.btn:hover,
+.btn:active {
+  transform: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  box-shadow: none;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  box-shadow: none;
+}
+
+.btn-primary:active {
+  background: var(--primary-active);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: var(--text-inverse);
+}
+
+.btn-secondary:hover {
+  background: var(--secondary-hover);
+  color: var(--text-inverse);
+}
+
+.btn-outline,
+.btn-ghost {
+  color: var(--primary);
+}
+
+.btn-ghost:hover,
+.btn-outline:hover {
+  background: var(--card-hover);
+}
+
+.btn-danger {
+  background: var(--danger);
+  box-shadow: none;
+}
+
+.btn-danger:hover {
+  background: var(--danger-hover);
+  box-shadow: none;
+}
+
+.btn-sm {
+  min-height: 40px;
+  height: 40px;
+}
+
+.btn-icon {
+  width: 48px;
+  height: 48px;
+}

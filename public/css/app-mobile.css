@@ -1,6 +1,6 @@
 /* 移动端样式拆分 */
 
-@media (max-width: 900px) {
+@media (max-width: 1056px) {
   /* 手机端 - 生成与配置重新编排 */
   body.is-mobile .mailbox-layout{ grid-template-columns: 1fr; gap: 12px; }
   body.is-mobile .mailbox-display-section{ order:1; }
@@ -56,7 +56,7 @@
   #mb-toggle{ display:none !important; }
   /* 列表加载提示不挤压布局：改为绝对定位到标题右侧 */
   #list-loading{ position: relative; }
-  @media (max-width: 900px){
+  @media (max-width: 1056px){
     #list-card .listcard-header{ position: relative; }
     #list-card #list-loading{ position: absolute; right: 52px; top: 50%; transform: translateY(-50%); margin: 0; pointer-events: none; z-index: 1; }
     #list-card #list-loading span{ display: none; }
@@ -235,14 +235,14 @@
 }
 
 /* 二级页操作条（移动端） */
-@media (max-width: 900px){
+@media (max-width: 1056px){
   /* 移动端二级页操作条：只保留发送/清空（刷新隐藏成右上角图标） */
   .mail-actions-mobile{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:8px; margin: 10px 0 6px; position: sticky; top: 6px; z-index: 6; }
   .mail-actions-mobile .btn{ width:100%; }
 }
 
 /* 横屏优化 */
-@media (max-width: 900px) and (max-height: 480px) and (orientation: landscape) {
+@media (max-width: 1056px) and (max-height: 480px) and (orientation: landscape) {
   .topbar{ padding: 8px 12px; }
   .container{ grid-template-columns: 60px 1fr; gap: 12px; padding: 8px 10px 12px; }
   .sidebar{ display: block; width: 60px; min-width: 60px; }
@@ -256,4 +256,29 @@
   .list-viewport{ max-height: calc(100vh - 260px); overflow: auto; }
 }
 
+@media (max-width: 1056px) {
+  body.is-mobile .mailbox-config-section .config-form,
+  body.is-mobile #mobile-main-switch,
+  .sidebar.history-inline,
+  .sidebar.history-inline #mb-list .mailbox-item,
+  #role-badge {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
 
+  body.is-mobile .mailbox-config-section .config-form {
+    background: #f4f4f4 !important;
+  }
+
+  body.is-mobile .mailbox-actions .btn,
+  .mail-actions-mobile .btn,
+  .mailbox-actions .btn {
+    height: 48px !important;
+  }
+
+  .container,
+  .page-mailboxes .container {
+    gap: 16px !important;
+  }
+}

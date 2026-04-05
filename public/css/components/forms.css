@@ -277,3 +277,54 @@
   transform: scale(1.1);
   box-shadow: 0 0 0 4px var(--primary-light);
 }
+
+/* IBM Carbon override layer */
+.form-group label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-light);
+  letter-spacing: 0.32px;
+}
+
+.form-group .form-hint,
+.form-error {
+  font-size: 12px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  padding: 0 16px;
+  background: var(--card-glass);
+  border: 0;
+  border-bottom: 2px solid var(--border);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.form-textarea {
+  padding: 12px 16px;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: none;
+}
+
+.form-input-sm,
+.form-input-lg {
+  border-radius: 0;
+}
+
+.form-switch-input {
+  border-radius: 24px;
+}
+
+.input-group .form-input,
+.input-group .btn,
+.input-group-prepend,
+.input-group-append {
+  border-radius: 0;
+}
