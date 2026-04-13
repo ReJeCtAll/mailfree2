@@ -43,8 +43,9 @@ export function createModal(options = {}) {
   const modal = document.createElement('div');
   modal.className = `modal-container ${className}`;
   modal.style.cssText = `
-    background: #f4f4f4;
-    border-radius: 0;
+    background: linear-gradient(180deg, rgba(17, 28, 45, 0.98), rgba(11, 20, 34, 0.98));
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 20px;
     padding: 24px;
     min-width: 320px;
     max-width: 90vw;
@@ -52,16 +53,16 @@ export function createModal(options = {}) {
     overflow: auto;
     transform: scale(0.9);
     transition: transform 0.2s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 24px 60px rgba(2, 8, 23, 0.42);
   `;
 
   // 构建内容
   modal.innerHTML = `
-    ${title ? `<div class="modal-title" style="font-size: 20px; font-weight: 600; line-height: 1.4; margin-bottom: 16px; color: #161616;">${title}</div>` : ''}
+    ${title ? `<div class="modal-title" style="font-size: 20px; font-weight: 600; line-height: 1.4; margin-bottom: 16px; color: var(--theme-text, #f3f7ff);">${title}</div>` : ''}
     <div class="modal-content" style="margin-bottom: 20px;">${content}</div>
     <div class="modal-actions" style="display: flex; gap: 12px; justify-content: flex-end;">
-      ${showCancel ? `<button class="modal-cancel" style="height: 40px; padding: 0 16px; border: 1px solid transparent; background: transparent; color: #0f62fe; border-radius: 0; cursor: pointer;">${cancelText}</button>` : ''}
-      <button class="modal-confirm" style="height: 40px; padding: 0 16px; border: 1px solid transparent; background: #0f62fe; color: white; border-radius: 0; cursor: pointer;">${confirmText}</button>
+      ${showCancel ? `<button class="modal-cancel" style="height: 40px; padding: 0 16px; border: 1px solid rgba(124, 181, 255, 0.14); background: rgba(13, 23, 40, 0.72); color: #d7e6ff; border-radius: 14px; cursor: pointer;">${cancelText}</button>` : ''}
+      <button class="modal-confirm" style="height: 40px; padding: 0 16px; border: 1px solid rgba(124, 181, 255, 0.26); background: linear-gradient(135deg, #6aa7ff, #5a8cff); color: #03101f; border-radius: 14px; cursor: pointer;">${confirmText}</button>
     </div>
   `;
 
@@ -139,7 +140,7 @@ export function confirm(message, options = {}) {
   return new Promise((resolve) => {
     createModal({
       title: options.title || '确认',
-      content: `<p style="margin: 0; color: #525252;">${message}</p>`,
+      content: `<p style="margin: 0; color: var(--theme-text-soft, #c4d0e4);">${message}</p>`,
       confirmText: options.confirmText || '确定',
       cancelText: options.cancelText || '取消',
       showCancel: true,
@@ -165,7 +166,7 @@ export function alert(message, options = {}) {
   return new Promise((resolve) => {
     createModal({
       title: options.title || '提示',
-      content: `<p style="margin: 0; color: #525252;">${message}</p>`,
+      content: `<p style="margin: 0; color: var(--theme-text-soft, #c4d0e4);">${message}</p>`,
       confirmText: options.confirmText || '知道了',
       showCancel: false,
       onConfirm: () => {

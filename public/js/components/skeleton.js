@@ -152,14 +152,15 @@ export function injectSkeletonStyles() {
     .skeleton-email-item,
     .skeleton-email-detail {
       padding: 16px;
-      background: #fff;
-      border-radius: 8px;
+      background: rgba(10, 18, 31, 0.86);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      border-radius: 18px;
       margin-bottom: 12px;
     }
     
     .skeleton-line {
       height: 16px;
-      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background: linear-gradient(90deg, rgba(36, 55, 84, 0.7) 25%, rgba(68, 90, 124, 0.92) 50%, rgba(36, 55, 84, 0.7) 75%);
       background-size: 200% 100%;
       animation: skeleton-loading 1.5s infinite;
       border-radius: 4px;
@@ -192,7 +193,7 @@ export function injectSkeletonStyles() {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background: linear-gradient(90deg, rgba(36, 55, 84, 0.7) 25%, rgba(68, 90, 124, 0.92) 50%, rgba(36, 55, 84, 0.7) 75%);
       background-size: 200% 100%;
       animation: skeleton-loading 1.5s infinite;
     }

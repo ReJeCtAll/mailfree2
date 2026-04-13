@@ -268,7 +268,7 @@
   }
 
   body.is-mobile .mailbox-config-section .config-form {
-    background: #f4f4f4 !important;
+    background: var(--card-glass) !important;
   }
 
   body.is-mobile .mailbox-actions .btn,
