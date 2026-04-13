@@ -1,0 +1,710 @@
+/* Final contrast theme override */
+
+:root {
+  --theme-bg: #08111f;
+  --theme-bg-soft: #0d1728;
+  --theme-surface: rgba(15, 25, 42, 0.9);
+  --theme-surface-strong: rgba(20, 34, 56, 0.96);
+  --theme-panel: rgba(12, 21, 36, 0.92);
+  --theme-panel-hover: rgba(18, 31, 52, 0.98);
+  --theme-panel-muted: rgba(21, 35, 58, 0.74);
+  --theme-border: rgba(148, 163, 184, 0.2);
+  --theme-border-strong: rgba(129, 140, 248, 0.42);
+  --theme-text: #f3f7ff;
+  --theme-text-soft: #c4d0e4;
+  --theme-text-muted: #8fa0ba;
+  --theme-accent: #7cb5ff;
+  --theme-accent-strong: #5a8cff;
+  --theme-accent-soft: rgba(124, 181, 255, 0.18);
+  --theme-danger: #ff7a90;
+  --theme-success: #43d4a0;
+  --theme-warning: #f5c76b;
+  --theme-shadow: 0 18px 50px rgba(2, 8, 23, 0.38);
+  --theme-shadow-soft: 0 10px 24px rgba(2, 8, 23, 0.22);
+  --theme-ring: 0 0 0 1px rgba(124, 181, 255, 0.12), 0 0 0 4px rgba(124, 181, 255, 0.16);
+}
+
+html,
+body {
+  background:
+    radial-gradient(circle at top left, rgba(90, 140, 255, 0.18), transparent 26%),
+    radial-gradient(circle at 85% 15%, rgba(56, 189, 248, 0.12), transparent 24%),
+    linear-gradient(180deg, #09111f 0%, #0b1525 52%, #08111f 100%) !important;
+  color: var(--theme-text) !important;
+}
+
+body {
+  font-family: "SF Pro Display", "Inter", "Segoe UI", sans-serif !important;
+}
+
+body::before {
+  display: block !important;
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 82%);
+  z-index: -1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.brand-text,
+.sidebar-title,
+.section-title,
+.listcard-title,
+.mailbox-address,
+.empty-title,
+.modal-header,
+.field-label,
+.card-header h2,
+.page-mailboxes .mailbox-card .addr,
+.page-mailboxes .mailbox-list-item .addr,
+.admin-page .table tbody td,
+.admin-page .mailbox-item .address,
+.admin-page .user-mailbox-item .addr {
+  color: var(--theme-text) !important;
+}
+
+.muted,
+.placeholder-text,
+.retention-hint,
+.toolbar-left,
+.toolbar-right label,
+.email-time,
+.meta-label,
+.pagination-info,
+.pagination-controls,
+.loading-indicator,
+.help-text,
+.page-mailboxes .mailbox-card .line,
+.page-mailboxes .mailbox-card .pwd,
+.page-mailboxes .mailbox-card .login,
+.page-mailboxes .mailbox-card .time,
+.page-mailboxes .mailbox-list-item .meta,
+.page-mailboxes .mailbox-list-item .time,
+.admin-page .table thead th,
+.admin-page .table tbody td.col-created,
+.admin-page .table tbody td.col-mailbox,
+.admin-page .table tbody td.col-id,
+.admin-page .table tbody td.col-can {
+  color: var(--theme-text-muted) !important;
+}
+
+.topbar {
+  background: rgba(4, 10, 20, 0.82) !important;
+  color: var(--theme-text) !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12) !important;
+  box-shadow: 0 18px 36px rgba(2, 8, 23, 0.28) !important;
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+}
+
+.brand {
+  gap: 14px !important;
+}
+
+.brand-icon {
+  background: linear-gradient(135deg, rgba(124, 181, 255, 0.22), rgba(86, 110, 240, 0.2)) !important;
+  border: 1px solid rgba(124, 181, 255, 0.18);
+  border-radius: 12px !important;
+}
+
+.brand-icon[aria-hidden="true"]::after,
+.card-icon[aria-hidden="true"]::after,
+.section-icon[aria-hidden="true"]::after,
+.sidebar-icon[aria-hidden="true"]::after {
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--theme-accent), #8c6dff) !important;
+  box-shadow: 0 0 18px rgba(124, 181, 255, 0.36);
+}
+
+.role-badge,
+.chip,
+.status-badge,
+.users-count,
+.mailboxes-count,
+.user-chip {
+  background: rgba(124, 181, 255, 0.16) !important;
+  color: #cfe2ff !important;
+  border: 1px solid rgba(124, 181, 255, 0.24) !important;
+}
+
+.status-delivered {
+  background: rgba(67, 212, 160, 0.18) !important;
+  color: #9ef0cb !important;
+  border-color: rgba(67, 212, 160, 0.26) !important;
+}
+
+.status-failed {
+  background: rgba(255, 122, 144, 0.16) !important;
+  color: #ffc3cd !important;
+  border-color: rgba(255, 122, 144, 0.24) !important;
+}
+
+.status-queued {
+  background: rgba(245, 199, 107, 0.16) !important;
+  color: #ffe2a4 !important;
+  border-color: rgba(245, 199, 107, 0.24) !important;
+}
+
+.card,
+.sidebar,
+.generate-card,
+.searchbar,
+.quota-display,
+.email-display,
+.range-display,
+.config-form,
+.sidebar.history-inline,
+.page-mailboxes .card,
+.page-mailboxes .mailbox-card,
+.page-mailboxes .mailbox-list-item,
+.page-mailboxes .selection-actions,
+.page-mailboxes .toolbar,
+.page-mailboxes .searchbar,
+.mailbox-info-card,
+.inbox-card,
+.email-content-card,
+.admin-page .card,
+.admin-page .table-container,
+.admin-page .mailbox-item,
+.admin-page .user-mailbox-item,
+.admin-page .mailbox-list,
+.modal-card {
+  background: var(--theme-surface) !important;
+  border: 1px solid var(--theme-border) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--theme-shadow) !important;
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+.card,
+.page-mailboxes .card,
+.admin-page .card,
+.modal-card,
+.mailbox-info-card,
+.inbox-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after,
+.page-mailboxes .card::after,
+.admin-page .card::after,
+.mailbox-info-card::after,
+.inbox-card::after,
+.modal-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 30%);
+  pointer-events: none;
+}
+
+.btn {
+  border-radius: 14px !important;
+  border: 1px solid transparent !important;
+  box-shadow: var(--theme-shadow-soft) !important;
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    color 0.18s ease !important;
+}
+
+.btn:hover {
+  transform: translateY(-1px) !important;
+}
+
+.btn:focus-visible,
+input:focus,
+select:focus,
+textarea:focus,
+.input:focus,
+.select:focus,
+.search-input:focus,
+.filter-select:focus,
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus,
+.custom-input:focus {
+  box-shadow: var(--theme-ring) !important;
+  border-color: rgba(124, 181, 255, 0.45) !important;
+}
+
+.btn-primary,
+.generate-action .btn-primary,
+.generate-action .btn.btn-generate,
+#gen.btn,
+#compose-send.btn,
+#confirm-ok.btn-danger {
+  background: linear-gradient(135deg, #6aa7ff, #5a8cff) !important;
+  color: #03101f !important;
+  border-color: rgba(124, 181, 255, 0.26) !important;
+}
+
+.btn-primary:hover,
+.generate-action .btn-primary:hover,
+.generate-action .btn.btn-generate:hover,
+#gen.btn:hover,
+#compose-send.btn:hover,
+#confirm-ok.btn-danger:hover {
+  background: linear-gradient(135deg, #93c5ff, #78a2ff) !important;
+  color: #03101f !important;
+}
+
+.btn-secondary {
+  background: rgba(29, 44, 68, 0.9) !important;
+  color: var(--theme-text) !important;
+  border-color: rgba(148, 163, 184, 0.18) !important;
+}
+
+.btn-secondary:hover {
+  background: rgba(39, 56, 84, 0.95) !important;
+  color: var(--theme-text) !important;
+}
+
+.btn-ghost,
+.btn-outline {
+  background: rgba(13, 23, 40, 0.72) !important;
+  color: #d7e6ff !important;
+  border-color: rgba(124, 181, 255, 0.14) !important;
+}
+
+.btn-ghost:hover,
+.btn-outline:hover {
+  background: rgba(20, 34, 56, 0.92) !important;
+  color: #ffffff !important;
+  border-color: rgba(124, 181, 255, 0.28) !important;
+}
+
+.btn-danger {
+  background: rgba(255, 122, 144, 0.18) !important;
+  color: #ffd2d9 !important;
+  border-color: rgba(255, 122, 144, 0.26) !important;
+}
+
+.btn-danger:hover {
+  background: rgba(255, 122, 144, 0.28) !important;
+  color: #fff0f3 !important;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+select,
+textarea,
+.input,
+.select,
+.search-input,
+.filter-select,
+.sidebar-search-input,
+.form-input,
+.form-select,
+.form-textarea,
+.custom-input,
+.toolbar-right .select,
+.toolbar-right .input {
+  background: rgba(7, 14, 25, 0.72) !important;
+  color: var(--theme-text) !important;
+  border: 1px solid rgba(148, 163, 184, 0.16) !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.16) !important;
+  border-radius: 14px !important;
+}
+
+input::placeholder,
+textarea::placeholder,
+.search-input::placeholder {
+  color: var(--theme-text-muted) !important;
+}
+
+.quota-display,
+.range-display,
+.label-chip,
+.view-switch,
+.selection-count,
+.filter-actions .filter-select {
+  background: rgba(8, 16, 28, 0.74) !important;
+  color: var(--theme-text-soft) !important;
+  border-color: rgba(148, 163, 184, 0.14) !important;
+}
+
+.modal {
+  background: rgba(2, 6, 14, 0.62) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.modal-header,
+.page-mailboxes .modal-header,
+.page-mailboxes .subpage-header,
+.admin-page .modal-header {
+  background: rgba(10, 17, 29, 0.86) !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12) !important;
+}
+
+.modal-body,
+.modal-footer,
+.compose-form,
+.page-mailboxes .subpage-footer,
+.admin-page .modal-body,
+.admin-page .modal-footer {
+  background: transparent !important;
+}
+
+.close {
+  border-radius: 12px !important;
+  color: var(--theme-text-soft) !important;
+}
+
+.close:hover {
+  background: rgba(124, 181, 255, 0.14) !important;
+  color: #ffffff !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .container,
+.mailbox-container {
+  width: min(1584px, calc(100% - 64px)) !important;
+  gap: 20px !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .sidebar,
+.sidebar.history-inline {
+  background: rgba(7, 14, 24, 0.8) !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .generate-card,
+body:not(.page-mailboxes):not(.admin-page) .inbox-card,
+.mailbox-info-card,
+.inbox-card {
+  background: linear-gradient(180deg, rgba(17, 28, 45, 0.96), rgba(12, 21, 35, 0.96)) !important;
+  border-top: 1px solid var(--theme-border) !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .mailbox-display-content,
+body:not(.page-mailboxes):not(.admin-page) .config-form,
+body:not(.page-mailboxes):not(.admin-page) .list-viewport,
+.mailbox-toolbar,
+.mailbox-info {
+  background: rgba(7, 14, 25, 0.52) !important;
+  border: 1px solid rgba(148, 163, 184, 0.1) !important;
+  border-radius: 18px !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .section-header,
+body:not(.page-mailboxes):not(.admin-page) .listcard-header,
+.sidebar-header,
+.mailbox-toolbar {
+  border-bottom-color: rgba(148, 163, 184, 0.12) !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .email-display,
+.mailbox-display {
+  background:
+    linear-gradient(135deg, rgba(124, 181, 255, 0.08), rgba(140, 109, 255, 0.08)),
+    rgba(7, 14, 25, 0.82) !important;
+  border: 1px solid rgba(124, 181, 255, 0.18) !important;
+  border-left: 1px solid rgba(124, 181, 255, 0.18) !important;
+  border-radius: 18px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 12px 32px rgba(2, 8, 23, 0.28) !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .email-item,
+body:not(.page-mailboxes):not(.admin-page) .mailbox-item,
+.email-item {
+  background: rgba(8, 16, 28, 0.74) !important;
+  border: 1px solid rgba(148, 163, 184, 0.1) !important;
+  border-left: 1px solid rgba(148, 163, 184, 0.1) !important;
+  border-radius: 16px !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .email-item:hover,
+body:not(.page-mailboxes):not(.admin-page) .mailbox-item:hover,
+.email-item:hover {
+  background: rgba(14, 26, 44, 0.92) !important;
+  border-color: rgba(124, 181, 255, 0.18) !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .email-item.clickable:active,
+body:not(.page-mailboxes):not(.admin-page) .mailbox-item.selected {
+  background: rgba(124, 181, 255, 0.14) !important;
+  border-color: rgba(124, 181, 255, 0.32) !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .view-switch,
+body:not(.page-mailboxes):not(.admin-page) .seg-btn {
+  border-radius: 14px !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .seg-btn {
+  color: var(--theme-text-muted) !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .seg-btn[aria-pressed="true"] {
+  background: rgba(124, 181, 255, 0.14) !important;
+  color: var(--theme-text) !important;
+  box-shadow: inset 0 0 0 1px rgba(124, 181, 255, 0.18) !important;
+}
+
+.page-mailboxes,
+.admin-page,
+.mailbox-page {
+  background: transparent !important;
+  color: var(--theme-text) !important;
+}
+
+.page-mailboxes .container,
+.admin-container {
+  width: min(1584px, calc(100% - 64px)) !important;
+  gap: 20px !important;
+}
+
+.page-mailboxes .toolbar,
+.page-mailboxes .toolbar-row-1,
+.page-mailboxes .toolbar-row-2,
+.page-mailboxes .selection-actions,
+.page-mailboxes .batch-actions {
+  background: transparent !important;
+}
+
+.page-mailboxes .mailbox-card,
+.page-mailboxes .mailbox-list-item {
+  background:
+    linear-gradient(180deg, rgba(15, 25, 42, 0.98), rgba(10, 18, 31, 0.98)) !important;
+}
+
+.page-mailboxes .mailbox-card:hover,
+.page-mailboxes .mailbox-list-item:hover {
+  background:
+    linear-gradient(180deg, rgba(20, 34, 56, 0.98), rgba(12, 21, 35, 0.98)) !important;
+  border-color: rgba(124, 181, 255, 0.22) !important;
+}
+
+.page-mailboxes .mailbox-card.selected,
+.page-mailboxes .user-item.selected {
+  background: rgba(124, 181, 255, 0.14) !important;
+  border-color: rgba(124, 181, 255, 0.32) !important;
+  box-shadow: 0 0 0 1px rgba(124, 181, 255, 0.14), 0 18px 38px rgba(8, 15, 27, 0.3) !important;
+}
+
+.page-mailboxes .selection-control-ui {
+  border-radius: 6px !important;
+  border-color: rgba(148, 163, 184, 0.32) !important;
+  background: rgba(7, 14, 25, 0.94) !important;
+}
+
+.page-mailboxes .selection-control input:checked + .selection-control-ui {
+  background: linear-gradient(135deg, #6aa7ff, #5a8cff) !important;
+  border-color: rgba(124, 181, 255, 0.4) !important;
+}
+
+.page-mailboxes .empty-state,
+.page-mailboxes .loading-placeholder,
+.page-mailboxes .users-list,
+.page-mailboxes .assign-mailbox-info {
+  background: rgba(8, 16, 28, 0.6) !important;
+  border: 1px solid rgba(148, 163, 184, 0.1) !important;
+  border-radius: 18px !important;
+}
+
+.page-mailboxes .pin-badge,
+.page-mailboxes .favorite-badge,
+.page-mailboxes .forward-badge {
+  border-radius: 999px !important;
+  background: rgba(124, 181, 255, 0.16) !important;
+  color: #d9e8ff !important;
+  border: 1px solid rgba(124, 181, 255, 0.18) !important;
+}
+
+.page-mailboxes .pager,
+.pagination-container,
+.pager {
+  border-top-color: rgba(148, 163, 184, 0.12) !important;
+}
+
+.admin-page .card,
+.admin-left .card,
+.admin-right .card {
+  background:
+    linear-gradient(180deg, rgba(15, 25, 42, 0.98), rgba(10, 18, 31, 0.96)) !important;
+  border-top: 1px solid rgba(148, 163, 184, 0.14) !important;
+}
+
+.admin-page .table,
+.admin-page table,
+.admin-page .table tbody tr,
+.admin-page .table tbody tr:nth-child(even) {
+  background: transparent !important;
+}
+
+.admin-page .table thead th {
+  background: rgba(7, 14, 25, 0.86) !important;
+  color: var(--theme-text-soft) !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12) !important;
+}
+
+.admin-page .table tbody tr {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.08) !important;
+}
+
+.admin-page .table tbody tr:hover,
+.admin-page .table tbody tr.clickable:hover {
+  background: rgba(124, 181, 255, 0.08) !important;
+}
+
+.admin-page .table tbody tr.active {
+  background: rgba(124, 181, 255, 0.14) !important;
+  box-shadow: inset 3px 0 0 rgba(124, 181, 255, 0.85) !important;
+}
+
+.admin-page .admin-left .table tbody td.col-role .role-admin,
+.admin-page .can-send-yes {
+  background: rgba(67, 212, 160, 0.16) !important;
+  color: #a7f4d4 !important;
+}
+
+.admin-page .admin-left .table tbody td.col-role .role-user,
+.admin-page .can-send-no {
+  background: rgba(148, 163, 184, 0.14) !important;
+  color: var(--theme-text-soft) !important;
+}
+
+.admin-page .mailbox-item.clickable:hover,
+.admin-page .user-mailbox-item:hover {
+  background: rgba(20, 34, 56, 0.94) !important;
+}
+
+body > .bg {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(124, 181, 255, 0.14) 0%, transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(140, 109, 255, 0.14) 0%, transparent 32%),
+    linear-gradient(180deg, rgba(10, 18, 31, 0.32), rgba(10, 18, 31, 0)) !important;
+}
+
+.center {
+  padding: 40px 32px !important;
+}
+
+.center > .card {
+  width: min(100%, 520px);
+  margin-left: clamp(0px, 9vw, 120px);
+  padding: 36px 36px 40px !important;
+  background:
+    linear-gradient(180deg, rgba(17, 28, 45, 0.98), rgba(11, 20, 34, 0.98)) !important;
+  border: 1px solid rgba(148, 163, 184, 0.14) !important;
+  border-top: 1px solid rgba(148, 163, 184, 0.14) !important;
+  border-radius: 28px !important;
+  box-shadow: 0 24px 60px rgba(2, 8, 23, 0.42) !important;
+}
+
+.logo {
+  background: rgba(124, 181, 255, 0.14) !important;
+  color: #d7e6ff !important;
+  border-radius: 16px !important;
+}
+
+h1::after,
+.card > div[style],
+.err {
+  color: var(--theme-text-muted) !important;
+}
+
+.center .input {
+  background: rgba(7, 14, 25, 0.86) !important;
+}
+
+.center .btn {
+  width: 100%;
+}
+
+.loading-container {
+  background:
+    linear-gradient(180deg, rgba(15, 25, 42, 0.96), rgba(10, 18, 31, 0.96)) !important;
+  border: 1px solid rgba(148, 163, 184, 0.14) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 24px 60px rgba(2, 8, 23, 0.42) !important;
+}
+
+.title,
+.status {
+  color: var(--theme-text) !important;
+}
+
+.status,
+footer {
+  color: var(--theme-text-muted) !important;
+}
+
+.progress {
+  background: rgba(124, 181, 255, 0.08) !important;
+  border-color: rgba(124, 181, 255, 0.16) !important;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #6aa7ff, #8c6dff) !important;
+}
+
+.spinner {
+  border-color: rgba(124, 181, 255, 0.18) !important;
+  border-top-color: var(--theme-accent) !important;
+}
+
+@media (max-width: 1056px) {
+  body:not(.page-mailboxes):not(.admin-page) .container,
+  .mailbox-container,
+  .page-mailboxes .container,
+  .admin-container {
+    width: calc(100% - 28px) !important;
+    padding: 16px 0 24px !important;
+    gap: 14px !important;
+  }
+
+  .topbar {
+    padding: 0 14px !important;
+  }
+
+  .topbar,
+  .topbar-inner,
+  .topbar .brand,
+  .topbar .nav-actions {
+    min-height: 56px !important;
+  }
+
+  .center {
+    padding: 20px 16px !important;
+  }
+
+  .center > .card {
+    margin-left: 0;
+    width: 100%;
+    padding: 28px 22px 30px !important;
+    border-radius: 22px !important;
+  }
+
+  body.is-mobile .mailbox-config-section .config-form,
+  body.is-mobile #mobile-main-switch,
+  body.is-mobile .sidebar.history-inline {
+    background: rgba(10, 18, 31, 0.86) !important;
+    border: 1px solid rgba(148, 163, 184, 0.12) !important;
+    box-shadow: var(--theme-shadow-soft) !important;
+  }
+
+  body.is-mobile #mobile-main-switch .seg-btn,
+  body.is-mobile .label-chip,
+  body.is-mobile .email-meta .meta-label {
+    background: rgba(16, 28, 46, 0.9) !important;
+    color: var(--theme-text-soft) !important;
+    border-color: rgba(148, 163, 184, 0.16) !important;
+  }
+}

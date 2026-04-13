@@ -187,11 +187,11 @@ export function prompt(message, options = {}) {
   return new Promise((resolve) => {
     const inputId = 'modal-input-' + Date.now();
     const content = `
-      <p style="margin: 0 0 12px; color: #525252;">${message}</p>
+      <p style="margin: 0 0 12px; color: var(--theme-text-soft, #c4d0e4);">${message}</p>
       <input id="${inputId}" type="${options.type || 'text'}" 
              placeholder="${options.placeholder || ''}"
              value="${options.defaultValue || ''}"
-             style="width: 100%; height: 40px; padding: 0 16px; border: 0; border-bottom: 2px solid #c6c6c6; border-radius: 0; background: #ffffff; box-sizing: border-box;">
+             style="width: 100%; height: 44px; padding: 0 16px; border: 1px solid rgba(148, 163, 184, 0.16); border-radius: 14px; background: rgba(7, 14, 25, 0.86); color: var(--theme-text, #f3f7ff); box-sizing: border-box;">
     `;
     
     const modal = createModal({
