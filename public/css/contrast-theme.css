@@ -22,6 +22,76 @@
   --theme-shadow: 0 18px 50px rgba(2, 8, 23, 0.38);
   --theme-shadow-soft: 0 10px 24px rgba(2, 8, 23, 0.22);
   --theme-ring: 0 0 0 1px rgba(124, 181, 255, 0.12), 0 0 0 4px rgba(124, 181, 255, 0.16);
+
+  /* Remap legacy tokens used across app.css/mailbox.css/mailboxes.css */
+  --surface: linear-gradient(180deg, #09111f 0%, #0b1525 52%, #08111f 100%);
+  --surface-overlay: rgba(8, 17, 31, 0.86);
+  --surface-pattern: none;
+  --surface-mesh: none;
+  --card: var(--theme-surface);
+  --card-hover: var(--theme-panel-hover);
+  --card-glass: rgba(10, 18, 31, 0.86);
+  --card-glass-hover: rgba(20, 34, 56, 0.94);
+  --card-gradient: linear-gradient(180deg, rgba(17, 28, 45, 0.98), rgba(12, 21, 35, 0.96));
+  --card-gradient-accent: linear-gradient(180deg, rgba(124, 181, 255, 0.06), rgba(124, 181, 255, 0));
+  --primary: var(--theme-accent);
+  --primary-hover: #97c8ff;
+  --primary-active: var(--theme-accent-strong);
+  --primary-light: rgba(124, 181, 255, 0.16);
+  --primary-glass: rgba(124, 181, 255, 0.1);
+  --primary-rgb: 124, 181, 255;
+  --primary-gradient: linear-gradient(135deg, #7cb5ff 0%, #5a8cff 52%, #8c6dff 100%);
+  --primary-gradient-soft: linear-gradient(135deg, rgba(124, 181, 255, 0.18) 0%, rgba(140, 109, 255, 0.12) 100%);
+  --secondary: #243754;
+  --secondary-hover: #304668;
+  --secondary-light: rgba(143, 160, 186, 0.12);
+  --secondary-gradient: linear-gradient(135deg, #243754 0%, #304668 100%);
+  --accent: #8c6dff;
+  --accent-hover: #a28bff;
+  --accent-light: rgba(140, 109, 255, 0.12);
+  --accent-gradient: linear-gradient(135deg, #8c6dff 0%, #6aa7ff 100%);
+  --success: var(--theme-success);
+  --success-hover: #5ee0b3;
+  --success-light: rgba(67, 212, 160, 0.14);
+  --success-gradient: linear-gradient(135deg, #43d4a0 0%, #70e8bf 100%);
+  --warning: var(--theme-warning);
+  --warning-hover: #ffd98e;
+  --warning-light: rgba(245, 199, 107, 0.14);
+  --warning-gradient: linear-gradient(135deg, #f5c76b 0%, #ffe09b 100%);
+  --danger: var(--theme-danger);
+  --danger-hover: #ff99aa;
+  --danger-active: #ff6681;
+  --danger-light: rgba(255, 122, 144, 0.14);
+  --danger-gradient: linear-gradient(135deg, #ff7a90 0%, #ff9faf 100%);
+  --info: var(--theme-accent);
+  --info-hover: #97c8ff;
+  --info-light: rgba(124, 181, 255, 0.14);
+  --info-gradient: linear-gradient(135deg, #7cb5ff 0%, #5a8cff 100%);
+  --text: var(--theme-text);
+  --text-light: var(--theme-text-soft);
+  --text-muted: var(--theme-text-muted);
+  --text-secondary: var(--theme-text-muted);
+  --text-disabled: rgba(143, 160, 186, 0.54);
+  --text-inverse: #04101e;
+  --muted: var(--theme-text-soft);
+  --muted2: var(--theme-text-muted);
+  --border: rgba(148, 163, 184, 0.16);
+  --border-light: rgba(148, 163, 184, 0.12);
+  --border-dark: rgba(148, 163, 184, 0.26);
+  --border-focus: rgba(124, 181, 255, 0.45);
+  --border-glass: rgba(148, 163, 184, 0.16);
+  --border-glass-hover: rgba(124, 181, 255, 0.28);
+  --shadow-xs: 0 2px 6px rgba(2, 8, 23, 0.16);
+  --shadow-sm: 0 6px 16px rgba(2, 8, 23, 0.2);
+  --shadow: var(--theme-shadow-soft);
+  --shadow-md: 0 14px 36px rgba(2, 8, 23, 0.28);
+  --shadow-lg: 0 24px 60px rgba(2, 8, 23, 0.42);
+  --shadow-xl: 0 28px 68px rgba(2, 8, 23, 0.48);
+  --shadow-glass: var(--theme-shadow);
+  --shadow-colored: 0 18px 44px rgba(90, 140, 255, 0.18);
+  --shadow-glow: 0 0 32px rgba(124, 181, 255, 0.16);
+  --shadow-button: 0 12px 28px rgba(90, 140, 255, 0.24);
+  --shadow-button-hover: 0 16px 34px rgba(90, 140, 255, 0.3);
 }
 
 html,
@@ -97,6 +167,46 @@ h6,
 .admin-page .table tbody td.col-id,
 .admin-page .table tbody td.col-can {
   color: var(--theme-text-muted) !important;
+}
+
+.email-subject,
+.email-preview,
+.value-text,
+.value-text.subject,
+.value-text.from,
+.meta-from-text,
+.email-sender,
+.email-time,
+.email-code,
+.mailbox-address,
+.page-mailboxes .mailbox-card .addr,
+.page-mailboxes .mailbox-list-item .addr,
+.page-mailboxes .mailbox-list-item .email-address,
+.admin-page .mailbox-item .address,
+.admin-page .user-mailbox-item .addr,
+.detail-subject,
+.detail-meta,
+.detail-meta .meta-value,
+.detail-body,
+.email-content-text,
+.email-content-text p,
+.email-content-text pre,
+.email-content-text blockquote {
+  color: var(--theme-text) !important;
+}
+
+.email-preview,
+.detail-meta .meta-label,
+.detail-meta .meta-row,
+.email-time,
+.email-code,
+.verification-code .code-value,
+.meta-value,
+.page-mailboxes .mailbox-card .line,
+.page-mailboxes .mailbox-card .pwd,
+.page-mailboxes .mailbox-card .login,
+.page-mailboxes .mailbox-card .time {
+  color: var(--theme-text-soft) !important;
 }
 
 .topbar {
@@ -340,6 +450,44 @@ textarea::placeholder,
   border-color: rgba(148, 163, 184, 0.14) !important;
 }
 
+.email-meta,
+.email-meta .meta-from,
+.email-meta .meta-label,
+.email-meta .meta-from-text,
+.email-line,
+.label-chip,
+.value-text,
+.email-preview.value-text,
+.email-subject,
+.email-header,
+.email-sender,
+.email-code,
+.mailbox-address,
+.detail-subject,
+.detail-meta .meta-label,
+.detail-meta .meta-value,
+.modal-meta,
+.modal-meta p,
+.modal-title,
+.email-content-text,
+.email-content-text h1,
+.email-content-text h2,
+.email-content-text h3,
+.email-content-text p,
+.email-content-text li,
+.email-content-text strong,
+.email-content-text span,
+.email-content-text div,
+.email-content-text td,
+.email-content-text th,
+.email-content-text pre,
+.email-content-text code,
+.email-content-text blockquote {
+  opacity: 1 !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
 .modal {
   background: rgba(2, 6, 14, 0.62) !important;
   backdrop-filter: blur(14px);
@@ -442,6 +590,22 @@ body:not(.page-mailboxes):not(.admin-page) .mailbox-item.selected {
   border-color: rgba(124, 181, 255, 0.32) !important;
 }
 
+.email-item::before,
+.email-item::after,
+.email-item:hover::before,
+.email-item:hover::after {
+  opacity: 0 !important;
+}
+
+.email-item:hover,
+.page-mailboxes .mailbox-card:hover,
+.page-mailboxes .mailbox-list-item:hover,
+.admin-page .mailbox-item.clickable:hover,
+.admin-page .user-mailbox-item:hover {
+  transform: none !important;
+  box-shadow: 0 0 0 1px rgba(124, 181, 255, 0.14), 0 18px 38px rgba(8, 15, 27, 0.3) !important;
+}
+
 body:not(.page-mailboxes):not(.admin-page) .view-switch,
 body:not(.page-mailboxes):not(.admin-page) .seg-btn {
   border-radius: 14px !important;
@@ -496,6 +660,67 @@ body:not(.page-mailboxes):not(.admin-page) .seg-btn[aria-pressed="true"] {
   background: rgba(124, 181, 255, 0.14) !important;
   border-color: rgba(124, 181, 255, 0.32) !important;
   box-shadow: 0 0 0 1px rgba(124, 181, 255, 0.14), 0 18px 38px rgba(8, 15, 27, 0.3) !important;
+}
+
+.page-mailboxes .mailbox-card .addr,
+.page-mailboxes .mailbox-list-item .addr,
+.page-mailboxes .mailbox-list-item .email-address,
+.mailbox-address,
+.email-sender,
+.email-subject,
+.value-text.subject,
+.meta-from-text,
+.detail-subject,
+.modal-title {
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.email-preview,
+.value-text,
+.email-time,
+.detail-meta .meta-value,
+.modal-meta p {
+  font-weight: 500 !important;
+}
+
+.email-item .email-actions,
+.email-item:hover .email-actions {
+  opacity: 1 !important;
+}
+
+.email-actions .btn.btn-secondary,
+.email-actions .btn.btn-danger {
+  min-width: 42px !important;
+}
+
+.email-content-area,
+.detail-body {
+  background: rgba(7, 14, 25, 0.72) !important;
+  border: 1px solid rgba(148, 163, 184, 0.12) !important;
+  border-radius: 18px !important;
+}
+
+.email-content-text a {
+  color: #9cccff !important;
+  border-bottom-color: rgba(156, 204, 255, 0.32) !important;
+}
+
+.email-content-text a:hover {
+  background: rgba(124, 181, 255, 0.12) !important;
+  border-bottom-color: rgba(156, 204, 255, 0.64) !important;
+}
+
+.email-content-text code {
+  background: rgba(124, 181, 255, 0.12) !important;
+  color: #dceaff !important;
+  border-color: rgba(124, 181, 255, 0.18) !important;
+}
+
+.email-content-text pre,
+.email-content-text blockquote {
+  background: rgba(10, 18, 31, 0.92) !important;
+  border-color: rgba(148, 163, 184, 0.14) !important;
 }
 
 .page-mailboxes .selection-control-ui {
