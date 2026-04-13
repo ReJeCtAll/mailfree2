@@ -24,6 +24,29 @@
   --theme-ring: 0 0 0 1px rgba(124, 181, 255, 0.12), 0 0 0 4px rgba(124, 181, 255, 0.16);
 
   /* Remap legacy tokens used across app.css/mailbox.css/mailboxes.css */
+  --cds-background: #0b1525;
+  --cds-layer-01: rgba(12, 21, 35, 0.92);
+  --cds-layer-01-hover: rgba(20, 34, 56, 0.96);
+  --cds-layer-02: rgba(36, 55, 84, 0.92);
+  --cds-text-primary: var(--theme-text);
+  --cds-text-secondary: var(--theme-text-soft);
+  --cds-text-placeholder: var(--theme-text-muted);
+  --cds-border-subtle: rgba(148, 163, 184, 0.16);
+  --cds-border-strong: rgba(124, 181, 255, 0.3);
+  --cds-link-primary: #9cccff;
+  --cds-link-primary-hover: #c0deff;
+  --cds-button-primary: #7cb5ff;
+  --cds-button-primary-hover: #97c8ff;
+  --cds-button-primary-active: #5a8cff;
+  --cds-button-secondary: #243754;
+  --cds-button-secondary-hover: #304668;
+  --cds-button-secondary-active: #395477;
+  --cds-support-error: #ff7a90;
+  --cds-support-success: #43d4a0;
+  --cds-support-warning: #f5c76b;
+  --cds-focus: #9cccff;
+  --cds-focus-inset: #04101e;
+
   --surface: linear-gradient(180deg, #09111f 0%, #0b1525 52%, #08111f 100%);
   --surface-overlay: rgba(8, 17, 31, 0.86);
   --surface-pattern: none;
@@ -588,6 +611,15 @@ body:not(.page-mailboxes):not(.admin-page) .email-item.clickable:active,
 body:not(.page-mailboxes):not(.admin-page) .mailbox-item.selected {
   background: rgba(124, 181, 255, 0.14) !important;
   border-color: rgba(124, 181, 255, 0.32) !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .mailbox-item .address {
+  color: var(--theme-text) !important;
+  font-weight: 700 !important;
+}
+
+body:not(.page-mailboxes):not(.admin-page) .mailbox-item .time {
+  color: var(--theme-text-soft) !important;
 }
 
 .email-item::before,
