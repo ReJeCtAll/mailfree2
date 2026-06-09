@@ -625,3 +625,218 @@ body {
   color: var(--text-muted);
   font-size: 12px;
 }
+
+/* Mailbox page refactor layer */
+body {
+  background:
+    linear-gradient(180deg, rgba(14, 14, 21, 0.92), var(--bg) 48%),
+    var(--bg);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.82), transparent 72%);
+  z-index: -1;
+}
+
+.topbar {
+  width: min(100% - 32px, 1440px);
+  min-height: 64px;
+  margin: 16px auto 0;
+  padding: 10px 12px 10px 16px;
+  justify-content: center;
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  background: var(--surface-overlay);
+  box-shadow: var(--shadow-glass);
+}
+
+.topbar-inner {
+  max-width: none;
+  padding: 0;
+}
+
+.brand {
+  gap: 12px;
+}
+
+.brand:hover {
+  text-decoration: none;
+}
+
+.brand span {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  background-clip: border-box;
+}
+
+.brand-icon {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-glass-hover);
+  border-radius: var(--radius-md);
+  background: var(--primary-gradient);
+  color: var(--text-on-brand);
+  font-family: var(--font-mono);
+  font-size: 0;
+  font-weight: 700;
+  box-shadow: var(--shadow-colored);
+}
+
+.brand-icon::before {
+  content: "MF";
+  color: var(--text-on-brand);
+  -webkit-text-fill-color: var(--text-on-brand);
+  font-size: 11px;
+}
+
+.brand-text {
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.mailbox-container {
+  width: min(100% - 32px, 1440px);
+  max-width: none;
+  margin: 0 auto;
+  padding: 16px 0 28px;
+  display: block;
+}
+
+.mailbox-main {
+  gap: 16px;
+}
+
+.mailbox-info-card,
+.inbox-card {
+  padding: 16px;
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  background: rgba(17, 17, 24, 0.72);
+  box-shadow: var(--shadow-card);
+}
+
+.mailbox-info-card h2,
+.listcard-title {
+  letter-spacing: 0;
+}
+
+.mailbox-display {
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(135deg, rgba(var(--primary-rgb), 0.14), rgba(34, 211, 238, 0.05)),
+    var(--surface);
+}
+
+.mailbox-address {
+  color: var(--text);
+  font-weight: 650;
+}
+
+.mailbox-toolbar {
+  align-items: stretch;
+}
+
+.toolbar-right {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.chip,
+.toggle,
+.select-sm,
+.input-sm {
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.retention-hint {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  margin-left: 8px;
+  padding: 0 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.password-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  border-radius: var(--radius-md);
+  background: var(--warning-light);
+  color: var(--warning);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+#email-modal.modal,
+#confirm-modal.modal,
+#password-modal.modal {
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#email-modal.modal.show,
+#confirm-modal.modal.show,
+#password-modal.modal.show {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .topbar,
+  .mailbox-container {
+    width: min(100% - 16px, 1440px);
+  }
+
+  .mailbox-container {
+    padding: 12px 0 18px;
+  }
+
+  .mailbox-info-card,
+  .inbox-card {
+    padding: 12px;
+  }
+
+  .mailbox-toolbar,
+  .toolbar-left,
+  .toolbar-right {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .modal-card {
+    border-radius: var(--radius-lg);
+  }
+}

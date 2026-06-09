@@ -134,6 +134,25 @@
   border-radius: var(--radius-md);
 }
 
+.btn > .btn-icon {
+  width: auto;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: var(--muted2);
+  color: currentColor;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
 .btn-icon.btn-sm { width: 28px; height: 28px; }
 .btn-icon.btn-lg { width: 44px; height: 44px; }
 

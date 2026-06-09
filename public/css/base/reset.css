@@ -34,9 +34,9 @@ body {
 }
 
 /* ── 标题层级 (DESIGN.md §3.3) ── */
-h1 { font-size: 22px; font-weight: 600; line-height: 1.4; letter-spacing: -0.02em; color: var(--text); }
-h2 { font-size: 18px; font-weight: 600; line-height: 1.45; letter-spacing: -0.015em; color: var(--text); }
-h3 { font-size: 16px; font-weight: 600; line-height: 1.5; letter-spacing: -0.01em; color: var(--text); }
+h1 { font-size: 22px; font-weight: 600; line-height: 1.4; letter-spacing: 0; color: var(--text); }
+h2 { font-size: 18px; font-weight: 600; line-height: 1.45; letter-spacing: 0; color: var(--text); }
+h3 { font-size: 16px; font-weight: 600; line-height: 1.5; letter-spacing: 0; color: var(--text); }
 h4 { font-size: 14px; font-weight: 600; line-height: 1.5; color: var(--text); }
 h5 { font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--text); }
 h6 { font-size: 12px; font-weight: 600; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text); }
@@ -57,7 +57,7 @@ code, pre, .email-address, .mono {
 .email-address {
   font-size: 14px;
   font-weight: 500;
-  letter-spacing: -0.005em;
+  letter-spacing: 0;
 }
 
 /* Links */

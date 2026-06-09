@@ -129,9 +129,9 @@
   --radius-xs: 4px;
   --radius-sm: 5px;
   --radius-md: 6px;
-  --radius-lg: 10px;
-  --radius-xl: 14px;
-  --radius-2xl: 18px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
   --radius-full: 9999px;
 
   /* ── 过渡动画 ── */

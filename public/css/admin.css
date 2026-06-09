@@ -95,7 +95,7 @@
   font-size: 20px;
   font-weight: 600;
   color: var(--text);
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .admin-page .card h2 .card-icon {

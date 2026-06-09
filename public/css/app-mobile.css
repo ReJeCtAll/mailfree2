@@ -262,9 +262,9 @@
   .sidebar.history-inline,
   .sidebar.history-inline #mb-list .mailbox-item,
   #role-badge {
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-card) !important;
+    backdrop-filter: blur(var(--blur-md)) !important;
   }
 
   body.is-mobile .mailbox-config-section .config-form {
@@ -280,5 +280,19 @@
   .container,
   .page-mailboxes .container {
     gap: 16px !important;
+  }
+
+  .brand-text {
+    display: block !important;
+  }
+
+  .brand-subtitle {
+    display: none !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .brand-text {
+    display: none !important;
   }
 }

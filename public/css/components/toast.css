@@ -32,6 +32,10 @@
   animation: toast-in var(--transition-slow);
 }
 
+.toast:empty {
+  display: none;
+}
+
 .toast.hiding {
   animation: toast-out var(--transition-slow) forwards;
 }
