@@ -13,6 +13,14 @@
 let __toastTpl = null;
 let __toastTplPromise = null;
 
+if (typeof window !== 'undefined' && typeof window.__ !== 'function') {
+  window.__ = function translateFallback(key, params) {
+    return String(key || '').replace(/\{(\w+)\}/g, function (_, name) {
+      return params && params[name] !== undefined && params[name] !== null ? String(params[name]) : '';
+    });
+  };
+}
+
 // 图标映射配置 - 使用最基本的字符确保兼容性
 const ICON_MAP = {
   'success': '✓',
