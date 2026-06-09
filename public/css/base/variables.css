@@ -1,109 +1,351 @@
 /* =============================================
    CSS 变量模块 - 设计系统基础
+   Linear + Vercel 设计令牌 · 暗色优先
    ============================================= */
 
 :root {
-  --surface:
-    radial-gradient(circle at top left, rgba(90, 140, 255, 0.18), transparent 26%),
-    radial-gradient(circle at 85% 15%, rgba(56, 189, 248, 0.12), transparent 24%),
-    linear-gradient(180deg, #09111f 0%, #0b1525 52%, #08111f 100%);
-  --surface-overlay: rgba(8, 17, 31, 0.86);
-  --surface-pattern: none;
-  --surface-mesh: none;
+  /* ── 背景系统 ── */
+  --bg: #0a0a0f;
+  --bg-secondary: #0e0e15;
 
-  --card: rgba(15, 25, 42, 0.9);
-  --card-hover: rgba(18, 31, 52, 0.98);
-  --card-glass: rgba(10, 18, 31, 0.86);
-  --card-glass-hover: rgba(20, 34, 56, 0.94);
-  --card-gradient: linear-gradient(180deg, rgba(17, 28, 45, 0.98), rgba(12, 21, 35, 0.96));
-  --card-gradient-accent: linear-gradient(180deg, rgba(124, 181, 255, 0.06), rgba(124, 181, 255, 0));
+  --surface: #111118;
+  --surface-overlay: rgba(17, 17, 24, 0.85);
+  --surface-pattern: radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.025) 0%, transparent 50%);
+  --surface-mesh:
+    radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.03) 0%, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(139, 92, 246, 0.02) 0%, transparent 50%);
 
-  --primary: #7cb5ff;
-  --primary-hover: #97c8ff;
-  --primary-active: #5a8cff;
-  --primary-light: rgba(124, 181, 255, 0.16);
-  --primary-glass: rgba(124, 181, 255, 0.1);
-  --primary-rgb: 124, 181, 255;
-  --primary-gradient: linear-gradient(135deg, #7cb5ff 0%, #5a8cff 52%, #8c6dff 100%);
-  --primary-gradient-soft: linear-gradient(135deg, rgba(124, 181, 255, 0.18) 0%, rgba(140, 109, 255, 0.12) 100%);
+  /* ── 卡片系统 ── */
+  --card: #14141c;
+  --card-hover: #181822;
+  --card-glass: rgba(20, 20, 28, 0.75);
+  --card-glass-hover: rgba(24, 24, 34, 0.85);
+  --card-gradient: linear-gradient(135deg, #14141c 0%, #181822 100%);
+  --card-gradient-accent: linear-gradient(135deg, rgba(20, 20, 28, 0.95), rgba(24, 24, 34, 0.9));
 
-  --secondary: #243754;
-  --secondary-hover: #304668;
-  --secondary-light: rgba(143, 160, 186, 0.12);
-  --secondary-gradient: linear-gradient(135deg, #243754 0%, #304668 100%);
+  /* ── 主色系统 ── */
+  --primary: #6366f1;
+  --primary-hover: #7577f5;
+  --primary-active: #5457e6;
+  --primary-light: rgba(99, 102, 241, 0.12);
+  --primary-glass: rgba(99, 102, 241, 0.15);
+  --primary-rgb: 99, 102, 241;
+  --text-on-brand: #ffffff;
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+  --primary-gradient-soft: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(168, 85, 247, 0.15) 100%);
 
-  --accent: #8c6dff;
-  --accent-hover: #a28bff;
-  --accent-light: rgba(140, 109, 255, 0.12);
-  --accent-gradient: linear-gradient(135deg, #8c6dff 0%, #6aa7ff 100%);
+  /* ── 辅色 ── */
+  --secondary: #717182;
+  --secondary-hover: #808090;
+  --secondary-light: rgba(113, 113, 130, 0.12);
+  --secondary-gradient: linear-gradient(135deg, #717182, #8b8b9a);
 
-  --success: #43d4a0;
-  --success-hover: #5ee0b3;
-  --success-light: rgba(67, 212, 160, 0.14);
-  --success-gradient: linear-gradient(135deg, #43d4a0 0%, #70e8bf 100%);
+  --accent: #22d3ee;
+  --accent-hover: #3dd9f0;
+  --accent-light: rgba(34, 211, 238, 0.12);
+  --accent-gradient: linear-gradient(135deg, #22d3ee, #6366f1);
 
-  --warning: #f5c76b;
-  --warning-hover: #ffd98e;
-  --warning-light: rgba(245, 199, 107, 0.14);
-  --warning-gradient: linear-gradient(135deg, #f5c76b 0%, #ffe09b 100%);
+  /* ── 语义色 ── */
+  --success: #22c55e;
+  --success-hover: #34d373;
+  --success-light: rgba(34, 197, 94, 0.12);
+  --success-gradient: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(74, 222, 128, 0.1));
 
-  --danger: #ff7a90;
-  --danger-hover: #ff99aa;
-  --danger-active: #ff6681;
-  --danger-light: rgba(255, 122, 144, 0.14);
-  --danger-gradient: linear-gradient(135deg, #ff7a90 0%, #ff9faf 100%);
+  --warning: #f59e0b;
+  --warning-hover: #f6b02e;
+  --warning-light: rgba(245, 158, 11, 0.12);
+  --warning-gradient: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(251, 191, 36, 0.1));
 
-  --info: #7cb5ff;
-  --info-hover: #97c8ff;
-  --info-light: rgba(124, 181, 255, 0.14);
-  --info-gradient: linear-gradient(135deg, #7cb5ff 0%, #5a8cff 100%);
+  --danger: #ef4444;
+  --danger-hover: #f15a5a;
+  --danger-active: #dc2626;
+  --danger-light: rgba(239, 68, 68, 0.12);
+  --danger-rgb: 239, 68, 68;
+  --danger-gradient: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(248, 113, 113, 0.1));
 
-  --text: #f3f7ff;
-  --text-light: #c4d0e4;
-  --text-muted: #8fa0ba;
-  --text-secondary: #8fa0ba;
-  --text-disabled: rgba(143, 160, 186, 0.54);
-  --text-inverse: #04101e;
+  --info: #3b82f6;
+  --info-hover: #5294f7;
+  --info-light: rgba(59, 130, 246, 0.12);
+  --info-gradient: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.1));
 
-  --border: rgba(148, 163, 184, 0.16);
-  --border-light: rgba(148, 163, 184, 0.12);
-  --border-focus: rgba(124, 181, 255, 0.45);
-  --border-glass: rgba(148, 163, 184, 0.16);
-  --border-glass-hover: rgba(124, 181, 255, 0.28);
+  /* ── 文本系统 ── */
+  --text: #ededf5;
+  --text-secondary: #c4c4d0;
+  --text-light: #a0a0b0;
+  --text-muted: #6b6b7b;
+  --text-disabled: #484858;
+  --text-inverse: #0a0a0f;
 
-  --shadow-xs: 0 2px 6px rgba(2, 8, 23, 0.16);
-  --shadow-sm: 0 6px 16px rgba(2, 8, 23, 0.2);
-  --shadow-md: 0 14px 36px rgba(2, 8, 23, 0.28);
-  --shadow-lg: 0 24px 60px rgba(2, 8, 23, 0.42);
-  --shadow-xl: 0 28px 68px rgba(2, 8, 23, 0.48);
-  --shadow-glow: 0 0 32px rgba(124, 181, 255, 0.16);
-  --shadow-card: 0 18px 50px rgba(2, 8, 23, 0.38);
-  --shadow-card-hover: 0 18px 50px rgba(2, 8, 23, 0.38);
+  /* ── 边框系统 ── */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.05);
+  --border-dark: rgba(255, 255, 255, 0.12);
+  --border-focus: rgba(99, 102, 241, 0.45);
+  --border-glass: rgba(255, 255, 255, 0.06);
+  --border-glass-dark: rgba(255, 255, 255, 0.1);
+  --border-glass-hover: rgba(255, 255, 255, 0.12);
+  --border-gradient: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.3) 0%,
+    rgba(139, 92, 246, 0.2) 50%,
+    rgba(168, 85, 247, 0.15) 100%
+  );
 
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
+  /* ── 微妙色 ── */
+  --muted: rgba(255, 255, 255, 0.04);
+  --muted2: rgba(255, 255, 255, 0.06);
+
+  /* ── 阴影系统 ── */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.55), 0 10px 10px rgba(0, 0, 0, 0.35);
+  --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.6);
+  --shadow-2xl: 0 35px 60px rgba(0, 0, 0, 0.7);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-colored: 0 4px 14px rgba(99, 102, 241, 0.18);
+  --shadow-glow: 0 0 24px rgba(99, 102, 241, 0.15);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-button: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-button-hover: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 16px rgba(99, 102, 241, 0.15);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.03);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.06);
+
+  /* ── 间距系统 ── */
+  --spacing-3xs: 2px;
+  --spacing-2xs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
   --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-2xl: 48px;
+  --spacing-lg: 20px;
+  --spacing-xl: 28px;
+  --spacing-2xl: 40px;
+  --spacing-3xl: 56px;
 
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 18px;
-  --radius-xl: 24px;
+  /* ── 圆角系统 ── */
+  --radius-none: 0;
+  --radius-2xs: 2px;
+  --radius-xs: 4px;
+  --radius-sm: 5px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-2xl: 18px;
   --radius-full: 9999px;
 
-  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  /* ── 过渡动画 ── */
+  --transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
 
-  --font-sans: "SF Pro Display", "Inter", "Segoe UI", sans-serif;
-  --font-mono: "SF Mono", "JetBrains Mono", Menlo, monospace;
+  /* ── 模糊系统 ── */
+  --blur-sm: 4px;
+  --blur-md: 8px;
+  --blur-lg: 16px;
+  --blur-xl: 24px;
 
+  /* ── 字体 ── */
+  --font-sans: "Inter", "SF Pro Display", "SF Pro Text", -apple-system,
+               BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+               "Noto Sans SC", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "IBM Plex Mono", "Fira Code",
+               "Cascadia Code", "Consolas", "Liberation Mono", Menlo, Monaco,
+               monospace;
+
+  /* ── Z-Index 层级 ── */
+  --z-base: 0;
   --z-dropdown: 100;
   --z-sticky: 200;
-  --z-modal: 1000;
-  --z-toast: 2000;
-  --z-tooltip: 3000;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+}
+
+/* =============================================
+   亮色模式 — data-theme="light"
+   ============================================= */
+:root[data-theme="light"] {
+  /* ── 背景系统 ── */
+  --bg: #fafafa;
+  --bg-secondary: #f4f4f5;
+  --surface: #ffffff;
+  --surface-overlay: rgba(255, 255, 255, 0.9);
+  --card: #ffffff;
+  --card-hover: #fafafa;
+  --card-glass: rgba(255, 255, 255, 0.78);
+  --card-glass-hover: rgba(255, 255, 255, 0.92);
+  --card-gradient: linear-gradient(135deg, #ffffff, #fafafa);
+  --card-gradient-accent: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(250, 250, 250, 0.9));
+
+  /* ── 主色系统 ── */
+  --primary: #4f46e5;
+  --primary-hover: #6366f1;
+  --primary-active: #4338ca;
+  --primary-light: rgba(79, 70, 229, 0.08);
+  --primary-glass: rgba(79, 70, 229, 0.1);
+  --primary-rgb: 79, 70, 229;
+  --text-on-brand: #ffffff;
+  --primary-gradient: linear-gradient(135deg, #4f46e5, #7c3aed, #9333ea);
+  --primary-gradient-soft: linear-gradient(135deg, rgba(79, 70, 229, 0.12), rgba(147, 51, 234, 0.08));
+
+  /* ── 辅色 ── */
+  --secondary: #717182;
+  --secondary-hover: #808090;
+  --secondary-light: rgba(113, 113, 130, 0.08);
+  --accent: #0891b2;
+  --accent-hover: #06b6d4;
+  --accent-light: rgba(8, 145, 178, 0.08);
+
+  /* ── 语义色 ── */
+  --success: #16a34a;
+  --success-hover: #22c55e;
+  --success-light: rgba(22, 163, 74, 0.08);
+  --warning: #d97706;
+  --warning-hover: #f59e0b;
+  --warning-light: rgba(217, 119, 6, 0.08);
+  --danger: #dc2626;
+  --danger-hover: #ef4444;
+  --danger-active: #b91c1c;
+  --danger-light: rgba(220, 38, 38, 0.08);
+  --danger-rgb: 220, 38, 38;
+  --info: #2563eb;
+  --info-hover: #3b82f6;
+  --info-light: rgba(37, 99, 235, 0.08);
+
+  /* ── 文本系统 ── */
+  --text: #18181b;
+  --text-secondary: #3f3f46;
+  --text-light: #52525b;
+  --text-muted: #71717a;
+  --text-disabled: #a1a1aa;
+  --text-inverse: #fafafa;
+
+  /* ── 边框系统 ── */
+  --border: rgba(0, 0, 0, 0.08);
+  --border-light: rgba(0, 0, 0, 0.04);
+  --border-dark: rgba(0, 0, 0, 0.12);
+  --border-focus: rgba(79, 70, 229, 0.4);
+  --border-glass: rgba(0, 0, 0, 0.06);
+  --border-glass-dark: rgba(0, 0, 0, 0.1);
+  --border-glass-hover: rgba(0, 0, 0, 0.12);
+
+  /* ── 微妙色 ── */
+  --muted: rgba(0, 0, 0, 0.04);
+  --muted2: rgba(0, 0, 0, 0.06);
+
+  /* ── 阴影系统 ── */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.06), 0 4px 6px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 35px 60px rgba(0, 0, 0, 0.15);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --shadow-colored: 0 4px 12px rgba(79, 70, 229, 0.15);
+  --shadow-glow: 0 0 30px rgba(79, 70, 229, 0.1);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-button: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-button-hover: 0 2px 6px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+/* =============================================
+   系统偏好自动检测 — 无手动主题时跟随 OS
+   ============================================= */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    /* ── 背景系统 ── */
+    --bg: #fafafa;
+    --bg-secondary: #f4f4f5;
+    --surface: #ffffff;
+    --surface-overlay: rgba(255, 255, 255, 0.9);
+    --card: #ffffff;
+    --card-hover: #fafafa;
+    --card-glass: rgba(255, 255, 255, 0.78);
+    --card-glass-hover: rgba(255, 255, 255, 0.92);
+    --card-gradient: linear-gradient(135deg, #ffffff, #fafafa);
+    --card-gradient-accent: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(250, 250, 250, 0.9));
+
+    /* ── 主色系统 ── */
+    --primary: #4f46e5;
+    --primary-hover: #6366f1;
+    --primary-active: #4338ca;
+    --primary-light: rgba(79, 70, 229, 0.08);
+    --primary-glass: rgba(79, 70, 229, 0.1);
+    --primary-rgb: 79, 70, 229;
+    --text-on-brand: #ffffff;
+    --primary-gradient: linear-gradient(135deg, #4f46e5, #7c3aed, #9333ea);
+    --primary-gradient-soft: linear-gradient(135deg, rgba(79, 70, 229, 0.12), rgba(147, 51, 234, 0.08));
+
+    /* ── 辅色 ── */
+    --secondary: #717182;
+    --secondary-hover: #808090;
+    --secondary-light: rgba(113, 113, 130, 0.08);
+    --accent: #0891b2;
+    --accent-hover: #06b6d4;
+    --accent-light: rgba(8, 145, 178, 0.08);
+
+    /* ── 语义色 ── */
+    --success: #16a34a;
+    --success-hover: #22c55e;
+    --success-light: rgba(22, 163, 74, 0.08);
+    --warning: #d97706;
+    --warning-hover: #f59e0b;
+    --warning-light: rgba(217, 119, 6, 0.08);
+    --danger: #dc2626;
+    --danger-hover: #ef4444;
+    --danger-active: #b91c1c;
+    --danger-light: rgba(220, 38, 38, 0.08);
+    --danger-rgb: 220, 38, 38;
+    --info: #2563eb;
+    --info-hover: #3b82f6;
+    --info-light: rgba(37, 99, 235, 0.08);
+
+    /* ── 文本系统 ── */
+    --text: #18181b;
+    --text-secondary: #3f3f46;
+    --text-light: #52525b;
+    --text-muted: #71717a;
+    --text-disabled: #a1a1aa;
+    --text-inverse: #fafafa;
+
+    /* ── 边框系统 ── */
+    --border: rgba(0, 0, 0, 0.08);
+    --border-light: rgba(0, 0, 0, 0.04);
+    --border-dark: rgba(0, 0, 0, 0.12);
+    --border-focus: rgba(79, 70, 229, 0.4);
+    --border-glass: rgba(0, 0, 0, 0.06);
+    --border-glass-dark: rgba(0, 0, 0, 0.1);
+    --border-glass-hover: rgba(0, 0, 0, 0.12);
+
+    /* ── 微妙色 ── */
+    --muted: rgba(0, 0, 0, 0.04);
+    --muted2: rgba(0, 0, 0, 0.06);
+
+    /* ── 阴影系统 ── */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.06), 0 4px 6px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.04);
+    --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 35px 60px rgba(0, 0, 0, 0.15);
+    --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.06);
+    --shadow-colored: 0 4px 12px rgba(79, 70, 229, 0.15);
+    --shadow-glow: 0 0 30px rgba(79, 70, 229, 0.1);
+    --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-button: 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-button-hover: 0 2px 6px rgba(0, 0, 0, 0.1);
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.04);
+    --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  }
 }

@@ -1,12 +1,13 @@
 /* =============================================
    模态框组件样式
+   Linear + Vercel · radius-xl 14px · overlay blur 4px
    ============================================= */
 
-/* 模态框遮罩 */
+/* ── 模态框遮罩 (DESIGN.md §4.5) ── */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   display: flex;
@@ -24,12 +25,13 @@
   visibility: visible;
 }
 
-/* 模态框容器 */
+/* ── 模态框容器 ── */
 .modal {
   position: relative;
   background: var(--card);
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-2xl);
   width: 100%;
   max-width: 500px;
   max-height: 90vh;
@@ -48,13 +50,13 @@
 .modal-xl { max-width: 900px; }
 .modal-full { max-width: 95vw; max-height: 95vh; }
 
-/* 模态框头部 */
+/* ── 模态框头部 ── */
 .modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-lg);
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border);
 }
 
 .modal-title {
@@ -80,25 +82,25 @@
 }
 
 .modal-close:hover {
-  background: var(--border-light);
+  background: var(--muted);
   color: var(--text);
 }
 
-/* 模态框内容 */
+/* ── 模态框内容 ── */
 .modal-body {
   padding: var(--spacing-lg);
   overflow-y: auto;
   max-height: calc(90vh - 160px);
 }
 
-/* 模态框底部 */
+/* ── 模态框底部 ── */
 .modal-footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: var(--spacing-sm);
   padding: var(--spacing-lg);
-  border-top: 1px solid var(--border-light);
+  border-top: 1px solid var(--border);
 }
 
 .modal-footer-left {
@@ -113,7 +115,7 @@
   justify-content: space-between;
 }
 
-/* 确认对话框 */
+/* ── 确认对话框 ── */
 .confirm-modal .modal {
   max-width: 400px;
   text-align: center;
@@ -139,7 +141,7 @@
   color: var(--text-muted);
 }
 
-/* 抽屉模态框 */
+/* ── 抽屉模态框 ── */
 .modal-drawer {
   position: fixed;
   top: 0;
@@ -167,7 +169,7 @@
   overflow-y: auto;
 }
 
-/* 邮件详情模态框 */
+/* ── 邮件详情模态框 ── */
 .email-modal .modal {
   max-width: 700px;
 }
@@ -207,7 +209,7 @@
   font-family: inherit;
 }
 
-/* 验证码高亮 */
+/* ── 验证码高亮 ── */
 .verification-code {
   display: inline-flex;
   align-items: center;
@@ -225,11 +227,11 @@
   color: var(--success);
   cursor: pointer;
   padding: 2px 8px;
-  background: white;
+  background: var(--card);
   border-radius: var(--radius-sm);
 }
 
 .verification-code .code-value:hover {
   background: var(--success);
-  color: white;
+  color: var(--text-on-brand);
 }

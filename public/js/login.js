@@ -20,7 +20,8 @@ let isSubmitting = false;
         showToast(msg, 'info');
       } else if (err) {
         err.textContent = msg;
-        err.style.color = '#6366f1';
+        err.textContent = msg;
+        err.style.color = '';
       }
     }, 300);
   }
@@ -30,13 +31,13 @@ async function doLogin(){
   if (isSubmitting) return;
   const user = (username.value || '').trim();
   const password = (pwd.value || '').trim();
-  if (!user){ err.textContent = '用户名不能为空'; await showToast('用户名不能为空','warn'); return; }
-  if (!password){ err.textContent = '密码不能为空'; await showToast('密码不能为空','warn'); return; }
+  if (!user){ err.textContent = window.__('login.empty.username'); await showToast(window.__('login.empty.username'),'warn'); return; }
+  if (!password){ err.textContent = window.__('login.empty.password'); await showToast(window.__('login.empty.password'),'warn'); return; }
   err.textContent = '';
   isSubmitting = true;
   btn.disabled = true;
   const original = btn.textContent;
-  btn.textContent = '正在登录…';
+  btn.textContent = window.__('login.logging.in');
 
   try{
     // 目标页：优先使用登录页上的 redirect 参数
@@ -66,7 +67,7 @@ async function doLogin(){
         }
         
         // 显示成功提示
-        await showToast('登录成功，正在跳转...', 'success');
+        await showToast(window.__('login.success'), 'success');
         // 延时确保toast显示和cookie设置生效
         setTimeout(() => {
           location.replace(finalTarget);
@@ -76,8 +77,8 @@ async function doLogin(){
     } else {
       // 登录失败，显示错误信息
       const errorText = await response.text();
-      err.textContent = errorText || '登录失败';
-      await showToast(errorText || '登录失败', 'warn');
+      err.textContent = errorText || window.__('login.fail');
+      await showToast(errorText || window.__('login.fail'), 'warn');
       // 恢复按钮状态
       isSubmitting = false;
       btn.disabled = false;
@@ -87,21 +88,21 @@ async function doLogin(){
     
     // 兜底：进入 loading 页面轮询
     if (window.AuthGuard && window.AuthGuard.goLoading){
-      window.AuthGuard.goLoading(target, '正在登录…', { force: true });
+      window.AuthGuard.goLoading(target, window.__('login.logging.in'), { force: true });
     }else{
-      location.replace('/templates/loading.html?redirect=' + encodeURIComponent(target) + '&status=' + encodeURIComponent('正在登录…') + '&force=1');
+      location.replace('/templates/loading.html?redirect=' + encodeURIComponent(target) + '&status=' + encodeURIComponent(window.__('login.logging.in')) + '&force=1');
     }
     return;
   }catch(e){
     // 网络错误或其他异常，显示错误并进入 loading
-    err.textContent = '网络错误，请重试';
-    await showToast('网络连接失败，请检查网络后重试', 'warn');
+    err.textContent = window.__('common.network.error');
+    await showToast(window.__('login.network.fail'), 'warn');
     // 恢复按钮状态
     isSubmitting = false;
     btn.disabled = false;
     btn.textContent = original;
     // 仍然进入 loading 作为兜底
-    location.replace('/templates/loading.html?status=' + encodeURIComponent('正在登录…') + '&force=1');
+    location.replace('/templates/loading.html?status=' + encodeURIComponent(window.__('login.logging.in')) + '&force=1');
     return;
   }finally{
     // 确保按钮状态恢复（防止某些异常情况）

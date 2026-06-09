@@ -1,8 +1,9 @@
 /* =============================================
    Toast 通知组件样式
+   Linear + Vercel · radius-md 6px · font-size 13px
    ============================================= */
 
-/* Toast 容器 */
+/* ── Toast 容器 ── */
 .toast-container {
   position: fixed;
   top: 20px;
@@ -15,22 +16,24 @@
   pointer-events: none;
 }
 
-/* Toast 项 */
+/* ── Toast 项 (DESIGN.md §4.6) ── */
 .toast {
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-sm);
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
   background: var(--card);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 500;
   pointer-events: auto;
-  animation: toast-in 0.3s ease;
+  animation: toast-in var(--transition-slow);
 }
 
 .toast.hiding {
-  animation: toast-out 0.3s ease forwards;
+  animation: toast-out var(--transition-slow) forwards;
 }
 
 @keyframes toast-in {
@@ -81,7 +84,7 @@
 }
 
 .toast-message {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-light);
   word-break: break-word;
 }
@@ -100,13 +103,14 @@
 }
 
 .toast-close:hover {
-  background: var(--border-light);
+  background: var(--muted);
   color: var(--text);
 }
 
-/* Toast 类型 */
+/* ── Toast 语义色类型 ── */
 .toast-success {
   border-color: var(--success);
+  background: var(--success-light);
 }
 
 .toast-success .toast-icon {
@@ -116,6 +120,7 @@
 
 .toast-error {
   border-color: var(--danger);
+  background: var(--danger-light);
 }
 
 .toast-error .toast-icon {
@@ -125,6 +130,7 @@
 
 .toast-warning {
   border-color: var(--warning);
+  background: var(--warning-light);
 }
 
 .toast-warning .toast-icon {
@@ -134,6 +140,7 @@
 
 .toast-info {
   border-color: var(--info);
+  background: var(--info-light);
 }
 
 .toast-info .toast-icon {
@@ -141,7 +148,7 @@
   color: var(--info);
 }
 
-/* 简化版 Toast（纯色背景） */
+/* ── 简化版 Toast（纯色背景） ── */
 .toast-simple {
   border: none;
 }
@@ -171,7 +178,8 @@
   color: white;
 }
 
-.toast-simple .toast-message {
+.toast-simple .toast-message,
+.toast-simple .toast-title {
   color: white;
 }
 
@@ -192,7 +200,7 @@
   height: 3px;
   background: currentColor;
   opacity: 0.3;
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
   animation: toast-progress 3s linear forwards;
 }
 
@@ -210,7 +218,7 @@
     right: 20px;
     max-width: none;
   }
-  
+
   .toast {
     width: 100%;
   }

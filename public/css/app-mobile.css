@@ -1,11 +1,11 @@
-/* 移动端样式拆分 */
+/* 移动端样式拆分 — 已令牌化 */
 
 @media (max-width: 1056px) {
   /* 手机端 - 生成与配置重新编排 */
   body.is-mobile .mailbox-layout{ grid-template-columns: 1fr; gap: 12px; }
   body.is-mobile .mailbox-display-section{ order:1; }
   body.is-mobile .mailbox-config-section{ order:2; }
-  body.is-mobile .mailbox-config-section .config-form{ padding: 8px 10px; background: rgba(255,255,255,.6); border-radius: 10px; }
+  body.is-mobile .mailbox-config-section .config-form{ padding: 8px 10px; background: var(--card-glass); border-radius: 10px; }
   body.is-mobile .generate-action{ position: sticky; bottom: 8px; z-index: 10; }
   /* 卡片与控件紧凑化 */
   body.is-mobile .card{ padding: 12px; }
@@ -13,7 +13,7 @@
   body.is-mobile .mailbox-config-section .config-item{ margin: 8px 0; }
   body.is-mobile .range-container{ gap: 8px; }
   body.is-mobile .mailbox-actions{ gap: 6px !important; }
-  body.is-mobile .mailbox-actions .btn{ height: 44px; }
+  body.is-mobile .mailbox-actions .btn{ height: auto; }
   body.is-mobile .email-display{ padding: 12px; min-height: 64px; }
   /* 主功能切换条（历史/生成） */
   body.is-mobile #mobile-main-switch{

@@ -1,8 +1,9 @@
 /* =============================================
    卡片组件样式
+   Linear + Vercel · radius-lg 10px · card-glass 毛玻璃
    ============================================= */
 
-/* 基础卡片 */
+/* ── 基础卡片 (DESIGN.md §4.3) ── */
 .card {
   background: var(--card);
   border-radius: var(--radius-lg);
@@ -13,10 +14,10 @@
 }
 
 .card:hover {
-  box-shadow: var(--shadow-card-hover);
+  border-color: var(--border-dark);
 }
 
-/* 毛玻璃卡片 */
+/* ── 毛玻璃卡片 ── */
 .card-glass {
   background: var(--card-glass);
   backdrop-filter: blur(16px);
@@ -29,7 +30,7 @@
   border-color: var(--border-glass-hover);
 }
 
-/* 卡片头部 */
+/* ── 卡片头部 ── */
 .card-header {
   display: flex;
   align-items: center;
@@ -68,41 +69,41 @@
   border-top: 1px solid var(--border-light);
 }
 
-/* 可点击卡片 */
+/* ── 可点击卡片 ── */
 .card-clickable {
   cursor: pointer;
 }
 
 .card-clickable:hover {
   transform: translateY(-2px);
-  border-color: var(--primary);
+  border-color: var(--border-dark);
 }
 
 .card-clickable:active {
   transform: translateY(0);
 }
 
-/* 选中状态 */
+/* ── 选中状态 ── */
 .card.selected,
 .card.active {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-light);
+  box-shadow: 0 0 0 1px var(--primary), var(--shadow-colored);
 }
 
-/* 高亮卡片 */
+/* ── 高亮卡片 ── */
 .card-highlight {
   border-color: var(--primary);
   background: linear-gradient(var(--card), var(--card)), var(--primary-gradient-soft);
 }
 
-/* 卡片网格 */
+/* ── 卡片网格 ── */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--spacing-lg);
 }
 
-/* 邮箱卡片 */
+/* ── 邮箱卡片 ── */
 .mailbox-card {
   background: var(--card-glass);
   backdrop-filter: blur(16px);
@@ -131,7 +132,7 @@
   margin-top: var(--spacing-sm);
 }
 
-/* 邮件卡片 */
+/* ── 邮件卡片 ── */
 .email-card {
   background: var(--card);
   border-radius: var(--radius-md);
@@ -142,7 +143,7 @@
 }
 
 .email-card:hover {
-  border-color: var(--primary);
+  border-color: var(--border-dark);
   box-shadow: var(--shadow-sm);
 }
 
@@ -163,7 +164,7 @@
   border-radius: 0 2px 2px 0;
 }
 
-/* 空状态 */
+/* ── 空状态 ── */
 .empty-state {
   display: flex;
   flex-direction: column;

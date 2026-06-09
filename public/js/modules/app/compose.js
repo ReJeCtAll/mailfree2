@@ -21,7 +21,7 @@ export function initCompose(elements, api, showToast) {
   compose.onclick = () => {
     const mailbox = getCurrentMailbox();
     if (!mailbox) {
-      showToast('请先选择或生成一个邮箱', 'warn');
+      showToast(window.__('email.no.mailbox'), 'warn');
       return;
     }
     
@@ -48,7 +48,7 @@ export function initCompose(elements, api, showToast) {
     composeSend.onclick = async () => {
       const mailbox = getCurrentMailbox();
       if (!mailbox) {
-        showToast('请先选择发件邮箱', 'warn');
+        showToast(window.__('email.no.sender'), 'warn');
         return;
       }
       
@@ -58,25 +58,25 @@ export function initCompose(elements, api, showToast) {
       const fromName = (composeFromName?.value || '').trim();
       
       if (!to) {
-        showToast('请输入收件人地址', 'warn');
+        showToast(window.__('email.empty.recipient'), 'warn');
         return;
       }
       
       if (!subject && !html) {
-        showToast('主题和内容不能都为空', 'warn');
+        showToast(window.__('email.empty.content'), 'warn');
         return;
       }
       
       // 设置加载状态
       const originalText = composeSend.textContent;
       composeSend.disabled = true;
-      composeSend.innerHTML = '<span class="spinner"></span> 发送中...';
+      composeSend.innerHTML = '<span class="spinner"></span> ' + window.__('email.sending');
       
       try {
         const body = {
           from: mailbox,
           to,
-          subject: subject || '(无主题)',
+          subject: subject || window.__('common.no.subject'),
           html: html || ''
         };
         if (fromName) body.fromName = fromName;
@@ -89,13 +89,13 @@ export function initCompose(elements, api, showToast) {
         
         if (!r.ok) {
           const text = await r.text();
-          throw new Error(text || '发送失败');
+          throw new Error(text || window.__('email.send.fail'));
         }
         
-        showToast('邮件发送成功！', 'success');
+        showToast(window.__('email.send.success'), 'success');
         closeModal();
       } catch (e) {
-        showToast(e.message || '发送失败，请稍后重试', 'error');
+        showToast(e.message || window.__('email.send.fail'), 'error');
       } finally {
         composeSend.disabled = false;
         composeSend.textContent = originalText;
@@ -116,7 +116,7 @@ export function showSentEmailDetail(email, elements) {
   const e = email;
   modalSubject.innerHTML = `
     <span class="modal-icon">📤</span>
-    <span>${escapeHtml(e.subject || '(无主题)')}</span>
+    <span>${escapeHtml(e.subject || window.__('common.no.subject'))}</span>
   `;
   
   const recipients = (e.recipients || e.to_addrs || '').toString();
@@ -124,10 +124,10 @@ export function showSentEmailDetail(email, elements) {
   
   let statusBadge = '';
   const statusMap = {
-    'queued': { class: 'status-queued', text: '排队中' },
-    'delivered': { class: 'status-delivered', text: '已送达' },
-    'failed': { class: 'status-failed', text: '发送失败' },
-    'processing': { class: 'status-processing', text: '处理中' }
+    'queued': { class: 'status-queued', text: window.__('email.status.queued') },
+    'delivered': { class: 'status-delivered', text: window.__('email.status.delivered') },
+    'failed': { class: 'status-failed', text: window.__('email.status.failed') },
+    'processing': { class: 'status-processing', text: window.__('email.status.processing') }
   };
   const statusInfo = statusMap[status] || { class: '', text: status };
   statusBadge = `<span class="status-badge ${statusInfo.class}">${statusInfo.text}</span>`;
@@ -135,9 +135,9 @@ export function showSentEmailDetail(email, elements) {
   modalContent.innerHTML = `
     <div class="sent-detail">
       <div class="detail-meta">
-        <div class="meta-row"><span class="meta-label">收件人：</span><span class="meta-value">${escapeHtml(recipients)}</span></div>
-        <div class="meta-row"><span class="meta-label">状态：</span>${statusBadge}</div>
-        <div class="meta-row"><span class="meta-label">发送时间：</span><span class="meta-value">${escapeHtml(e.created_at || '')}</span></div>
+        <div class="meta-row"><span class="meta-label">${window.__('email.recipient.label')}</span><span class="meta-value">${escapeHtml(recipients)}</span></div>
+        <div class="meta-row"><span class="meta-label">${window.__('email.status.label')}</span>${statusBadge}</div>
+        <div class="meta-row"><span class="meta-label">${window.__('email.sent.time.label')}</span><span class="meta-value">${escapeHtml(e.created_at || '')}</span></div>
       </div>
       <div class="detail-content">
         ${e.html_content ? e.html_content : `<pre>${escapeHtml(e.text_content || '')}</pre>`}

@@ -72,7 +72,7 @@ async function api(path, options = {}) {
     return mockApi(path, options);
   }
   const r = await fetch(path, { ...options, headers: { 'Cache-Control': 'no-cache', ...options.headers }});
-  if (r.status === 401) { redirectToLogin('请先登录'); throw new Error('unauthorized'); }
+  if (r.status === 401) { redirectToLogin(window.__('login.plz.login')); throw new Error('unauthorized'); }
   return r;
 }
 
@@ -86,20 +86,20 @@ async function initAuth() {
   try {
     const r = await fetch('/api/session');
     const data = await r.json();
-    if (!data.authenticated) { redirectToLogin('请先登录'); return; }
-    if (data.role !== 'mailbox') { redirectToLogin('只有邮箱用户可以访问此页面'); return; }
+    if (!data.authenticated) { redirectToLogin(window.__('login.plz.login')); return; }
+    if (data.role !== 'mailbox') { redirectToLogin(window.__('login.mailbox.only')); return; }
     
     currentUser = data;
     currentMailbox = data.mailboxAddress;
     
-    if (els.roleBadge) els.roleBadge.textContent = `邮箱：${currentMailbox}`;
+    if (els.roleBadge) els.roleBadge.textContent = window.__('role.mailbox.owner', { mailbox: currentMailbox });
     if (els.currentMailbox) els.currentMailbox.textContent = currentMailbox;
     
     await loadEmails();
     startAutoRefresh();
   } catch(e) {
     console.error('认证失败:', e);
-    redirectToLogin('认证失败');
+    redirectToLogin(window.__('login.auth.fail'));
   }
 }
 
@@ -117,7 +117,7 @@ async function loadEmails() {
     updateCounts();
   } catch(e) {
     console.error('加载邮件失败:', e);
-    showToast('加载失败', 'error');
+    showToast(window.__('common.load.fail'), 'error');
   } finally {
     if (els.listLoading) els.listLoading.style.display = 'none';
   }
@@ -166,15 +166,15 @@ async function showEmail(id) {
     const r = await api(`/api/email/${id}`);
     const email = await r.json();
     
-    if (els.modalSubject) els.modalSubject.textContent = email.subject || '(无主题)';
+    if (els.modalSubject) els.modalSubject.textContent = email.subject || window.__('common.no.subject');
     if (els.modalContent) els.modalContent.innerHTML = renderEmailDetail(email);
     
     // 绑定验证码复制
     els.modalContent?.querySelectorAll('.code-value').forEach(el => {
       el.onclick = async () => {
         const code = el.dataset.code || el.textContent;
-        try { await navigator.clipboard.writeText(code); showToast('已复制', 'success'); }
-        catch(_) { showToast('复制失败', 'error'); }
+        try { await navigator.clipboard.writeText(code); showToast(window.__('common.copy.success'), 'success'); }
+        catch(_) { showToast(window.__('common.copy.fail'), 'error'); }
       };
     });
     
@@ -185,7 +185,7 @@ async function showEmail(id) {
       try { await api(`/api/email/${id}/read`, { method: 'POST' }); loadEmails(); } catch(_) {}
     }
   } catch(e) {
-    showToast('加载邮件失败', 'error');
+    showToast(window.__('email.load.fail'), 'error');
   }
 }
 
@@ -251,13 +251,13 @@ function showAlert(message) {
 
 // 删除邮件
 async function deleteEmail(id) {
-  if (!await showConfirm('确定删除这封邮件？')) return;
+  if (!await showConfirm(window.__('email.confirm.delete'))) return;
   try {
     await api(`/api/email/${id}`, { method: 'DELETE' });
-    showToast('已删除', 'success');
+    showToast(window.__('common.delete.success'), 'success');
     els.emailModal?.classList.remove('show');
     loadEmails();
-  } catch(e) { showToast('删除失败', 'error'); }
+  } catch(e) { showToast(window.__('common.delete.fail'), 'error'); }
 }
 
 // 修改密码
@@ -266,12 +266,12 @@ async function changePassword() {
   const newPass = els.newPasswordInput?.value;
   const confirmPass = els.confirmPasswordInput?.value;
   
-  if (!current || !newPass) { await showAlert('请填写完整'); return; }
-  if (newPass !== confirmPass) { await showAlert('两次密码不一致'); return; }
-  if (newPass.length < 6) { await showAlert('密码至少6位'); return; }
+  if (!current || !newPass) { await showAlert(window.__('password.fill.all')); return; }
+  if (newPass !== confirmPass) { await showAlert(window.__('password.mismatch')); return; }
+  if (newPass.length < 6) { await showAlert(window.__('password.min.length')); return; }
   
   // 二级确认
-  const confirmed = await showConfirm('修改密码后需要重新登录，确定要修改吗？');
+  const confirmed = await showConfirm(window.__('password.change.confirm'));
   if (!confirmed) return;
   
   try {
@@ -289,7 +289,7 @@ async function changePassword() {
       els.confirmPasswordInput.value = '';
       
       // 密码修改成功，强制退出登录
-      showToast('密码修改成功，即将重新登录...', 'success');
+      showToast(window.__('password.change.success'), 'success');
       stopAutoRefresh();
       
       // 清除会话
@@ -297,13 +297,13 @@ async function changePassword() {
       
       // 延迟跳转让用户看到提示
       setTimeout(() => {
-        sessionStorage.setItem('mf:login-message', '密码已修改，请使用新密码登录');
+        sessionStorage.setItem('mf:login-message', window.__('password.changed.relogin'));
         location.replace('/html/login.html');
       }, 1500);
     } else {
       // 显示具体的错误信息（使用模态框，需要手动关闭）
       const errorText = await r.text();
-      const errorMsg = errorText || '修改失败';
+      const errorMsg = errorText || window.__('common.save.fail');
       console.error('修改密码失败:', r.status, errorMsg);
       
       // 显示错误提示框，等待用户确认
@@ -317,14 +317,14 @@ async function changePassword() {
     }
   } catch(e) {
     console.error('修改密码请求失败:', e);
-    await showAlert('网络错误，请重试');
+    await showAlert(window.__('common.network.error'));
   }
 }
 
 // 事件绑定
 els.copyMailboxBtn?.addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText(currentMailbox); showToast('已复制', 'success'); }
-  catch(_) { showToast('复制失败', 'error'); }
+  try { await navigator.clipboard.writeText(currentMailbox); showToast(window.__('common.copy.success'), 'success'); }
+  catch(_) { showToast(window.__('common.copy.fail'), 'error'); }
 });
 
 els.refreshEmailsBtn?.addEventListener('click', async () => {
@@ -333,7 +333,7 @@ els.refreshEmailsBtn?.addEventListener('click', async () => {
   els.refreshEmailsBtn.disabled = true;
   try {
     await loadEmails();
-    showToast('刷新成功', 'success');
+    showToast(window.__('login.refresh.success'), 'success');
   } finally {
     if (icon) icon.classList.remove('spinning');
     els.refreshEmailsBtn.disabled = false;

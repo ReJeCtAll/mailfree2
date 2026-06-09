@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,11 +12,16 @@
     <meta http-equiv="Expires" content="0" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/app.css" />
     <link rel="stylesheet" href="/css/app-mobile.css" media="(max-width: 1056px)" />
     <link rel="stylesheet" href="/css/contrast-theme.css" />
     <script src="/js/toast-utils.js"></script>
     <script src="/js/mock.js"></script>
+    <!-- i18n -->
+    <script src="/js/i18n.js"></script>
+    <script src="/js/locales/zh.js"></script>
+    <script src="/js/locales/en.js"></script>
     <!-- 提前内联保存 hash，保证最早阶段即可保留路由信息 -->
     <script>
       try{ if (location.hash){ sessionStorage.setItem('mf:preservedHash', location.hash); } }catch(_){ }

@@ -96,14 +96,14 @@ function syncSelectionUI() {
   const pageAllSelected = currentData.length > 0 && currentData.every((item) => isAddressSelected(item.address));
 
   if (els.selectionCount) {
-    els.selectionCount.textContent = selectedCount > 0 ? `已选 ${selectedCount} 项` : '未选择';
+    els.selectionCount.textContent = selectedCount > 0 ? window.__('selection.selected', { count: selectedCount }) : window.__('selection.none');
   }
   if (els.batchDelete) els.batchDelete.disabled = selectedCount === 0;
   if (els.clearSelection) els.clearSelection.disabled = selectedCount === 0;
   if (els.selectPage) {
     els.selectPage.disabled = currentData.length === 0;
     const label = els.selectPage.querySelector('span:not(.btn-icon)');
-    if (label) label.textContent = pageAllSelected ? '取消本页' : '全选本页';
+    if (label) label.textContent = pageAllSelected ? window.__('selection.deselect.page') : window.__('selection.all.page');
   }
 
   els.grid?.querySelectorAll('[data-address]').forEach((item) => {
@@ -171,7 +171,7 @@ async function load() {
     syncSelectionUI();
   } catch (e) {
     console.error('加载失败:', e);
-    showToast('加载失败', 'error');
+    showToast(window.__('common.load.fail'), 'error');
   } finally {
     isLoading = false;
   }
@@ -180,7 +180,7 @@ async function load() {
 // 更新分页器
 function updatePager() {
   const totalPages = Math.max(1, Math.ceil(lastCount / PAGE_SIZE));
-  if (els.page) els.page.textContent = `第 ${page} / ${totalPages} 页 (共 ${lastCount} 个)`;
+  if (els.page) els.page.textContent = window.__('pager.page.total', { page: page, total: totalPages, count: lastCount });
   if (els.prev) els.prev.disabled = page <= 1;
   if (els.next) els.next.disabled = page >= totalPages;
 }
@@ -194,7 +194,7 @@ function bindCardEvents() {
       if (e.target.closest('.actions') || e.target.closest('.selection-control')) return;
       const address = card.dataset.address;
       if (address) {
-        showToast('跳转中...', 'info', 500);
+        showToast(window.__('common.jumping'), 'info', 500);
         setTimeout(() => location.href = `/?mailbox=${encodeURIComponent(address)}`, 600);
       }
     };
@@ -216,11 +216,11 @@ function bindCardEvents() {
       
       switch (action) {
         case 'copy':
-          try { await navigator.clipboard.writeText(address); showToast('已复制', 'success'); }
-          catch(_) { showToast('复制失败', 'error'); }
+          try { await navigator.clipboard.writeText(address); showToast(window.__('common.copy.success'), 'success'); }
+          catch(_) { showToast(window.__('common.copy.fail'), 'error'); }
           break;
         case 'jump':
-          showToast('跳转中...', 'info', 500);
+          showToast(window.__('common.jumping'), 'info', 500);
           setTimeout(() => location.href = `/?mailbox=${encodeURIComponent(address)}`, 600);
           break;
         case 'pin':
@@ -229,12 +229,12 @@ function bindCardEvents() {
               method: 'POST'
             });
             if (pinRes.ok) {
-              showToast('置顶状态已更新', 'success');
+              showToast(window.__('mailbox.pin.success'), 'success');
               load();
             } else {
-              showToast('操作失败', 'error');
+              showToast(window.__('common.op.fail'), 'error');
             }
-          } catch(e) { showToast('操作失败', 'error'); }
+          } catch(e) { showToast(window.__('common.op.fail'), 'error'); }
           break;
         case 'forward':
           const m = currentData.find(x => x.address === address);
@@ -252,7 +252,7 @@ function bindCardEvents() {
           if (mailbox) {
             try {
               await apiToggleLogin(address, !mailbox.can_login);
-              showToast(mailbox.can_login ? '已禁止登录' : '已允许登录', 'success');
+              showToast(mailbox.can_login ? window.__('status.login.denied.verb') : window.__('status.login.allowed.verb'), 'success');
               load();
             } catch(e) { showToast('操作失败', 'error'); }
           }
@@ -268,18 +268,18 @@ function bindCardEvents() {
           syncSelectionUI();
           break;
         case 'delete':
-          if (!confirm(`确定删除邮箱 ${address}？`)) return;
+          if (!confirm(window.__('mailbox.confirm.delete.simple', { address: address }))) return;
           try {
             const response = await apiDeleteMailbox(address);
             if (!response.ok) {
               const result = await response.json().catch(() => ({}));
-              throw new Error(result.error || result.message || '删除失败');
+              throw new Error(result.error || result.message || window.__('common.delete.fail'));
             }
             selectedAddresses.delete(normalizeAddress(address));
             syncSelectionUI();
-            showToast('已删除', 'success');
+            showToast(window.__('common.delete.success'), 'success');
             load();
-          } catch(e) { showToast(e.message || '删除失败', 'error'); }
+          } catch(e) { showToast(e.message || window.__('common.delete.fail'), 'error'); }
           break;
       }
     };
@@ -310,7 +310,7 @@ async function loadDomainsFilter() {
     if (Array.isArray(domains) && domains.length) {
       availableDomains = domains.sort();
       if (els.domainFilter) {
-        els.domainFilter.innerHTML = '<option value="">全部域名</option>' + domains.map(d => `<option value="${d}">@${d}</option>`).join('');
+        els.domainFilter.innerHTML = '<option value="">' + window.__('mailbox.all.domains') + '</option>' + domains.map(d => `<option value="${d}">@${d}</option>`).join('');
       }
     }
   } catch(_) {}
@@ -331,8 +331,8 @@ function openPasswordModal(address, isDefault) {
   if (isDefault) {
     // 设置新密码
     if (els.passwordModalIcon) els.passwordModalIcon.textContent = '🔐';
-    if (els.passwordModalTitle) els.passwordModalTitle.textContent = '设置密码';
-    if (els.passwordModalMessage) els.passwordModalMessage.innerHTML = `为 <strong>${address}</strong> 设置新密码：`;
+    if (els.passwordModalTitle) els.passwordModalTitle.textContent = window.__('password.set');
+    if (els.passwordModalMessage) els.passwordModalMessage.innerHTML = window.__('password.set.prompt', { address: address });
     if (els.passwordInputWrapper) els.passwordInputWrapper.style.display = 'block';
     if (els.passwordNewInput) els.passwordNewInput.value = '';
     if (els.passwordShowToggle) els.passwordShowToggle.checked = false;
@@ -340,8 +340,8 @@ function openPasswordModal(address, isDefault) {
   } else {
     // 重置密码
     if (els.passwordModalIcon) els.passwordModalIcon.textContent = '🔓';
-    if (els.passwordModalTitle) els.passwordModalTitle.textContent = '重置密码';
-    if (els.passwordModalMessage) els.passwordModalMessage.innerHTML = `确定将 <strong>${address}</strong> 的密码重置为默认密码（邮箱地址）？`;
+    if (els.passwordModalTitle) els.passwordModalTitle.textContent = window.__('password.reset');
+    if (els.passwordModalMessage) els.passwordModalMessage.innerHTML = window.__('password.reset.prompt', { address: address });
     if (els.passwordInputWrapper) els.passwordInputWrapper.style.display = 'none';
   }
   
@@ -374,7 +374,7 @@ async function executePasswordAction() {
       // 设置新密码
       const newPwd = els.passwordNewInput?.value?.trim();
       if (!newPwd) {
-        showToast('请输入新密码', 'error');
+        showToast(window.__('password.enter.new'), 'error');
         return;
       }
       res = await apiChangePassword(currentPasswordAddress, newPwd);
@@ -384,15 +384,15 @@ async function executePasswordAction() {
     }
     
     if (res.ok) {
-      showToast(currentPasswordIsDefault ? '密码已设置' : '密码已重置', 'success');
+      showToast(currentPasswordIsDefault ? window.__('password.set.success') : window.__('password.reset.success'), 'success');
       closePasswordModal();
       load();
     } else {
       const err = await res.json().catch(() => ({}));
-      showToast(err.error || '操作失败', 'error');
+      showToast(err.error || window.__('common.op.fail'), 'error');
     }
   } catch (e) {
-    showToast('操作失败: ' + (e.message || '未知错误'), 'error');
+    showToast(window.__('common.op.fail') + ': ' + (e.message || window.__('common.unknown.error')), 'error');
   } finally {
     if (btnText) btnText.style.display = 'inline';
     if (btnLoading) btnLoading.style.display = 'none';
@@ -407,7 +407,7 @@ function openBatchModal(action, title, icon, message) {
   if (els.batchModalTitle) els.batchModalTitle.textContent = title;
   if (els.batchModalMessage) els.batchModalMessage.textContent = message;
   if (els.batchEmailsInput) els.batchEmailsInput.value = '';
-  if (els.batchCountInfo) els.batchCountInfo.textContent = '输入邮箱后将显示数量统计';
+  if (els.batchCountInfo) els.batchCountInfo.textContent = window.__('batch.enter.emails');
   if (els.batchModalConfirm) els.batchModalConfirm.disabled = true;
   
   // 显示/隐藏转发目标输入
@@ -435,7 +435,7 @@ function parseEmails(text) {
 function updateBatchCount() {
   const emails = parseEmails(els.batchEmailsInput?.value || '');
   if (els.batchCountInfo) {
-    els.batchCountInfo.textContent = emails.length > 0 ? `已识别 ${emails.length} 个邮箱地址` : '输入邮箱后将显示数量统计';
+    els.batchCountInfo.textContent = emails.length > 0 ? window.__('batch.recognized', { count: emails.length }) : window.__('batch.enter.emails');
   }
   if (els.batchModalConfirm) {
     const forwardValid = currentBatchAction !== 'forward' || (els.batchForwardTarget?.value?.includes('@'));
@@ -479,7 +479,7 @@ async function executeBatchAction() {
         break;
       case 'forward':
         const forwardTo = els.batchForwardTarget?.value?.trim();
-        if (!forwardTo) { showToast('请输入转发目标', 'error'); return; }
+        if (!forwardTo) { showToast(window.__('batch.needed.input'), 'error'); return; }
         result = await api('/api/mailboxes/batch-forward-by-address', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -494,11 +494,11 @@ async function executeBatchAction() {
         });
         break;
     }
-    showToast('批量操作完成', 'success');
+    showToast(window.__('batch.complete'), 'success');
     closeBatchModal();
     load();
   } catch (e) {
-    showToast('操作失败: ' + (e.message || '未知错误'), 'error');
+    showToast(window.__('common.op.fail') + ': ' + (e.message || window.__('common.unknown.error')), 'error');
   } finally {
     if (btnText) btnText.style.display = 'inline';
     if (btnLoading) btnLoading.style.display = 'none';
@@ -510,7 +510,7 @@ async function executeBatchDelete() {
   const addresses = Array.from(selectedAddresses);
   if (!addresses.length) return;
 
-  const confirmed = confirm(`确定批量删除已选择的 ${addresses.length} 个邮箱吗？此操作会同时删除邮箱下的邮件。`);
+  const confirmed = confirm(window.__('batch.confirm.delete', { count: addresses.length }));
   if (!confirmed) return;
 
   if (els.batchDelete) els.batchDelete.disabled = true;
@@ -520,7 +520,7 @@ async function executeBatchDelete() {
     const result = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-      throw new Error(result.error || result.message || '批量删除失败');
+      throw new Error(result.error || result.message || window.__('common.delete.fail'));
     }
 
     for (const address of (result.deleted_addresses || [])) {
@@ -532,16 +532,16 @@ async function executeBatchDelete() {
     const failCount = Number(result.fail_count || 0);
 
     if (deletedCount === 0) {
-      showToast('没有可删除的邮箱', 'warn');
+      showToast(window.__('batch.no.deletable'), 'warn');
     } else if (failCount > 0) {
-      showToast(`已删除 ${deletedCount} 个，失败 ${failCount} 个`, 'warn');
+      showToast(window.__('batch.deleted.partial', { deleted: deletedCount, fail: failCount }), 'warn');
     } else {
-      showToast(`已删除 ${deletedCount} 个邮箱`, 'success');
+      showToast(window.__('batch.deleted', { count: deletedCount }), 'success');
     }
 
     await load();
   } catch (e) {
-    showToast(e.message || '批量删除失败', 'error');
+    showToast(e.message || window.__('common.delete.fail'), 'error');
     syncSelectionUI();
   }
 }
@@ -567,12 +567,12 @@ els.clearSelection?.addEventListener('click', clearSelectedAddresses);
 els.batchDelete?.addEventListener('click', executeBatchDelete);
 
 // 批量操作按钮
-els.batchAllow?.addEventListener('click', () => openBatchModal('allow', '批量放行登录', '✅', '输入要允许登录的邮箱地址（每行一个或用逗号分隔）：'));
-els.batchDeny?.addEventListener('click', () => openBatchModal('deny', '批量禁止登录', '🚫', '输入要禁止登录的邮箱地址（每行一个或用逗号分隔）：'));
-els.batchFavorite?.addEventListener('click', () => openBatchModal('favorite', '批量收藏', '⭐', '输入要收藏的邮箱地址（每行一个或用逗号分隔）：'));
-els.batchUnfavorite?.addEventListener('click', () => openBatchModal('unfavorite', '批量取消收藏', '☆', '输入要取消收藏的邮箱地址（每行一个或用逗号分隔）：'));
-els.batchForward?.addEventListener('click', () => openBatchModal('forward', '批量设置转发', '↪️', '输入要设置转发的邮箱地址（每行一个或用逗号分隔）：'));
-els.batchClearForward?.addEventListener('click', () => openBatchModal('clear-forward', '批量清除转发', '🚫', '输入要清除转发的邮箱地址（每行一个或用逗号分隔）：'));
+els.batchAllow?.addEventListener('click', () => openBatchModal('allow', window.__('batch.allow.login'), '✅', window.__('batch.enter.emails.desc', { action: window.__('batch.allow.login') })));
+els.batchDeny?.addEventListener('click', () => openBatchModal('deny', window.__('batch.deny.login'), '🚫', window.__('batch.enter.emails.desc', { action: window.__('batch.deny.login') })));
+els.batchFavorite?.addEventListener('click', () => openBatchModal('favorite', window.__('batch.favorite'), '⭐', window.__('batch.enter.emails.desc', { action: window.__('batch.favorite') })));
+els.batchUnfavorite?.addEventListener('click', () => openBatchModal('unfavorite', window.__('batch.unfavorite'), '☆', window.__('batch.enter.emails.desc', { action: window.__('batch.unfavorite') })));
+els.batchForward?.addEventListener('click', () => openBatchModal('forward', window.__('batch.forward'), '↪️', window.__('batch.enter.emails.desc', { action: window.__('batch.forward') })));
+els.batchClearForward?.addEventListener('click', () => openBatchModal('clear-forward', window.__('batch.clear.forward'), '🚫', window.__('batch.enter.emails.desc', { action: window.__('batch.clear.forward') })));
 
 // 批量操作模态框事件
 els.batchModalClose?.addEventListener('click', closeBatchModal);
