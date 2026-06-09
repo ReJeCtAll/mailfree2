@@ -54,6 +54,9 @@
                         <!-- 第一行：搜索 + 筛选 -->
                         <div class="toolbar-row-1">
                             <div class="searchbar">
+                                <label class="sr-only" for="q"
+                                    >搜索邮箱地址</label
+                                >
                                 <input
                                     id="q"
                                     class="search-input"
@@ -68,6 +71,9 @@
                                 </button>
                             </div>
                             <div class="filter-actions">
+                                <label class="sr-only" for="domain-filter"
+                                    >按域名筛选</label
+                                >
                                 <select
                                     id="domain-filter"
                                     class="filter-select"
@@ -75,6 +81,9 @@
                                 >
                                     <option value="">全部域名</option>
                                 </select>
+                                <label class="sr-only" for="login-filter"
+                                    >按登录权限筛选</label
+                                >
                                 <select
                                     id="login-filter"
                                     class="filter-select"
@@ -84,6 +93,9 @@
                                     <option value="allowed">允许登录</option>
                                     <option value="denied">禁止登录</option>
                                 </select>
+                                <label class="sr-only" for="favorite-filter"
+                                    >按收藏筛选</label
+                                >
                                 <select
                                     id="favorite-filter"
                                     class="filter-select"
@@ -93,6 +105,9 @@
                                     <option value="favorite">已收藏</option>
                                     <option value="not-favorite">未收藏</option>
                                 </select>
+                                <label class="sr-only" for="forward-filter"
+                                    >按转发筛选</label
+                                >
                                 <select
                                     id="forward-filter"
                                     class="filter-select"
@@ -389,6 +404,7 @@
                     <form id="change-password-form">
                         <div style="margin-bottom: 16px">
                             <label
+                                for="new-password"
                                 style="
                                     display: block;
                                     margin-bottom: 6px;
@@ -402,6 +418,7 @@
                                 type="password"
                                 id="new-password"
                                 class="form-input"
+                                autocomplete="new-password"
                                 placeholder="请输入新密码（至少6位）"
                                 minlength="6"
                                 required
@@ -417,6 +434,7 @@
                         </div>
                         <div style="margin-bottom: 20px">
                             <label
+                                for="confirm-password"
                                 style="
                                     display: block;
                                     margin-bottom: 6px;
@@ -430,6 +448,7 @@
                                 type="password"
                                 id="confirm-password"
                                 class="form-input"
+                                autocomplete="new-password"
                                 placeholder="请再次输入新密码"
                                 minlength="6"
                                 required
@@ -487,6 +506,7 @@
                     ></p>
                     <div style="margin-bottom: 16px">
                         <label
+                            for="batch-emails-input"
                             style="
                                 display: block;
                                 margin-bottom: 6px;
@@ -531,6 +551,7 @@
                         style="display: none; margin-bottom: 16px"
                     >
                         <label
+                            for="batch-forward-target"
                             style="
                                 display: block;
                                 margin-bottom: 6px;
@@ -609,6 +630,7 @@
                         style="display: none; margin-bottom: 16px"
                     >
                         <label
+                            for="password-new-input"
                             style="
                                 display: block;
                                 margin-bottom: 6px;
@@ -623,6 +645,7 @@
                             id="password-new-input"
                             type="password"
                             class="form-input"
+                            autocomplete="new-password"
                             placeholder="请输入新密码"
                             style="
                                 width: 100%;
@@ -729,6 +752,9 @@
 
                         <!-- 搜索用户 -->
                         <div class="user-search">
+                            <label class="sr-only" for="user-search-input"
+                                >搜索用户名或显示名称</label
+                            >
                             <input
                                 id="user-search-input"
                                 type="text"

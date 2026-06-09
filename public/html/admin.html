@@ -265,24 +265,32 @@
                     <div class="modal-body">
                         <div class="form-grid">
                             <div>
-                                <label class="config-label">新密码</label>
+                                <label class="config-label" for="edit-pass"
+                                    >新密码</label
+                                >
                                 <input
                                     id="edit-pass"
                                     class="input"
                                     type="password"
+                                    autocomplete="new-password"
                                     placeholder="留空则不修改"
                                 />
                             </div>
                             <div>
-                                <label class="config-label">新用户名</label>
+                                <label class="config-label" for="edit-new-name"
+                                    >新用户名</label
+                                >
                                 <input
                                     id="edit-new-name"
                                     class="input"
+                                    autocomplete="username"
                                     placeholder="留空则不修改"
                                 />
                             </div>
                             <div>
-                                <label class="config-label">邮箱上限</label>
+                                <label class="config-label" for="edit-limit"
+                                    >邮箱上限</label
+                                >
                                 <input
                                     id="edit-limit"
                                     class="input"
@@ -374,24 +382,29 @@
                     <div class="modal-body">
                         <div class="config-form">
                             <div class="config-item">
-                                <label class="config-label">用户名</label
+                                <label class="config-label" for="u-name"
+                                    >用户名</label
                                 ><input
                                     id="u-name"
                                     class="input"
+                                    autocomplete="username"
                                     placeholder="username"
                                 />
                             </div>
                             <div class="config-item">
-                                <label class="config-label">密码</label
+                                <label class="config-label" for="u-pass"
+                                    >密码</label
                                 ><input
                                     id="u-pass"
                                     class="input"
                                     type="password"
+                                    autocomplete="new-password"
                                     placeholder="password"
                                 />
                             </div>
                             <div class="config-item">
-                                <label class="config-label">角色</label
+                                <label class="config-label" for="u-role"
+                                    >角色</label
                                 ><select id="u-role" class="select">
                                     <option value="user">普通用户</option>
                                     <option value="admin">高级用户</option>
@@ -430,15 +443,19 @@
                     <div class="modal-body">
                         <div class="config-form">
                             <div class="config-item">
-                                <label class="config-label">用户名</label
+                                <label class="config-label" for="a-name"
+                                    >用户名</label
                                 ><input
                                     id="a-name"
                                     class="input"
+                                    autocomplete="username"
                                     placeholder="username"
                                 />
                             </div>
                             <div class="config-item">
-                                <label class="config-label">邮箱地址</label>
+                                <label class="config-label" for="a-mail"
+                                    >邮箱地址</label
+                                >
                                 <textarea
                                     id="a-mail"
                                     class="input"
@@ -482,15 +499,19 @@
                     <div class="modal-body">
                         <div class="config-form">
                             <div class="config-item">
-                                <label class="config-label">用户名</label
+                                <label class="config-label" for="unassign-name"
+                                    >用户名</label
                                 ><input
                                     id="unassign-name"
                                     class="input"
+                                    autocomplete="username"
                                     placeholder="username"
                                 />
                             </div>
                             <div class="config-item">
-                                <label class="config-label">邮箱地址</label>
+                                <label class="config-label" for="unassign-mail"
+                                    >邮箱地址</label
+                                >
                                 <textarea
                                     id="unassign-mail"
                                     class="input"

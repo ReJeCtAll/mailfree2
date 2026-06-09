@@ -25,6 +25,7 @@ const els = {
   usersLoading: document.getElementById('users-loading'),
   usersCount: document.getElementById('users-count'),
   usersPagination: document.getElementById('users-pagination'),
+  paginationText: document.getElementById('pagination-text'),
   pageInfo: document.getElementById('page-info'),
   prevPage: document.getElementById('prev-page'),
   nextPage: document.getElementById('next-page'),
@@ -72,6 +73,7 @@ const els = {
   userMailboxesLoading: document.getElementById('user-mailboxes-loading'),
   mailboxesCount: document.getElementById('mailboxes-count'),
   mailboxesPagination: document.getElementById('mailboxes-pagination'),
+  mailboxesPaginationText: document.getElementById('mailboxes-pagination-text'),
   mailboxesPageInfo: document.getElementById('mailboxes-page-info'),
   mailboxesPrevPage: document.getElementById('mailboxes-prev-page'),
   mailboxesNextPage: document.getElementById('mailboxes-next-page'),
@@ -115,6 +117,13 @@ function initConfirmEvents() {
 }
 initConfirmEvents();
 
+function formatPaginationText(page, size, total) {
+  if (!total) return '显示 0 条，共 0 条';
+  const start = (page - 1) * size + 1;
+  const end = Math.min(page * size, total);
+  return `显示 ${start}-${end} 条，共 ${total} 条`;
+}
+
 // 加载用户列表
 async function loadUsers() {
   if (els.usersLoading) els.usersLoading.style.display = 'flex';
@@ -141,6 +150,7 @@ async function loadUsers() {
 // 更新分页
 function updatePagination() {
   const totalPages = Math.max(1, Math.ceil(totalUsers / pageSize));
+  if (els.paginationText) els.paginationText.textContent = formatPaginationText(currentPage, pageSize, totalUsers);
   if (els.pageInfo) els.pageInfo.textContent = `第 ${currentPage} / ${totalPages} 页`;
   if (els.prevPage) els.prevPage.disabled = currentPage <= 1;
   if (els.nextPage) els.nextPage.disabled = currentPage >= totalPages;
@@ -284,6 +294,7 @@ async function loadUserMailboxes() {
     
     // 更新分页
     const totalPages = Math.max(1, Math.ceil(totalMailboxes / mailboxPageSize));
+    if (els.mailboxesPaginationText) els.mailboxesPaginationText.textContent = formatPaginationText(mailboxPage, mailboxPageSize, totalMailboxes);
     if (els.mailboxesPageInfo) els.mailboxesPageInfo.textContent = `${mailboxPage} / ${totalPages}`;
     if (els.mailboxesPrevPage) els.mailboxesPrevPage.disabled = mailboxPage <= 1;
     if (els.mailboxesNextPage) els.mailboxesNextPage.disabled = mailboxPage >= totalPages;

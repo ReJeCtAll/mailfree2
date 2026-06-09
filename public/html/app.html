@@ -69,6 +69,7 @@
             </div>
         </div>
         <div class="sidebar-search">
+            <label class="sr-only" for="mb-search">搜索历史邮箱</label>
             <input
                 id="mb-search"
                 class="input sidebar-search-input"
@@ -117,6 +118,9 @@
                                 class="custom-overlay"
                                 style="display: none"
                             >
+                                <label class="sr-only" for="custom-local-overlay"
+                                    >自定义邮箱用户名</label
+                                >
                                 <input
                                     id="custom-local-overlay"
                                     class="input custom-input"
@@ -203,7 +207,7 @@
                     </div>
                     <div class="config-form">
                         <div class="config-item">
-                            <label class="config-label">
+                            <label class="config-label" for="domain-select">
                                 <span class="label-icon" aria-hidden="true"></span>
                                 <span>邮箱后缀</span>
                             </label>
@@ -213,7 +217,7 @@
                             ></select>
                         </div>
                         <div class="config-item">
-                            <label class="config-label">
+                            <label class="config-label" for="len-range">
                                 <span class="label-icon" aria-hidden="true"></span>
                                 <span>用户名长度</span>
                             </label>
@@ -378,7 +382,7 @@
         <div class="modal-body">
             <div class="compose-form">
                 <div class="field-group">
-                    <label class="field-label">收件人</label>
+                    <label class="field-label" for="compose-to">收件人</label>
                     <input
                         id="compose-to"
                         class="input field-input"
@@ -388,7 +392,9 @@
                     <div class="field-hint">多个地址请以逗号分隔</div>
                 </div>
                 <div class="field-group">
-                    <label class="field-label">发件名称（可选）</label>
+                    <label class="field-label" for="compose-from-name"
+                        >发件名称（可选）</label
+                    >
                     <input
                         id="compose-from-name"
                         class="input field-input"
@@ -397,7 +403,7 @@
                     />
                 </div>
                 <div class="field-group">
-                    <label class="field-label">主题</label>
+                    <label class="field-label" for="compose-subject">主题</label>
                     <input
                         id="compose-subject"
                         class="input field-input"
@@ -406,7 +412,7 @@
                     />
                 </div>
                 <div class="field-group">
-                    <label class="field-label">内容</label>
+                    <label class="field-label" for="compose-body">内容</label>
                     <textarea
                         id="compose-body"
                         class="textarea field-textarea"

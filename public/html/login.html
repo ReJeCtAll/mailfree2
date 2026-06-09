@@ -145,8 +145,8 @@
         </script>
 
         <script src="/js/mock.js"></script>
-        <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-        <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="stylesheet" href="/css/login.css" />
         <link rel="stylesheet" href="/css/contrast-theme.css" />
         <link rel="stylesheet" href="/css/refactor.css" />
@@ -158,16 +158,20 @@
                 <div class="logo">🔐</div>
                 <h1>登录到临时邮箱</h1>
                 <div id="err" class="err"></div>
+                <label class="sr-only" for="username">用户名或邮箱</label>
                 <input
                     id="username"
                     class="input"
                     type="text"
+                    autocomplete="username"
                     placeholder="用户名/邮箱"
                 />
+                <label class="sr-only" for="pwd">密码</label>
                 <input
                     id="pwd"
                     class="input"
                     type="password"
+                    autocomplete="current-password"
                     placeholder="密码"
                 />
                 <div
