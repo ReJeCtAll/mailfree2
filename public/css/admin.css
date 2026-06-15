@@ -669,7 +669,7 @@
 }
 
 /* ── 模态框 ── */
-.admin-page .modal-card {
+.admin-page .modal {
   background: var(--card);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-xl);

@@ -553,36 +553,7 @@
   .skeleton-card { width: 100%; max-width: 320px; margin: 0 auto; }
 }
 
-/* ── 模态框样式 ── */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: var(--overlay-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.modal-card {
-  background: var(--card);
-  border: 1px solid var(--border-glass);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl);
-  width: 90%;
-  max-width: 480px;
-  max-height: 90vh;
-  overflow: hidden;
-  animation: modalSlideIn 0.3s ease;
-}
-
-@keyframes modalSlideIn {
-  from { opacity: 0; transform: scale(0.95) translateY(-10px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
+/* ── 模态框业务覆盖 ── */
 .modal-header {
   display: flex;
   align-items: center;
@@ -607,7 +578,7 @@
 #login-confirm-icon.unlock { color: var(--success); }
 #login-confirm-icon.lock { color: var(--danger-hover); }
 
-.modal-header .close {
+.modal-header .modal-close {
   background: var(--card-glass);
   border: 1px solid var(--border);
   font-size: 18px;
@@ -623,7 +594,7 @@
   justify-content: center;
 }
 
-.modal-header .close:hover {
+.modal-header .modal-close:hover {
   background: var(--danger-light);
   border-color: var(--danger);
   color: var(--danger);
@@ -1453,8 +1424,8 @@
 .modal-body .show-password-label input { cursor: pointer; }
 
 /* ── 模态卡片宽度变体 ── */
-.modal-card.modal-wide { max-width: 600px; }
-.modal-card.modal-narrow { max-width: 420px; }
+.modal.modal-wide { max-width: 600px; }
+.modal.modal-narrow { max-width: 420px; }
 
 /* ── nav spacer ── */
 .nav-spacer { margin-right: auto; }

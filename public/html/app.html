@@ -127,7 +127,7 @@
                                 <div id="custom-overlay" class="custom-overlay hidden">
                                     <input
                                         id="custom-local-overlay"
-                                        class="input custom-input"
+                                        class="form-input"
                                         type="text"
                                         placeholder="仅限字母/数字/._-"
                                     />
@@ -271,14 +271,14 @@
 
 <div id="footer-slot"></div>
 
-<div class="modal" id="email-modal">
-    <div class="modal-card">
+<div class="modal-overlay" id="email-modal">
+    <div class="modal">
         <div class="modal-header">
             <div id="modal-subject">
                 <span class="modal-icon" aria-hidden="true"></span>
                 <span>邮件详情</span>
             </div>
-            <button id="modal-close" class="close">✕</button>
+            <button id="modal-close" class="modal-close">✕</button>
         </div>
         <div class="modal-body">
             <div id="modal-content"></div>
@@ -286,14 +286,14 @@
     </div>
 </div>
 
-<div class="modal" id="confirm-modal">
-    <div class="modal-card confirm-card">
+<div class="modal-overlay" id="confirm-modal">
+    <div class="modal confirm-card">
         <div class="modal-header confirm-header">
             <div>
                 <span class="modal-icon" aria-hidden="true"></span>
                 <span>确认操作</span>
             </div>
-            <button id="confirm-close" class="close">✕</button>
+            <button id="confirm-close" class="modal-close">✕</button>
         </div>
         <div class="modal-body confirm-body">
             <div id="confirm-message" class="confirm-message"></div>
@@ -307,14 +307,14 @@
     </div>
 </div>
 
-<div class="modal" id="compose-modal">
-    <div class="modal-card">
+<div class="modal-overlay" id="compose-modal">
+    <div class="modal">
         <div class="modal-header">
             <div>
                 <span class="modal-icon" aria-hidden="true"></span>
                 <span>新邮件</span>
             </div>
-            <button id="compose-close" class="close">✕</button>
+            <button id="compose-close" class="modal-close">✕</button>
         </div>
         <div class="modal-body">
             <div class="compose-form">

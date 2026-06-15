@@ -5,9 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>邮箱管理 - ReJeCt's临时邮箱</title>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="stylesheet" href="/css/main.css" />
         <link rel="stylesheet" href="/css/app.css" />
         <link rel="stylesheet" href="/css/mailboxes.css" />
         <link rel="stylesheet" href="/css/contrast-theme.css" />
+        <!-- i18n -->
+        <script src="/js/i18n.js"></script>
+        <script src="/js/locales/zh.js"></script>
+        <script src="/js/locales/en.js"></script>
     </head>
     <body class="page-mailboxes">
         <div class="topbar">
@@ -231,14 +236,14 @@
 
         <div id="footer-slot"></div>
         <!-- 重置密码二级页（模态框） -->
-        <div class="modal hidden" id="reset-modal">
-            <div class="modal-card">
+        <div class="modal-overlay" id="reset-modal">
+            <div class="modal">
                 <div class="modal-header">
                     <div>
                         <span class="modal-icon">🔐</span>
                         <span>重置邮箱密码</span>
                     </div>
-                    <button id="reset-close" class="close">✕</button>
+                    <button id="reset-close" class="modal-close">✕</button>
                 </div>
                 <div class="modal-body">
                     <p class=”confirm-message-text”>
@@ -261,8 +266,8 @@
         </div>
 
         <!-- 登录权限确认框（模态框） -->
-        <div class="modal hidden" id="login-confirm-modal">
-            <div class="modal-card">
+        <div class="modal-overlay" id="login-confirm-modal">
+            <div class="modal">
                 <div class="modal-header">
                     <div>
                         <span class="modal-icon" id="login-confirm-icon"
@@ -270,7 +275,7 @@
                         >
                         <span id="login-confirm-title">确认操作</span>
                     </div>
-                    <button id="login-confirm-close" class="close">✕</button>
+                    <button id="login-confirm-close" class="modal-close">✕</button>
                 </div>
                 <div class="modal-body">
                     <p id="login-confirm-message" class="confirm-message-text"></p>
@@ -294,14 +299,14 @@
         </div>
 
         <!-- 修改密码模态框 -->
-        <div class="modal hidden" id="change-password-modal">
-            <div class="modal-card">
+        <div class="modal-overlay" id="change-password-modal">
+            <div class="modal">
                 <div class="modal-header">
                     <div>
                         <span class="modal-icon">🔑</span>
                         <span>修改邮箱密码</span>
                     </div>
-                    <button id="change-password-close" class="close">✕</button>
+                    <button id="change-password-close" class="modal-close">✕</button>
                 </div>
                 <div class="modal-body">
                     <p class="confirm-message-text">
@@ -356,14 +361,14 @@
         </div>
 
         <!-- 批量操作模态框 -->
-        <div class="modal hidden" id="batch-login-modal">
-            <div class="modal-card modal-wide">
+        <div class="modal-overlay" id="batch-login-modal">
+            <div class="modal modal-wide">
                 <div class="modal-header">
                     <div>
                         <span class="modal-icon" id="batch-modal-icon">📝</span>
                         <span id="batch-modal-title">批量操作邮箱登录权限</span>
                     </div>
-                    <button id="batch-modal-close" class="close">✕</button>
+                    <button id="batch-modal-close" class="modal-close">✕</button>
                 </div>
                 <div class="modal-body">
                     <p id="batch-modal-message" class="confirm-message-text"></p>
@@ -415,8 +420,8 @@
         </div>
 
         <!-- 密码操作模态框 -->
-        <div class="modal hidden" id="password-modal">
-            <div class="modal-card modal-narrow">
+        <div class="modal-overlay" id="password-modal">
+            <div class="modal modal-narrow">
                 <div class="modal-header">
                     <div>
                         <span class="modal-icon" id="password-modal-icon"
@@ -424,7 +429,7 @@
                         >
                         <span id="password-modal-title">密码操作</span>
                     </div>
-                    <button id="password-modal-close" class="close">✕</button>
+                    <button id="password-modal-close" class="modal-close">✕</button>
                 </div>
                 <div class="modal-body">
                     <p id="password-modal-message" class="confirm-message-text"></p>

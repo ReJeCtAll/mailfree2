@@ -100,3 +100,15 @@ Thumbs.db
 /asset/bookmarks_2025_9_5.html
 
 eml
+
+# AI/tooling artifacts
+.codebuddy/
+.playwright-mcp/
+output/
+regression-*.png
+# Local design reference docs (untracked, not part of repo)
+docs/DESIGN.md
+docs/architecture-redesign.md
+docs/class-diagram.mermaid
+docs/prd-redesign.md
+docs/sequence-diagram.mermaid

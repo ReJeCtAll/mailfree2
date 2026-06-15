@@ -345,7 +345,7 @@ function openPasswordModal(address, isDefault) {
     if (els.passwordInputWrapper) els.passwordInputWrapper.style.display = 'none';
   }
   
-  if (els.passwordModal) els.passwordModal.style.display = 'flex';
+  if (els.passwordModal) els.passwordModal.classList.add('show');
   if (isDefault && els.passwordNewInput) {
     setTimeout(() => els.passwordNewInput.focus(), 100);
   }
@@ -353,7 +353,7 @@ function openPasswordModal(address, isDefault) {
 
 // 关闭密码操作模态框
 function closePasswordModal() {
-  if (els.passwordModal) els.passwordModal.style.display = 'none';
+  if (els.passwordModal) els.passwordModal.classList.remove('show');
   currentPasswordAddress = null;
   currentPasswordIsDefault = false;
 }
@@ -416,12 +416,12 @@ function openBatchModal(action, title, icon, message) {
   }
   if (els.batchForwardTarget) els.batchForwardTarget.value = '';
   
-  if (els.batchModal) els.batchModal.style.display = 'flex';
+  if (els.batchModal) els.batchModal.classList.add('show');
 }
 
 // 关闭批量操作模态框
 function closeBatchModal() {
-  if (els.batchModal) els.batchModal.style.display = 'none';
+  if (els.batchModal) els.batchModal.classList.remove('show');
   currentBatchAction = null;
 }
 

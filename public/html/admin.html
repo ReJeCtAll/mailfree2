@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN" class="precheck-hide">
+<html lang="zh-CN" class="precheck-hide" data-theme="dark">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,9 +23,14 @@
         </style>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="stylesheet" href="/css/main.css" />
         <link rel="stylesheet" href="/css/app.css" />
         <link rel="stylesheet" href="/css/admin.css" />
         <link rel="stylesheet" href="/css/contrast-theme.css" />
+        <!-- i18n -->
+        <script src="/js/i18n.js"></script>
+        <script src="/js/locales/zh.js"></script>
+        <script src="/js/locales/en.js"></script>
         <script src="/js/auth-guard.js" defer></script>
         <script>
             // 访问管理页先做前端快速鉴权，避免内容闪现；未登录或权限不足均进入 loading 或回首页
@@ -248,8 +253,8 @@
             <div id="toast" class="toast"></div>
 
             <!-- 编辑用户 二级页面 -->
-            <div class="modal" id="edit-modal">
-                <div class="modal-card">
+            <div class="modal-overlay" id="edit-modal">
+                <div class="modal">
                     <div class="modal-header">
                         <div>
                             <span class="modal-icon">✏️</span>
@@ -259,7 +264,7 @@
                                 class="user-chip"
                             ></span>
                         </div>
-                        <button id="edit-close" class="close">✕</button>
+                        <button id="edit-close" class="modal-close">✕</button>
                     </div>
                     <div class="modal-body">
                         <div class="form-grid">
@@ -328,14 +333,14 @@
             </div>
 
             <!-- 自定义确认对话框（删除用户） -->
-            <div class="modal" id="admin-confirm-modal">
-                <div class="modal-card confirm-card">
+            <div class="modal-overlay" id="admin-confirm-modal">
+                <div class="modal modal-sm">
                     <div class="modal-header confirm-header">
                         <div>
                             <span class="modal-icon">🔔</span>
                             <span>确认操作</span>
                         </div>
-                        <button id="admin-confirm-close" class="close">
+                        <button id="admin-confirm-close" class="modal-close">
                             ✕
                         </button>
                     </div>
@@ -361,14 +366,14 @@
                     </div>
                 </div>
             </div>
-            <div class="modal" id="u-modal">
-                <div class="modal-card">
+            <div class="modal-overlay" id="u-modal">
+                <div class="modal">
                     <div class="modal-header">
                         <div>
                             <span class="modal-icon">👤</span>
                             <span>创建用户</span>
                         </div>
-                        <button id="u-close" class="close">✕</button>
+                        <button id="u-close" class="modal-close">✕</button>
                     </div>
                     <div class="modal-body">
                         <div class="config-form">
@@ -417,14 +422,14 @@
                 </div>
             </div>
 
-            <div class="modal" id="a-modal">
-                <div class="modal-card">
+            <div class="modal-overlay" id="a-modal">
+                <div class="modal">
                     <div class="modal-header">
                         <div>
                             <span class="modal-icon">📬</span>
                             <span>分配邮箱</span>
                         </div>
-                        <button id="a-close" class="close">✕</button>
+                        <button id="a-close" class="modal-close">✕</button>
                     </div>
                     <div class="modal-body">
                         <div class="config-form">
@@ -469,14 +474,14 @@
                 </div>
             </div>
 
-            <div class="modal" id="unassign-modal">
-                <div class="modal-card">
+            <div class="modal-overlay" id="unassign-modal">
+                <div class="modal">
                     <div class="modal-header">
                         <div>
                             <span class="modal-icon">📬</span>
                             <span>取消分配邮箱</span>
                         </div>
-                        <button id="unassign-close" class="close">✕</button>
+                        <button id="unassign-close" class="modal-close">✕</button>
                     </div>
                     <div class="modal-body">
                         <div class="config-form">

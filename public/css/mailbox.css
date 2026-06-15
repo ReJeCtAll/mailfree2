@@ -401,44 +401,10 @@ body {
   isolation: isolate;
 }
 
-/* ── 模态框样式 ── */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: var(--overlay-bg);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: var(--spacing-lg);
-}
-
+/* ── 模态框业务覆盖 ── */
 #confirm-modal { z-index: 1100; }
 
 .toast-container { z-index: 9999 !important; }
-
-.modal.show { display: flex; }
-
-.modal-card {
-  background: var(--card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-glass);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  max-width: 800px;
-  width: 100%;
-  max-height: 80vh;
-  overflow: hidden;
-  animation: modalSlideIn 0.3s ease-out;
-}
-
-@keyframes modalSlideIn {
-  from { opacity: 0; transform: scale(0.9) translateY(-20px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
 
 .modal-header {
   display: flex;
@@ -458,20 +424,8 @@ body {
 
 .modal-icon { font-size: 20px; }
 
-.close {
-  background: none;
-  border: none;
+.modal-close {
   font-size: 20px;
-  cursor: pointer;
-  color: var(--text-muted);
-  padding: var(--spacing-2xs);
-  border-radius: var(--radius-xs);
-  transition: var(--transition);
-}
-
-.close:hover {
-  background: var(--card-glass);
-  color: var(--text);
 }
 
 .modal-body {
@@ -605,7 +559,7 @@ body {
   .email-time { order: 2; text-align: center; }
   .email-actions { order: 3; opacity: 1; justify-content: center; }
 
-  .modal-card {
+  .modal-overlay .modal {
     margin: 0;
     max-height: 100vh;
     border-radius: 0;

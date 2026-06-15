@@ -10,9 +10,14 @@
   <style>.precheck-hide body{ visibility: hidden !important; }</style>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/css/main.css" />
   <link rel="stylesheet" href="/css/app.css" />
   <link rel="stylesheet" href="/css/mailbox.css" />
   <link rel="stylesheet" href="/css/contrast-theme.css" />
+  <!-- i18n -->
+  <script src="/js/i18n.js"></script>
+  <script src="/js/locales/zh.js"></script>
+  <script src="/js/locales/en.js"></script>
   <script src="/js/auth-guard.js" defer></script>
   <script>
     // 访问邮箱页先做前端快速鉴权，仅允许 mailbox 角色
@@ -137,15 +142,15 @@
 
 <div id="footer-slot"></div>
 
-<!-- Email detail modal -->
-<div class="modal" id="email-modal">
-  <div class="modal-card">
+<!-- 邮件详情模态框 -->
+<div class="modal-overlay" id="email-modal">
+  <div class="modal">
     <div class="modal-header">
       <div id="modal-subject">
         <span class="modal-icon">📧</span>
         <span>邮件详情</span>
       </div>
-      <button id="modal-close" class="close">✕</button>
+      <button id="modal-close" class="modal-close">✕</button>
     </div>
     <div class="modal-body">
       <div id="modal-content"></div>
@@ -168,15 +173,15 @@
     }catch(_){ }
   })();
 </script>
-<!-- Delete confirmation modal -->
-<div class="modal" id="confirm-modal">
-  <div class="modal-card confirm-card">
+<!-- 确认删除模态框 -->
+<div class="modal-overlay" id="confirm-modal">
+  <div class="modal modal-sm">
     <div class="modal-header confirm-header">
       <div>
         <span class="modal-icon">⚠️</span>
         <span>确认操作</span>
       </div>
-      <button id="confirm-close" class="close">✕</button>
+      <button id="confirm-close" class="modal-close">✕</button>
     </div>
     <div class="modal-body confirm-body">
       <div id="confirm-message" class="confirm-message"></div>
@@ -188,15 +193,15 @@
   </div>
 </div>
 
-<!-- Password change modal -->
-<div class="modal" id="password-modal">
-  <div class="modal-card">
+<!-- 修改密码模态框 -->
+<div class="modal-overlay" id="password-modal">
+  <div class="modal">
     <div class="modal-header">
       <div>
         <span class="modal-icon">🔒</span>
         <span>修改密码</span>
       </div>
-      <button id="password-close" class="close">✕</button>
+      <button id="password-close" class="modal-close">✕</button>
     </div>
     <div class="modal-body">
       <div class="password-hint">

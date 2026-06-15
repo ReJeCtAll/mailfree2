@@ -771,7 +771,7 @@ body {
   box-shadow: var(--shadow-xs);
 }
 
-/* ── 自定义输入层 ── */
+/* ── 自定义输入层（业务布局容器，内部输入框使用设计系统 .form-input） ── */
 .custom-overlay {
   position: absolute;
   inset: 0;
@@ -784,24 +784,8 @@ body {
   padding: var(--spacing-sm);
 }
 
-.custom-input {
-  min-width: 280px;
-  height: 44px;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--card);
-  font-size: 14px;
-  color: var(--text);
-}
-
-.custom-input::placeholder { color: var(--text-muted); }
-.custom-input:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--border-focus);
-}
-
+/* 与 .form-input 等高对齐 */
+.custom-overlay .form-input { min-width: 280px; }
 .custom-overlay .btn {
   height: 44px;
   padding: 0 var(--spacing-md);
