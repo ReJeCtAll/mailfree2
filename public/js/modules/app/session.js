@@ -80,12 +80,12 @@ export function applySessionUI(session) {
     const adminLink = document.getElementById('admin');
     const allMailboxesLink = document.getElementById('all-mailboxes');
     
-    if (session && (session.strictAdmin || session.role === 'guest')) {
-      if (adminLink) adminLink.style.display = 'inline-flex';
-      if (allMailboxesLink) allMailboxesLink.style.display = 'inline-flex';
+    if (session && (session.strictAdmin || session.role === 'admin' || session.role === 'guest')) {
+      if (adminLink) adminLink.classList.remove('hidden');
+      if (allMailboxesLink) allMailboxesLink.classList.remove('hidden');
     } else {
-      if (adminLink) adminLink.style.display = 'none';
-      if (allMailboxesLink) allMailboxesLink.style.display = 'none';
+      if (adminLink) adminLink.classList.add('hidden');
+      if (allMailboxesLink) allMailboxesLink.classList.add('hidden');
     }
   } catch(_) {}
 }
