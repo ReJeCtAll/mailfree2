@@ -235,3 +235,23 @@
   background: var(--success);
   color: var(--text-on-brand);
 }
+
+/* ── 邮件内容空状态提示 ── */
+.empty-content-tip {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 48px 24px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.content-fallback-tip {
+  color: var(--text-muted);
+  font-size: 12px;
+  padding: 10px 16px;
+  background: var(--surface-alt, var(--muted));
+  border-radius: var(--radius-sm);
+  margin-top: 12px;
+  text-align: center;
+  line-height: 1.5;
+}

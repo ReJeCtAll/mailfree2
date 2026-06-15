@@ -220,7 +220,15 @@ export async function handleEmailsApi(request, db, url, path, options) {
         } catch (_) { }
       }
 
-      return Response.json({ ...row, content, html_content, download: row.r2_object_key ? `/api/email/${emailId}/download` : '' });
+      // preview 兜底：R2 对象不存在且 DB 无 content/html_content 时，用 preview 摘要填充
+      if (!content && !html_content) {
+        content = row.preview || '';
+      }
+
+      // 仅当内容确实可用时才提供 download 链接（避免 R2 404）
+      const hasContent = content || html_content;
+      const isFullContent = hasContent && (content !== (row.preview || '') || html_content);
+      return Response.json({ ...row, content, html_content, download: isFullContent && row.r2_object_key ? `/api/email/${emailId}/download` : '' });
     } catch (e) {
       const { results } = await db.prepare(`
         SELECT id, sender, subject, content, html_content, received_at, is_read

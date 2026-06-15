@@ -72,6 +72,8 @@
       'email.code.copied': '验证码已复制',
       'email.code.copied.msg': '验证码已复制：{code}',
       'email.content.copied': '邮件内容已复制',
+      'email.content.unavailable': '完整邮件内容暂不可用，以上为摘要信息',
+      'email.content.no.data': '此邮件内容暂不可用',
       'email.no.mailbox': '请先选择邮箱',
       'email.no.sender': '请先选择发件邮箱',
       'email.empty.recipient': '请输入收件人',

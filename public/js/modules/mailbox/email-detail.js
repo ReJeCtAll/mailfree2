@@ -27,8 +27,14 @@ export function renderEmailDetail(email) {
   if (email.html_content) {
     // 对 HTML 内容进行安全处理
     content = sanitizeHtml(email.html_content);
+  } else if (email.content) {
+    content = `<pre style="white-space: pre-wrap; word-break: break-word;">${escapeHtml(email.content)}</pre>`;
+    // 内容很短且无 html_content，可能是 preview 兜底，添加提示
+    if (email.content.length <= 120 && !email.html_content) {
+      content += `<div class="content-fallback-tip">${window.__('email.content.unavailable')}</div>`;
+    }
   } else {
-    content = `<pre style="white-space: pre-wrap; word-break: break-word;">${escapeHtml(email.content || '')}</pre>`;
+    content = `<div class="empty-content-tip">${window.__('email.content.no.data')}</div>`;
   }
   
   return `
@@ -121,8 +127,13 @@ export function renderEmailModal(email) {
   let content = '';
   if (email.html_content) {
     content = sanitizeHtml(email.html_content);
+  } else if (email.content) {
+    content = `<pre style="white-space: pre-wrap; word-break: break-word;">${escapeHtml(email.content)}</pre>`;
+    if (email.content.length <= 120 && !email.html_content) {
+      content += `<div class="content-fallback-tip">${window.__('email.content.unavailable')}</div>`;
+    }
   } else {
-    content = `<pre style="white-space: pre-wrap; word-break: break-word;">${escapeHtml(email.content || '')}</pre>`;
+    content = `<div class="empty-content-tip">${window.__('email.content.no.data')}</div>`;
   }
   
   return `

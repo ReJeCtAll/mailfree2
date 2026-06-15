@@ -40,8 +40,14 @@ export async function showEmailDetail(id, elements, api, showToast) {
     
     if (email.html_content) {
       contentHtml += `<iframe class="email-frame" srcdoc="${escapeAttr(email.html_content)}" style="width:100%;min-height:400px;border:none"></iframe>`;
+    } else if (email.content) {
+      contentHtml += `<pre style="white-space:pre-wrap;word-break:break-word">${escapeHtml(email.content)}</pre>`;
+      // 内容很短且无 html_content，可能是 preview 兜底，添加提示
+      if (email.content.length <= 120 && !email.html_content) {
+        contentHtml += `<div class="content-fallback-tip">${window.__('email.content.unavailable')}</div>`;
+      }
     } else {
-      contentHtml += `<pre style="white-space:pre-wrap;word-break:break-word">${escapeHtml(email.content || '')}</pre>`;
+      contentHtml += `<div class="empty-content-tip">${window.__('email.content.no.data')}</div>`;
     }
     
     modalContent.innerHTML = contentHtml;
