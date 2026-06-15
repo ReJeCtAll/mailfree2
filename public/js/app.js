@@ -95,7 +95,7 @@ async function refresh() {
     const ctrl = new AbortController(); const timeout = setTimeout(() => ctrl.abort(), 8000);
     let emails = [];
     try { const r = await api(url, { signal: ctrl.signal }); emails = await r.json(); } finally { clearTimeout(timeout); }
-    if (!Array.isArray(emails) || !emails.length) { els.list.innerHTML = '<div style="text-align:center;color:#64748b">' + window.__('common.no.emails') + '</div>'; if (els.pager) els.pager.style.display = 'none'; return; }
+    if (!Array.isArray(emails) || !emails.length) { els.list.innerHTML = '<div style="text-align:center;color:#64748b">' + window.__('common.no.emails') + '</div>'; if (els.pager) els.pager.classList.add('hidden'); return; }
     const isMobile = window.matchMedia?.('(max-width: 900px)').matches;
     els.list.innerHTML = sliceByPage(emails, els).map(e => renderEmailItem(e, isMobile)).join('');
     if (!isSentViewActive()) prefetchEmails(emails, api);
@@ -165,7 +165,7 @@ if (els.mbSearch) { let t = null; els.mbSearch.oninput = () => { if (t) clearTim
 if (lenRange && lenVal) { lenRange.value = String(getStoredLength()); lenVal.textContent = String(getStoredLength()); updateRangeProgress(lenRange); lenRange.oninput = () => { lenVal.textContent = lenRange.value; saveLength(Number(lenRange.value)); updateRangeProgress(lenRange); };}
 
 // 自定义邮箱
-if (els.toggleCustom) els.toggleCustom.onclick = () => { if (els.customOverlay) { const vis = els.customOverlay.style.display !== 'none'; els.customOverlay.style.display = vis ? 'none' : 'flex'; if (!vis) setTimeout(() => els.customLocalOverlay?.focus(), 50); }};
+if (els.toggleCustom) els.toggleCustom.onclick = () => { if (els.customOverlay) { const vis = !els.customOverlay.classList.contains('hidden'); els.customOverlay.classList.toggle('hidden', vis); if (!vis) setTimeout(() => els.customLocalOverlay?.focus(), 50); }};
 if (els.createCustomOverlay) els.createCustomOverlay.onclick = () => createCustomMailbox(els, domainSelect, api, showToast, loadMailboxes);
 
 // 侧边栏

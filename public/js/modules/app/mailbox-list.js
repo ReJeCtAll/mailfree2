@@ -66,7 +66,7 @@ export function renderMbPager(elements, total) {
   try {
     const totalPages = Math.max(1, Math.ceil(total / MB_PAGE_SIZE));
     if (!elements.mbPager) return;
-    elements.mbPager.style.display = total > MB_PAGE_SIZE ? 'flex' : 'none';
+    elements.mbPager.classList.toggle('hidden', total <= MB_PAGE_SIZE);
     if (elements.mbPageInfo) elements.mbPageInfo.textContent = `${mbPage} / ${totalPages}`;
     if (elements.mbPrev) elements.mbPrev.disabled = mbPage <= 1;
     if (elements.mbNext) elements.mbNext.disabled = mbPage >= totalPages;

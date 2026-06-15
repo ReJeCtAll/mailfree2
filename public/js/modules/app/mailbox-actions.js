@@ -148,7 +148,7 @@ export async function createCustomMailbox(elements, domainSelect, api, showToast
     
     setCurrentMailbox(data.email);
     updateEmailDisplay(elements, data.email);
-    if (customOverlay) customOverlay.style.display = 'none';
+    if (customOverlay) customOverlay.classList.add('hidden');
     
     showToast(window.__('mailbox.create.success', { mailbox: data.email }), 'success');
     await loadMailboxes({ forceFresh: true });
@@ -167,10 +167,11 @@ export function updateEmailDisplay(elements, address) {
   const emailText = document.getElementById('email-text');
   if (emailText) emailText.textContent = address;
   else if (email) email.textContent = address;
-  
+
   email?.classList.add('has-email');
-  if (emailActions) emailActions.style.display = 'flex';
-  if (listCard) listCard.style.display = 'block';
+  // 用 classList 切换 .hidden，避免被 .hidden{display:none!important} 覆盖
+  if (emailActions) emailActions.classList.remove('hidden');
+  if (listCard) listCard.classList.remove('hidden');
 }
 
 /**
@@ -251,7 +252,7 @@ export async function deleteMailboxAddress(event, address, elements, api, showTo
         clearCurrentMailbox();
         if (elements.email) elements.email.textContent = window.__('mailbox.plz.generate');
         elements.email?.classList.remove('has-email');
-        if (elements.emailActions) elements.emailActions.style.display = 'none';
+        if (elements.emailActions) elements.emailActions.classList.add('hidden');
         if (elements.list) elements.list.innerHTML = '';
         stopAutoRefresh();
       }

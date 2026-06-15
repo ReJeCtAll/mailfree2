@@ -35,7 +35,7 @@ export function renderPager(elements) {
     const total = Array.isArray(lastLoadedEmails) ? lastLoadedEmails.length : 0;
     const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
     if (!elements.pager) return;
-    elements.pager.style.display = total > PAGE_SIZE ? 'flex' : 'none';
+    elements.pager.classList.toggle('hidden', total <= PAGE_SIZE);
     if (elements.pageInfo) elements.pageInfo.textContent = `${currentPage} / ${totalPages}`;
     if (elements.prevPage) elements.prevPage.disabled = currentPage <= 1;
     if (elements.nextPage) elements.nextPage.disabled = currentPage >= totalPages;
