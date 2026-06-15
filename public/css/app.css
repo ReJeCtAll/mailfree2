@@ -347,8 +347,11 @@ body {
   border-radius: var(--radius-sm);
 }
 
+.sidebar.collapsed .sidebar-search,
+.sidebar.collapsed .sidebar-caption,
 .sidebar.collapsed #mb-list,
-.sidebar.collapsed #mb-loading { display: none; }
+.sidebar.collapsed #mb-loading,
+.sidebar.collapsed #mb-pager { display: none; }
 
 .sidebar.collapsed #mb-more-wrap {
   margin-top: var(--spacing-xs);
