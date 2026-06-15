@@ -107,14 +107,15 @@
 }
 
 /* ── 操作按钮 ── */
-.generate-action { margin-bottom: var(--spacing-md); }
+.generate-action { margin-bottom: var(--spacing-md); display: block; }
 .generate-action:last-child { margin-bottom: 0; }
 
-.generate-action-row { display: flex; gap: var(--spacing-sm); }
-.generate-action-row .btn { flex: 1; min-width: 0; }
+.generate-action-row { display: flex; gap: var(--spacing-sm); flex-wrap: nowrap; }
+.generate-action-row .btn { flex: 1 1 0; min-width: 0; }
 
 .generate-action .btn {
   width: 100%;
+  flex: none;
   height: 52px;
   font-size: 16px;
   font-weight: 500;
