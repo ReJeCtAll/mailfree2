@@ -459,6 +459,16 @@ export async function mockApi(path, options = {}) {
     }
   }
 
+  // GET /api/mailbox/info - Return the full mailbox record for one address.
+  if (url.pathname === '/api/mailbox/info' && (!options.method || options.method === 'GET')) {
+    const address = url.searchParams.get('address') || '';
+    const mailbox = MOCK_STATE.mailboxes.find(m => m.address === address);
+    if (mailbox) {
+      return new Response(JSON.stringify(mailbox), { headers: jsonHeaders });
+    }
+    return new Response(JSON.stringify({ error: '邮箱不存在' }), { status: 404, headers: jsonHeaders });
+  }
+
   return new Response('Not Found', { status: 404 });
 }
 

@@ -59,6 +59,8 @@ export function openForwardDialog(mailboxId, mailboxAddress, currentForwardTo) {
   `;
   
   document.body.appendChild(dialog);
+  // The shared modal overlay is hidden by default and becomes visible with .show.
+  requestAnimationFrame(() => dialog.classList.add('show'));
   
   // 绑定保存事件
   document.getElementById('save-forward-btn').onclick = async () => {
@@ -318,59 +320,47 @@ export function injectDialogStyles() {
   const style = document.createElement('style');
   style.id = 'mailbox-settings-styles';
   style.textContent = `
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      backdrop-filter: blur(4px);
-    }
-    .modal-content {
-      background: var(--bg-primary, #fff);
-      border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    /* Forward dialog styles */
+    #forward-dialog .modal-content {
+      background: var(--card, var(--bg-primary, #fff));
+      border-radius: var(--radius-xl, 12px);
+      box-shadow: var(--shadow-2xl, 0 20px 60px rgba(0, 0, 0, 0.3));
       width: 90%;
-      max-width: 500px;
-      animation: modalIn 0.2s ease;
+      max-width: 400px;
+      border: 1px solid var(--border, #e5e7eb);
     }
-    .modal-header {
+    #forward-dialog .modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border-color, #e5e7eb);
+      padding: var(--spacing-lg, 16px 20px);
+      border-bottom: 1px solid var(--border, #e5e7eb);
     }
-    .modal-header h3 {
+    #forward-dialog .modal-header h3 {
       margin: 0;
       font-size: 18px;
     }
-    .modal-close {
+    #forward-dialog .modal-close {
       background: none;
       border: none;
       font-size: 24px;
       cursor: pointer;
-      color: var(--text-secondary, #6b7280);
+      color: var(--text-muted, #6b7280);
       padding: 0;
       line-height: 1;
     }
-    .modal-close:hover {
-      color: var(--text-primary, #111827);
+    #forward-dialog .modal-close:hover {
+      color: var(--text, #111827);
     }
-    .modal-body {
-      padding: 20px;
+    #forward-dialog .modal-body {
+      padding: var(--spacing-lg, 20px);
     }
-    .modal-footer {
+    #forward-dialog .modal-footer {
       display: flex;
       justify-content: flex-end;
       gap: 10px;
-      padding: 16px 20px;
-      border-top: 1px solid var(--border-color, #e5e7eb);
+      padding: var(--spacing-lg, 16px 20px);
+      border-top: 1px solid var(--border, #e5e7eb);
     }
     .form-group {
       margin-bottom: 15px;

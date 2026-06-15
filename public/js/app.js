@@ -191,6 +191,16 @@ if (els.toggleFavorite) els.toggleFavorite.onclick = async () => {
   } else showToast(window.__('mailbox.plz.select'), 'warn'); 
 };
 
+// Keep the selected mailbox state in sync after forwarding settings are saved.
+window.addEventListener('mailbox-settings-updated', (e) => {
+  const info = getCurrentMailboxInfo();
+  if (info && info.id && e.detail) {
+    const updated = { ...info, ...e.detail };
+    setCurrentMailboxInfo(updated);
+    updateMailboxInfoUI(updated);
+  }
+});
+
 // 撰写
 initCompose(els, api, showToast);
 
