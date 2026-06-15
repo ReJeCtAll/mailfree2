@@ -750,18 +750,16 @@ body::before {
   gap: 8px;
 }
 
-#email-modal.modal,
-#confirm-modal.modal,
-#password-modal.modal {
-  display: flex;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+/* ── 模态框业务覆盖（兼容设计系统 .modal-overlay/.modal 双层结构） ── */
+#email-modal.modal-overlay,
+#confirm-modal.modal-overlay,
+#password-modal.modal-overlay {
+  /* show/hide handled by design-system .modal-overlay.show */
 }
 
-#email-modal.modal.show,
-#confirm-modal.modal.show,
-#password-modal.modal.show {
+#email-modal.modal-overlay.show,
+#confirm-modal.modal-overlay.show,
+#password-modal.modal-overlay.show {
   display: flex;
   opacity: 1;
   visibility: visible;
@@ -790,7 +788,7 @@ body::before {
     align-items: stretch;
   }
 
-  .modal-card {
+  .modal-overlay .modal {
     border-radius: var(--radius-lg);
   }
 }

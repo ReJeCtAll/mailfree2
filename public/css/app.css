@@ -1525,7 +1525,7 @@ select:disabled { opacity: 0.7; cursor: not-allowed; }
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-xs);
   width: min(720px, 100%);
-}
+  }
 
 .search-input {
   flex: 1;
@@ -2444,62 +2444,34 @@ select,
   min-width: 76px;
 }
 
-#email-modal.modal,
-#confirm-modal.modal,
-#compose-modal.modal,
-#password-modal.modal {
-  position: fixed;
-  inset: 0;
-  z-index: var(--z-modal);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  max-width: none;
-  max-height: none;
+/* ── 模态框业务覆盖（兼容设计系统 .modal-overlay/.modal 双层结构） ── */
+#email-modal.modal-overlay,
+#confirm-modal.modal-overlay,
+#compose-modal.modal-overlay,
+#password-modal.modal-overlay {
   padding: 20px;
-  overflow: auto;
-  border: 0;
-  border-radius: 0;
-  background: rgba(0, 0, 0, 0.62);
-  box-shadow: none;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: none;
   backdrop-filter: blur(var(--blur-md));
   -webkit-backdrop-filter: blur(var(--blur-md));
 }
 
-#email-modal.modal.show,
-#confirm-modal.modal.show,
-#compose-modal.modal.show,
-#password-modal.modal.show {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
+/* show state is handled by design-system .modal-overlay.show */
 
-.modal-card {
+.modal-overlay .modal {
   width: min(720px, 100%);
   max-height: min(86vh, 900px);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
   border: 1px solid var(--border-glass-hover);
-  border-radius: var(--radius-xl);
   background: var(--surface);
-  box-shadow: var(--shadow-2xl);
   transform: translateY(8px) scale(0.98);
   transition: transform var(--transition-slow);
 }
 
-.modal.show .modal-card {
+.modal-overlay.show .modal {
   transform: translateY(0) scale(1);
 }
 
-#email-modal .modal-card {
+#email-modal .modal {
   width: min(920px, 100%);
+  max-width: min(920px, 100%);
 }
 
 .modal-header {
@@ -2687,14 +2659,14 @@ select,
     width: 100%;
   }
 
-#email-modal.modal,
-#confirm-modal.modal,
-#compose-modal.modal,
-#password-modal.modal {
+#email-modal.modal-overlay,
+#confirm-modal.modal-overlay,
+#compose-modal.modal-overlay,
+#password-modal.modal-overlay {
     padding: 10px;
   }
 
-  .modal-card {
+  .modal-overlay .modal {
     width: 100%;
     max-height: 92vh;
     border-radius: var(--radius-lg);
