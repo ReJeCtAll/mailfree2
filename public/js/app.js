@@ -3,22 +3,20 @@
  * @module app
  */
 
-import { cacheGet, cacheSet, setCurrentUserKey, getCurrentUserKey } from './storage.js';
 import { openForwardDialog, toggleFavorite, injectDialogStyles } from './mailbox-settings.js';
 
 // 导入模块
-import { formatTs, formatTsMobile, extractCode, escapeHtml, escapeAttr } from './modules/app/ui-helpers.js';
 import { mockApi, MOCK_STATE } from './modules/app/mock-api.js';
 import { showConfirm } from './modules/app/confirm-dialog.js';
 import { startAutoRefresh, stopAutoRefresh, initVisibilityTracking } from './modules/app/auto-refresh.js';
-import { getCurrentMailbox, setCurrentMailbox, loadCurrentMailbox, clearCurrentMailbox, setCurrentMailboxInfo, getCurrentMailboxInfo } from './modules/app/mailbox-state.js';
-import { renderPager, sliceByPage, prevPage, nextPage, resetPager, setView, isSentViewActive, renderEmailItem, markViewLoaded, isFirstLoad } from './modules/app/email-list.js';
-import { renderMailboxList, renderMbPager, getCurrentPage, setCurrentPage, getPageSize, prevMbPage, nextMbPage, resetMbPage, setSearchTerm, getSearchTerm, setLoading, isLoadingMailboxes, setLastCount, getLastCount } from './modules/app/mailbox-list.js';
-import { initSessionFromCache, validateSession, isGuest, isAdmin, applySessionUI, initGuestMode } from './modules/app/session.js';
-import { loadDomains, getStoredLength, saveLength, updateRangeProgress, getSelectedDomainIndex, populateDomains, STORAGE_KEYS } from './modules/app/domains.js';
+import { getCurrentMailbox, loadCurrentMailbox, clearCurrentMailbox, setCurrentMailboxInfo, getCurrentMailboxInfo } from './modules/app/mailbox-state.js';
+import { sliceByPage, prevPage, nextPage, resetPager, setView, isSentViewActive, renderEmailItem, markViewLoaded, isFirstLoad } from './modules/app/email-list.js';
+import { renderMailboxList, renderMbPager, getCurrentPage, getPageSize, prevMbPage, nextMbPage, resetMbPage, setSearchTerm, getSearchTerm, setLoading, isLoadingMailboxes, setLastCount, getLastCount } from './modules/app/mailbox-list.js';
+import { initSessionFromCache, validateSession, isAdmin, initGuestMode } from './modules/app/session.js';
+import { loadDomains, getStoredLength, saveLength, updateRangeProgress, populateDomains } from './modules/app/domains.js';
 import { initCompose, showSentEmailDetail } from './modules/app/compose.js';
 import { showEmailDetail, deleteEmailById, deleteSentById, copyFromEmailList, prefetchEmails } from './modules/app/email-viewer.js';
-import { generateMailbox, generateNameMailbox, createCustomMailbox, updateEmailDisplay, selectMailboxAddress, toggleMailboxPin, deleteMailboxAddress, copyMailboxAddress, clearAllEmails, logout } from './modules/app/mailbox-actions.js';
+import { generateMailbox, generateNameMailbox, createCustomMailbox, selectMailboxAddress, toggleMailboxPin, deleteMailboxAddress, copyMailboxAddress, clearAllEmails } from './modules/app/mailbox-actions.js';
 
 // 全局状态
 window.__GUEST_MODE__ = false;
@@ -124,15 +122,71 @@ async function loadMailboxes(opts = {}) {
 
 function updateMailboxInfoUI(info) { if (!info) return; if (els.favoriteIcon && els.favoriteText) { els.favoriteIcon.textContent = info.is_favorite ? '⭐' : '☆'; els.favoriteText.textContent = info.is_favorite ? window.__('favorite.on') : window.__('favorite.off'); }}
 
-// 全局函数
-window.selectMailbox = (addr) => selectMailboxAddress(addr, els, api, refresh, autoRefreshCallback, updateMailboxInfoUI);
-window.togglePin = (e, addr) => toggleMailboxPin(e, addr, api, showToast, loadMailboxes);
-window.deleteMailbox = (e, addr) => deleteMailboxAddress(e, addr, els, api, showToast, showConfirm, loadMailboxes);
-window.showEmail = (id) => showEmailDetail(id, els, api, showToast);
-window.showSentEmail = async (id) => { try { const r = await api(`/api/sent/${id}`); showSentEmailDetail(await r.json(), els); } catch(e) { showToast(e.message || window.__('common.load.fail'), 'error'); }};
-window.deleteEmail = (id) => deleteEmailById(id, api, showToast, showConfirm, refresh);
-window.deleteSent = (id) => deleteSentById(id, api, showToast, showConfirm, refresh);
-window.copyFromList = (e, id) => copyFromEmailList(e, id, api, showToast);
+async function handleEmailListAction(event) {
+  const actionEl = event.target.closest('[data-action]');
+  if (!actionEl || !els.list?.contains(actionEl)) return;
+
+  const action = actionEl.dataset.action;
+  const id = actionEl.dataset.emailId;
+  if (!action || !id) return;
+
+  event.stopPropagation();
+
+  if (action === 'show-email') {
+    await showEmailDetail(id, els, api, showToast);
+    return;
+  }
+
+  if (action === 'show-sent-email') {
+    try {
+      const r = await api(`/api/sent/${id}`);
+      showSentEmailDetail(await r.json(), els);
+    } catch(e) {
+      showToast(e.message || window.__('common.load.fail'), 'error');
+    }
+    return;
+  }
+
+  if (action === 'copy-code') {
+    await copyFromEmailList(event, id, api, showToast);
+    return;
+  }
+
+  if (action === 'delete-email') {
+    await deleteEmailById(id, api, showToast, showConfirm, refresh);
+    return;
+  }
+
+  if (action === 'delete-sent-email') {
+    await deleteSentById(id, api, showToast, showConfirm, refresh);
+  }
+}
+
+async function handleMailboxListAction(event) {
+  const actionEl = event.target.closest('[data-action]');
+  if (!actionEl || !els.mbList?.contains(actionEl)) return;
+
+  const action = actionEl.dataset.action;
+  const address = actionEl.dataset.address;
+  if (!action || !address) return;
+
+  event.stopPropagation();
+
+  if (action === 'select-mailbox') {
+    await selectMailboxAddress(address, els, api, refresh, autoRefreshCallback, updateMailboxInfoUI);
+    return;
+  }
+
+  if (action === 'toggle-pin') {
+    await toggleMailboxPin(event, address, api, showToast, loadMailboxes);
+    return;
+  }
+
+  if (action === 'delete-mailbox') {
+    await deleteMailboxAddress(event, address, els, api, showToast, showConfirm, loadMailboxes);
+  }
+}
+
 window.refreshEmails = refresh;
 
 // 事件绑定
@@ -147,6 +201,8 @@ if (els.logout) els.logout.addEventListener('click', async () => {
 });
 if (els.modalClose) els.modalClose.onclick = () => els.modal?.classList.remove('show');
 els.modal?.addEventListener('click', (e) => { if (e.target === els.modal) els.modal.classList.remove('show'); });
+els.list?.addEventListener('click', handleEmailListAction);
+els.mbList?.addEventListener('click', handleMailboxListAction);
 
 // 视图切换
 if (els.tabInbox) els.tabInbox.onclick = () => { setView(false); els.tabInbox.classList.add('active'); els.tabSent?.classList.remove('active'); if (els.boxTitle) els.boxTitle.textContent = window.__('email.inbox'); if (els.boxIcon) els.boxIcon.textContent = '📥'; resetPager(els); refresh(); };
@@ -217,12 +273,12 @@ initCompose(els, api, showToast);
   const urlParams = new URLSearchParams(window.location.search);
   const urlMailbox = urlParams.get('mailbox');
   if (urlMailbox) {
-    await window.selectMailbox(urlMailbox);
+    await selectMailboxAddress(urlMailbox, els, api, refresh, autoRefreshCallback, updateMailboxInfoUI);
     // 清除 URL 参数，避免刷新时重复选择
     window.history.replaceState({}, '', window.location.pathname);
   } else {
     const last = loadCurrentMailbox(); 
-    if (last) await window.selectMailbox(last);
+    if (last) await selectMailboxAddress(last, els, api, refresh, autoRefreshCallback, updateMailboxInfoUI);
   }
   
   initVisibilityTracking();

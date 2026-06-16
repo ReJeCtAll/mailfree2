@@ -72,6 +72,41 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
+.bootstrap-loading {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  z-index: 9999;
+}
+
+.bootstrap-loading-inner {
+  text-align: center;
+}
+
+.bootstrap-loading-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.bootstrap-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(59, 130, 246, 0.2);
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: bootstrap-spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes bootstrap-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* ── 顶部导航栏 ── */
 .topbar {
   position: sticky;

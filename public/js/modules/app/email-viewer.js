@@ -33,13 +33,13 @@ export async function showEmailDetail(id, elements, api, showToast) {
       contentHtml += `
         <div class="verification-code-box" style="margin-bottom:16px;padding:12px;background:var(--success-light);border-radius:8px;display:flex;align-items:center;gap:12px">
           <span style="font-size:20px">🔑</span>
-          <span style="font-size:18px;font-weight:600;font-family:monospace;cursor:pointer" onclick="navigator.clipboard.writeText('${code}').then(()=>showToast(window.__('email.code.copied'),'success'))">${code}</span>
+          <button type="button" class="code-value" data-action="copy-verification-code" data-code="${escapeAttr(code)}" style="font-size:18px;font-weight:600;font-family:monospace;cursor:pointer;background:none;border:0;color:inherit;padding:0">${escapeHtml(code)}</button>
           <span style="font-size:12px;color:var(--text-muted)">${window.__('common.click.copy')}</span>
         </div>`;
     }
     
     if (email.html_content) {
-      contentHtml += `<iframe class="email-frame" srcdoc="${escapeAttr(email.html_content)}" style="width:100%;min-height:400px;border:none"></iframe>`;
+      contentHtml += `<iframe class="email-frame" title="${escapeAttr(window.__('email.content'))}" srcdoc="${escapeAttr(email.html_content)}" sandbox="" referrerpolicy="no-referrer" style="width:100%;min-height:400px;border:none"></iframe>`;
     } else if (email.content) {
       contentHtml += `<pre style="white-space:pre-wrap;word-break:break-word">${escapeHtml(email.content)}</pre>`;
       // 内容很短且无 html_content，可能是 preview 兜底，添加提示
@@ -51,6 +51,16 @@ export async function showEmailDetail(id, elements, api, showToast) {
     }
     
     modalContent.innerHTML = contentHtml;
+    modalContent.querySelectorAll?.('[data-action="copy-verification-code"]').forEach(button => {
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(button.dataset.code || '');
+          showToast(window.__('email.code.copied'), 'success');
+        } catch (_) {
+          showToast(window.__('common.copy.fail'), 'error');
+        }
+      });
+    });
     modal.classList.add('show');
   } catch(e) {
     showToast(e.message || window.__('common.load.fail'), 'error');
