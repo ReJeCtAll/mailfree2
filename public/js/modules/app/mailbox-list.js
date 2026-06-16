@@ -28,14 +28,14 @@ export function renderMailboxItem(mailbox, isActive = false) {
   const time = formatTs(m.created_at);
   
   return `
-    <div class="mailbox-item ${isPinned} ${activeClass}" onclick="selectMailbox('${address}')">
+    <div class="mailbox-item ${isPinned} ${activeClass}" data-action="select-mailbox" data-address="${address}">
       <div class="mailbox-content">
         <span class="address">${displayAddress}</span>
         <span class="time">${time}</span>
       </div>
       <div class="mailbox-actions">
-        <button class="btn btn-ghost btn-sm pin" onclick="togglePin(event,'${address}')" title="${m.is_pinned ? window.__('status.unpin') : window.__('status.pin')}">${m.is_pinned ? '📌' : '📍'}</button>
-        <button class="btn btn-ghost btn-sm del" onclick="deleteMailbox(event,'${address}')" title="${window.__('action.delete')}">🗑️</button>
+        <button class="btn btn-ghost btn-sm pin" data-action="toggle-pin" data-address="${address}" title="${m.is_pinned ? window.__('status.unpin') : window.__('status.pin')}">${m.is_pinned ? '📌' : '📍'}</button>
+        <button class="btn btn-ghost btn-sm del" data-action="delete-mailbox" data-address="${address}" title="${window.__('action.delete')}">🗑️</button>
       </div>
     </div>`;
 }

@@ -3,7 +3,7 @@
  * @module modules/app/email-list
  */
 
-import { formatTs, formatTsMobile, extractCode, escapeHtml } from './ui-helpers.js';
+import { formatTs, formatTsMobile, extractCode, escapeHtml, escapeAttr } from './ui-helpers.js';
 import { getCurrentMailbox } from './mailbox-state.js';
 
 // 分页状态
@@ -167,9 +167,11 @@ export function renderEmailItem(email, isMobile = false) {
   const metaLabel = isSentView ? window.__('email.recipient') : window.__('email.sender');
   const metaText = isSentView ? escapeHtml(recipientsDisplay) : senderText;
   const timeDisplay = isMobile ? formatTsMobile(e.received_at || e.created_at) : formatTs(e.received_at || e.created_at);
+  const emailId = escapeAttr(String(e.id));
+  const primaryAction = isSentView ? 'show-sent-email' : 'show-email';
   
   return `
-    <div class="email-item clickable" onclick="${isSentView ? `showSentEmail(${e.id})` : `showEmail(${e.id})`}">
+    <div class="email-item clickable" data-action="${primaryAction}" data-email-id="${emailId}">
       <div class="email-meta">
         <span class="meta-from"><span class="meta-label">${metaLabel}</span><span class="meta-from-text">${metaText}</span></span>
         <span class="email-time"><span class="time-icon">🕐</span>${timeDisplay}</span>
@@ -182,10 +184,10 @@ export function renderEmailItem(email, isMobile = false) {
         <div class="email-actions">
           ${isSentView ? `
             <span class="status-badge ${statusClass(e.status)}">${e.status || 'unknown'}</span>
-            <button class="btn btn-danger btn-sm" onclick="deleteSent(${e.id});event.stopPropagation()" title="${window.__('email.confirm.delete.sent')}"><span class="btn-icon">🗑️</span></button>
+            <button class="btn btn-danger btn-sm" data-action="delete-sent-email" data-email-id="${emailId}" title="${window.__('email.confirm.delete.sent')}"><span class="btn-icon">🗑️</span></button>
           ` : `
-            <button class="btn btn-secondary btn-sm" data-code="${listCode || ''}" onclick="copyFromList(event, ${e.id});event.stopPropagation()" title="${window.__('email.code.copied')}"><span class="btn-icon">📋</span></button>
-            <button class="btn btn-danger btn-sm" onclick="deleteEmail(${e.id});event.stopPropagation()" title="${window.__('email.confirm.delete')}"><span class="btn-icon">🗑️</span></button>
+            <button class="btn btn-secondary btn-sm" data-action="copy-code" data-email-id="${emailId}" data-code="${escapeAttr(listCode || '')}" title="${window.__('email.code.copied')}"><span class="btn-icon">📋</span></button>
+            <button class="btn btn-danger btn-sm" data-action="delete-email" data-email-id="${emailId}" title="${window.__('email.confirm.delete')}"><span class="btn-icon">🗑️</span></button>
           `}
         </div>
       </div>
